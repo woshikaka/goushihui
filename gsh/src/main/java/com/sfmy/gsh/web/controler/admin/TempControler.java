@@ -10,7 +10,7 @@ public class TempControler {
 	@RequestMapping(value = "/test")
 	public String test(HttpServletRequest request) {
 		
-		
+		//git test
 		
 		
 		
