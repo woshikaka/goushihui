@@ -11,6 +11,7 @@ public class TempControler {
 	public String test(HttpServletRequest request) {
 		
 		
+		
 		return "test";
 	}
 }
