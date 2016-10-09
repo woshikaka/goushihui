@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
 		http://www.springframework.org/schema/data/repository http://www.springframework.org/schema/data/repository/spring-repository-1.5.xsd">
-	<context:component-scan base-package="com.hyz.doc" />
+	<context:component-scan base-package="com.sfmy.gsh" />
 	<bean id="configProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations">
 			<list>
@@ -58,7 +58,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
 		<!-- Set base package of your entities -->
-		<property name="packagesToScan" value="com.hyz.doc.entity" />
+		<property name="packagesToScan" value="com.sfmy.gsh.entity" />
 		<!-- Set share cache mode -->
 		<property name="sharedCacheMode" value="ENABLE_SELECTIVE" />
 		<!-- Set validation mode -->
@@ -89,5 +89,5 @@
 
 	<tx:annotation-driven />
 
-	<jpa:repositories base-package="com.hyz.doc.dao" />
+	<jpa:repositories base-package="com.sfmy.gsh.dao" />
 </beans>
