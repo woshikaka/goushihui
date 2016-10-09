@@ -6,4 +6,6 @@ import com.sfmy.gsh.entity.User;
 
 public interface UserDao extends JpaRepository<User,Integer>{
 
+	User findUserByName(String name);
+
 }

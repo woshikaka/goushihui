@@ -20,7 +20,13 @@ public class User implements Serializable{
 	@Column(length=30)
 	private String name;
 	
-	public Integer getId() {
+	@Column(length=64)
+	private String password;
+	
+	@Column(length=32)
+	private String salt;
+	
+	public Integer getId() {     
 		return id;
 	}
 	public void setId(Integer id) {
@@ -31,5 +37,17 @@ public class User implements Serializable{
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	public String getSalt() {
+		return salt;
+	}
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 }

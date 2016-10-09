@@ -2,6 +2,11 @@ package com.sfmy.gsh.service;
 
 import javax.annotation.Resource;
 
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.Md5Hash;
+import org.apache.shiro.crypto.hash.Sha256Hash;
+import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +20,14 @@ public class UserService {
 	private UserDao userDao;
 
 	public void saveUser(User u) {
+		RandomNumberGenerator rng = new SecureRandomNumberGenerator();
+		ByteSource byteSource = rng.nextBytes();
+		String salt = byteSource.toHex();//随机盐
+		
+//		String hashedPassword = new Sha256Hash(u.getPassword(),salt,1024).toString();
+		String hashedPassword = new Md5Hash(u.getPassword(),salt,1024).toString();
+		u.setPassword(hashedPassword);
+		u.setSalt(salt);
 		userDao.save(u);
 	}
 
@@ -24,5 +37,9 @@ public class UserService {
 
 	public void updateUser(User u) {
 		userDao.save(u);
+	}
+
+	public User findUserByName(String name) {
+		return userDao.findUserByName(name);
 	}
 }
