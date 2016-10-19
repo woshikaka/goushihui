@@ -59,6 +59,6 @@
 		});
 		
 		//全局confirm弹窗
-		$(".confirm").confirm();
+		//$(".confirm").confirm();
 	});
 </script>
