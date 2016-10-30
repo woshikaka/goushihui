@@ -26,8 +26,8 @@
 				<li>
 					<a href="#" name="oneLevel">产品管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
 					<ul class="nav nav-second-level">
-						<li><a href="productUSAList">产品列表</a></li>
-						<li><a href="productJPNList">添加产品</a></li>
+						<li><a href="listUI">产品列表</a></li>
+						<li><a href="addUI">添加产品</a></li>
 					</ul>
 				</li>
 			</ul>

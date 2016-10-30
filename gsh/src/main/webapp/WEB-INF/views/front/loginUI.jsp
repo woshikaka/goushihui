@@ -21,8 +21,7 @@
 			<div class="login_box right">
 				<form class="form" method="post" action="<%=request.getContextPath()%>/login">
 					<h4>用户登录</h4>
-					${isDangerShow}xxxxxxxxxxxx
-					<%-- <%@ include file="/WEB-INF/views/admin/public/alertInfo.jsp"%> --%>
+					<%@ include file="/WEB-INF/views/admin/public/alertInfo.jsp"%>
 					<div class="form-li">
 						<div class="form-box">
 							<input type="text" name="name" placeholder="请输入用户名">

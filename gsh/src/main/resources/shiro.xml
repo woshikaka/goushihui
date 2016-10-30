@@ -34,8 +34,13 @@
 		<!-- <property name="loginUrl" value="/unauthorized" /> -->
 		<property name="filterChainDefinitions">
 			<value>
-				/member/** = authc
-				/admin/** = authc
+				<!-- /loginUI = anon
+				/login = anon
+				/registerUI = anon
+				/register = anon
+				/resources/** = anon -->
+				/m/** = authc
+				/a/** = authc
 				/** = anon
 			</value>
 		</property>

@@ -47,7 +47,7 @@ public class LoginController {
 	public String logout(HttpServletRequest request) {
 		Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
-		return "security/loginUI";
+		return "/front/gshIndex";
 	}
 	
 	/**
@@ -131,6 +131,10 @@ public class LoginController {
 			ra.addFlashAttribute("isDangerShow",true);
 			ra.addFlashAttribute("dangerMessage","登录失败！请联系管理员！");
 			return "redirect:loginUI";
+		}
+		
+		if(currentUser.hasRole("admin")){
+			return "redirect:/a/product/addUI";
 		}
 		
 		return "/front/gshIndex";

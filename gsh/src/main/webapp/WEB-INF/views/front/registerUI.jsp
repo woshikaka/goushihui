@@ -31,18 +31,18 @@
 					</div>
 					<div class="form-li">
 						<div class="form-box">
-							<input type="text" name="yzm" placeholder="请输入验证码" class="yzm"> 
-							<img title="点击更换" onclick="refreshValidateCode(this)" src="/gsh/validateCode">
-						</div>
-					</div>
-					<div class="form-li">
-						<div class="form-box">
 							<input type="password" name="password" placeholder="请输入登录密码">
 						</div>
 					</div>
 					<div class="form-li">
 						<div class="form-box">
 							<input type="password" name="againPassword" placeholder="请再次登录密码">
+						</div>
+					</div>
+					<div class="form-li">
+						<div class="form-box">
+							<input type="text" name="yzm" placeholder="请输入验证码" class="yzm"> 
+							<img title="点击更换" onclick="refreshValidateCode(this)" src="/gsh/validateCode">
 						</div>
 					</div>
 					<div class="form-li">

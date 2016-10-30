@@ -18,7 +18,9 @@ import com.sfmy.gsh.entity.User;
 public class UserService {
 	@Resource
 	private UserDao userDao;
-
+	/**
+	 * admin  sfmy66admin88
+	 */
 	public void saveUser(User u) {
 		RandomNumberGenerator rng = new SecureRandomNumberGenerator();
 		ByteSource byteSource = rng.nextBytes();

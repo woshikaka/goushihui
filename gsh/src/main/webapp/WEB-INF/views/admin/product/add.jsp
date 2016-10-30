@@ -13,17 +13,18 @@
 		<jsp:include page="/WEB-INF/views/admin/public/nav.jsp" />
 		<div id="page-wrapper">
 			<%@ include file="/WEB-INF/views/admin/public/alertInfo.jsp"%>
-			<form class="form-horizontal" action="/gsh/a/product/addProduct">
+			<form class="form-horizontal" action="/gsh/a/product/addUI" method="post">
+				<input type="hidden" name="isForm" value="true"/>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">产品名称</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="name" />
+						<input type="text" class="form-control" value="${product.name}" name="name" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">价格</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="price" />
+						<input type="text" class="form-control" value="${product.price}" name="price" />
 					</div>
 				</div>
 				<div class="form-group">
@@ -36,7 +37,7 @@
 					<label class="col-sm-2 control-label">是否上架</label>
 					<div class="col-sm-6">
 						<label class="radio-inline"> <input type="radio" name="isVisible" value="true"> 上架
-						</label> <label class="radio-inline"> <input type="radio" name="isVisible" value="false"> 下架
+						</label> <label class="radio-inline"> <input type="radio" checked="checked" name="isVisible" value="false"> 下架
 						</label>
 					</div>
 
