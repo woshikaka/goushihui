@@ -1,0 +1,166 @@
+body{font-size: 12px;max-width: 1920px;min-width: 1200px;background-color: #fafafa}
+
+.left{float:left;}
+.right{float:right;}
+.text_underline{text-decoration: underline;}
+.container{width:85%;}
+/*登陆注册*/
+.login_header{height: 97px;}
+.login_con{background: url(../images/login_bg.png) 50% 50% no-repeat;height: 530px;}
+.login_box {width:371px;padding:27px 34px;background-color: rgba(255,255,255,0.7);color: #666;}
+.login_box h4{font-size: 18px;margin-bottom: 21px;}
+.login_footer{position: relative;bottom:0;text-align: center;min-height: 40px;line-height: 40px;}
+/*表单*/
+.form-li{margin-bottom: 16px;}
+.form-li input{text-indent: 1em;border:1px solid #eee;}
+.form-li input,.form-li button{width: 100%;height: 41px;}
+.form-li input.yzm{width: 48%}
+.form-li input.yzm+ .yzm{margin-left:2%;}
+.form-li button{background-color: #1faff7;border:1px solid #1faff7;border-radius: 0;font-size: 16px}
+/*表单结束*/
+.red{color: #f04848 !important;}
+/*公用头部*/
+.shop_header{height: 43px;line-height: 43px;color: #999;font-size: 14px;}
+.shop_header a{color: #999; }
+.shop_header .header_left li{float:left;}
+.shop_header .header_left li+li{margin-left: 10px;}
+.shop_header .header_left li img{margin-right: 100px;}
+
+@red:#f04848; 
+.vertical-align{
+	display: inline-block;vertical-align: middle;
+}
+.center_border{border:1px solid #ddd;background-color: #fff;padding:2%}
+.shop_header{	
+	height: 43px;line-height: 43px;color: #999;font-size: 14px;
+	a{color: #999}
+	.header_left{
+		li{
+			float: left;
+			& + &{margin-left: 10px;}
+			a{
+				&:hover{color: @red;}
+			}
+			img{margin-right: 10px;}
+			span{.vertical-align;    line-height: normal;} 
+		}
+	}
+}
+.center_header{	height: 100px;background-color: @red;overflow: hidden;line-height: 100px;
+	a{color: #fff;font-size: 16px;}
+	.logo_box{width: 15%;height: 80px;background-color: #ccc;.vertical-align}
+	.center_header_nav{.vertical-align;width: 50%;
+		li{float: left;
+			&+li{margin-left: 8%;}
+			i{margin-left: 8px;font-size: 12px;}
+			a{display: inline-block;
+				&:hover{text-decoration: underline;}
+			}
+		}
+	}
+	.search_box{width: 315px;
+		form{width: 100%;.vertical-align;}
+		input{height: 36px;float: left;width: 75%}
+		button{    border: 1px solid transparent;color: #666;background-color: #f5f5f5;width: 25%;height: 36px;float: left;}
+	}
+}
+.center_con{margin: 32px 0;color: #666;
+	.center_menu{ width: 15%;
+		h5{font-size: 16px;
+			&:before{content: '';padding:3px;background-color: @red;display: inline-block;border-radius: 50%;margin-right: 10px;vertical-align: middle;}
+		}
+		ul{margin-top: 21px;margin-left: 15px;
+			&+h5{margin-top: 30px;}
+			li{font-size: 14px;
+				&.select{color: @red;}
+				&+li{margin-top: 10px;}
+				a{color: #999;}
+				&:hover{
+					a{color: @red;text-decoration: underline;}
+				}
+			}
+		}
+	}
+	.center_main{width: 85%;font-size: 14px;
+		.center_border{
+			&+.center_border{margin-top: 20px;}
+			.title{font-size: 16px;font-weight: 700;margin-bottom: 30px}
+		}
+		.base_info{
+			.user_info{width: 42%;border-right: 1px solid #ddd;.vertical-align;
+				.logo{margin:0 6%;.vertical-align;}
+				.info{.vertical-align;
+					h3{font-size: 16px;font-weight: 700;margin-bottom: 16px;
+						span{color: #999;}
+					}
+				}
+			}
+			.account_info{width: 57%;.vertical-align;
+				.box{padding-left: 8%;.vertical-align;
+					img{.vertical-align;}
+					.info{.vertical-align;margin-left: 10%;
+						h6{font-weight: 700;margin-bottom: 10px}
+						.num{color:@red;}
+					}
+				}
+				.balance_box{width:37%;}
+				.integral__box{width:62.2%;}
+			}
+		}
+		.history{
+			ul{
+				li{width: 25%;text-align: center;float: left;
+					.label{margin:10px 0 4px 0;}
+					.num{font-size: 24px;color: @red;}
+				}
+			}
+		}
+		.my_order{padding-bottom: 0;
+			.title{
+				a{font-size: 14px;color: #666;
+					&:hover{color: @red;}
+				}
+			}
+			.order_list{width: 100%;    table-layout: fixed;
+				th{padding:15px 0;text-align: left;}
+				td{padding:20px 0;}
+				tr{border-bottom:1px solid #ddd;position: relative;z-index: 999;
+
+				}
+				tbody{
+					tr{
+						&:last-child{border-bottom: none;}
+					}
+					td{
+						.goods_name{width: 95%;
+							&+.goods_name{margin-top: 20px;}
+						}
+						.red{color: @red;}
+						&.order_staus{
+							a{color: #0066cc;
+								&:hover{color: #326899;}
+							}
+						}
+						&.market_price{    text-decoration: line-through;}
+					}
+				}
+			}
+		}
+	}
+}
+
+.footer_main{background-color: #4e4e4e;
+	.container{width: 900px;}
+	.item{margin-bottom: 30px;
+		>li{width: 20%;float: left;
+			h6{margin:26px 0;color: #fff;}
+			li{
+				a{color: #ccc;
+					&:hover{color: #fff;}
+				}
+				&+li{margin-top: 10px;}
+			}
+		}
+	}
+	.bottom{text-align: center;height: 50px;line-height: 50px;color: #999;}
+}

@@ -17,32 +17,27 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">产品名称</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="name"/>
+						<input type="text" class="form-control" name="name" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">价格</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="price"/>
+						<input type="text" class="form-control" name="price" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">超市价格</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="marketPrice"/>
+						<input type="text" class="form-control" name="marketPrice" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">是否上架</label> 
+					<label class="col-sm-2 control-label">是否上架</label>
 					<div class="col-sm-6">
-					<label
-						class="radio-inline"> <input type="radio"
-						name="isVisible"  value="true">
-						上架
-					</label> <label class="radio-inline"> <input type="radio"
-						name="isVisible" value="false">
-						下架
-					</label>
+						<label class="radio-inline"> <input type="radio" name="isVisible" value="true"> 上架
+						</label> <label class="radio-inline"> <input type="radio" name="isVisible" value="false"> 下架
+						</label>
 					</div>
 
 				</div>
