@@ -1,9 +1,9 @@
 package com.sfmy.gsh.entity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -18,23 +18,29 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-
-
+/**
+ * 产品二级类型
+ * @author 黄燕针
+ */
 @Entity
-@Table(name = "product_type")
-public class ProductType {
+@Table(name = "product_sec_type")
+public class ProductSecType {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
+//	@Column(name = "first_type")
+//	@Enumerated(EnumType.STRING)
+//	private ProductFirstType firstType;
+	
 	@OneToMany(cascade={CascadeType.ALL})
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(
-			name="product_type_product_sec_type",
-			joinColumns = {@JoinColumn(name = "product_type_id", referencedColumnName = "id")},
-			inverseJoinColumns={@JoinColumn(name = "product_sec_id", referencedColumnName = "id")}
+			name="product_sec_type_product_third_type",
+			joinColumns = {@JoinColumn(name = "product_sec_id", referencedColumnName = "id")},
+			inverseJoinColumns={@JoinColumn(name = "product_third_id", referencedColumnName = "id")}
 			)
-	private List<ProductSecType> productSecTypes = new ArrayList<ProductSecType>();
+	private List<ProductThirdType> thirdTypes;
 
 	public Integer getId() {
 		return id;
@@ -52,11 +58,11 @@ public class ProductType {
 		this.name = name;
 	}
 
-	public List<ProductSecType> getProductSecTypes() {
-		return productSecTypes;
+	public List<ProductThirdType> getThirdTypes() {
+		return thirdTypes;
 	}
 
-	public void setProductSecTypes(List<ProductSecType> productSecTypes) {
-		this.productSecTypes = productSecTypes;
+	public void setThirdTypes(List<ProductThirdType> thirdTypes) {
+		this.thirdTypes = thirdTypes;
 	}
 }
