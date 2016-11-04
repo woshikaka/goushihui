@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE xml>
-<ehcache updateCheck="false" name="interfaceCache">
+<ehcache updateCheck="false" name="shiroCache">
    <defaultCache
             eternal="false"
             overflowToDisk="false"

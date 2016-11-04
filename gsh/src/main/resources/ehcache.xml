@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<ehcache updateCheck="false">
+   <cache
+		name="gshCache"
+        eternal="false"
+		overflowToDisk="false"
+		maxElementsInMemory="3000"
+		timeToIdleSeconds="1800" 
+		timeToLiveSeconds="1800" 
+		diskPersistent="false"
+        />
+</ehcache>
