@@ -29,4 +29,7 @@ public class OssUtils {
 		ossClient.putObject(bucketName,key,input);
 //		ossClient.shutdown();
 	}
+	public static void delete(String key) {
+		ossClient.deleteObject(bucketName,key);
+	}
 }

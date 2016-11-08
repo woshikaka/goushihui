@@ -27,7 +27,14 @@
 					<a href="#" name="oneLevel">产品管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
 					<ul class="nav nav-second-level">
 						<li><a href="listUI">产品列表</a></li>
-						<li><a href="addUI">添加产品</a></li>
+						<li><a href="${pageContext.request.contextPath}/a/product/addUI">添加产品</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="#" name="oneLevel">首页广告管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
+					<ul class="nav nav-second-level">
+						<li><a href="${pageContext.request.contextPath}/a/ad/adListUI">广告列表</a></li>
+						<li><a href="${pageContext.request.contextPath}/a/ad/addUI">添加广告</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -59,6 +66,6 @@
 		});
 		
 		//全局confirm弹窗
-		//$(".confirm").confirm();
+		$(".confirm").confirm();
 	});
 </script>
