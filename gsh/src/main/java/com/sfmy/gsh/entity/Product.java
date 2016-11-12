@@ -4,8 +4,6 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,19 +11,22 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.sfmy.gsh.constant.ProductFirstType;
-
 @Entity
 @Table(name = "product")
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+
 	@Column(length = 100, nullable = false)
 	private String name;
+
+	@Column(nullable = false)
 	private Double price;
-	@Column(length = 100)
+
+	@Column(length = 100, nullable = false)
 	private String image;
+
 	@Column(name = "market_price")
 	private Double marketPrice;
 	/**
@@ -38,9 +39,11 @@ public class Product {
 	 **/
 	@Column(name = "base_price")
 	private Float basePrice;
+
 	private String description;
+
 	@Column(name = "create_time")
-	private Date createTime;
+	private Date createTime = new Date();
 	/**
 	 * 销售量
 	 */
@@ -49,14 +52,20 @@ public class Product {
 	/**
 	 * 是否可见
 	 */
-	@Column(name = "is_visible")
+	@Column(name = "is_visible",nullable=false)
 	private Boolean isVisible;
-	@Column(name = "first_type")
-	@Enumerated(EnumType.STRING)
-	private ProductFirstType firstType;
+
 	@OneToOne
-	@JoinColumn(name = "sec_type_id")
+	@JoinColumn(name = "first_type_id",nullable=false)
+	private ProductType firstType;
+
+	@OneToOne
+	@JoinColumn(name = "sec_type_id",nullable=false)
 	private ProductSecType secType;
+	
+	@OneToOne
+	@JoinColumn(name = "third_type_id",nullable=false)
+	private ProductThirdType thirdType;
 
 	public String getName() {
 		return name;
@@ -146,19 +155,27 @@ public class Product {
 		this.image = image;
 	}
 
-	public ProductFirstType getFirstType() {
-		return firstType;
-	}
-
-	public void setFirstType(ProductFirstType firstType) {
-		this.firstType = firstType;
-	}
-
 	public ProductSecType getSecType() {
 		return secType;
 	}
 
 	public void setSecType(ProductSecType secType) {
 		this.secType = secType;
+	}
+
+	public ProductType getFirstType() {
+		return firstType;
+	}
+
+	public void setFirstType(ProductType firstType) {
+		this.firstType = firstType;
+	}
+
+	public ProductThirdType getThirdType() {
+		return thirdType;
+	}
+
+	public void setThirdType(ProductThirdType thirdType) {
+		this.thirdType = thirdType;
 	}
 }
