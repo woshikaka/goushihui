@@ -6,8 +6,6 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import net.sf.json.util.WebUtils;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,7 +25,6 @@ import com.sfmy.gsh.utils.MyRegexUtils;
 import com.sfmy.gsh.utils.MyStringUtils;
 import com.sfmy.gsh.utils.OssUtils;
 import com.sfmy.gsh.web.vo.ProductVO;
-import com.zg.diyway.common.utils.JsonUtils;
 
 @Controller
 @RequestMapping(value = "/a/product")
@@ -44,6 +41,7 @@ public class ProductControler {
 	}
 
 	@RequestMapping(value = "/addUI")
+	@SuppressWarnings("unchecked")
 	public String addUI(HttpServletRequest request) {
 		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
 		request.setAttribute("productTypes", productTypes);
@@ -52,6 +50,7 @@ public class ProductControler {
 
 	@ResponseBody
 	@RequestMapping(value = "/findSecTypeByFirType",produces="application/json;charset=utf-8")
+	@SuppressWarnings("unchecked")
 	public String findSecTypeByFirType(HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
 
@@ -74,15 +73,22 @@ public class ProductControler {
 
 	@ResponseBody
 	@RequestMapping(value = "/findThirdTypeBySecType",produces="application/json;charset=utf-8")
+	@SuppressWarnings("unchecked")
 	public String findThirdTypeBySecType(HttpServletRequest request) {
 		StringBuilder sb = new StringBuilder();
 
 		String secTypeId = request.getParameter("secTypeId");
-
+		
 		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
-		for (ProductType productType : productTypes) {
+		firFor:for (ProductType productType : productTypes) {
+			if(sb.length()>0){
+				break firFor;
+			}
 			List<ProductSecType> productSecTypes = productType.getProductSecTypes();
 			for (ProductSecType productSecType : productSecTypes) {
+				if(sb.length()>0){
+					break firFor;
+				}
 				if (StringUtils.equals(productSecType.getId() + "", secTypeId)) {
 					List<ProductThirdType> thirdTypes = productSecType.getThirdTypes();
 					sb.append("<option value=''>三级分类</option>");
@@ -108,6 +114,15 @@ public class ProductControler {
 		if (name.length() > 100) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "产品名称长度不能超过100个字符");
+			ra.addFlashAttribute("product", product);
+			return "redirect:/a/product/addUI";
+		}
+		
+		//验证产品类型
+		
+		if(product.getFirstType().getId()==null||product.getSecType().getId()==null||product.getThirdType().getId()==null){
+			ra.addFlashAttribute("isDangerShow", true);
+			ra.addFlashAttribute("dangerMessage", "产品类型为空！");
 			ra.addFlashAttribute("product", product);
 			return "redirect:/a/product/addUI";
 		}

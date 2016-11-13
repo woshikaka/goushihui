@@ -21,7 +21,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">产品类型</label>
 					<div class="col-sm-2">
-						<select class="form-control" name="firstType" id="firstTypeChosen">
+						<select class="form-control" name="firstType.id" id="firstTypeChosen">
 								<option value="">一级分类</option>
 								<c:forEach items="${productTypes}" var="bean">
 									<option value="${bean.id}">${bean.name}</option>
@@ -29,12 +29,12 @@
 						</select>
 					</div>
 					<div class="col-sm-2">
-						<select class="form-control" name="secType" id="secTypeChosen">
+						<select class="form-control" name="secType.id" id="secTypeChosen">
 								<option value="">二级分类</option>
 						</select>
 					</div>
 					<div class="col-sm-2">
-						<select class="form-control" name="thirdType" id="thirdTypeChosen">
+						<select class="form-control" name="thirdType.id" id="thirdTypeChosen">
 								<option value="">三级分类</option>
 						</select>
 					</div>
