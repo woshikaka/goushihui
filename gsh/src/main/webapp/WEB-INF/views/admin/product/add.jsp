@@ -15,13 +15,13 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">产品名称</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" value="${product.name}" name="name" />
+						<input type="text" class="form-control" value="${productVO.name}" name="name" />
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">产品类型</label>
 					<div class="col-sm-2">
-						<select class="form-control" name="firstType.id" id="firstTypeChosen">
+						<select class="form-control" name="firstTypeId" id="firstTypeChosen">
 								<option value="">一级分类</option>
 								<c:forEach items="${productTypes}" var="bean">
 									<option value="${bean.id}">${bean.name}</option>
@@ -29,12 +29,12 @@
 						</select>
 					</div>
 					<div class="col-sm-2">
-						<select class="form-control" name="secType.id" id="secTypeChosen">
+						<select class="form-control" name="secTypeId" id="secTypeChosen">
 								<option value="">二级分类</option>
 						</select>
 					</div>
 					<div class="col-sm-2">
-						<select class="form-control" name="thirdType.id" id="thirdTypeChosen">
+						<select class="form-control" name="thirdTypeId" id="thirdTypeChosen">
 								<option value="">三级分类</option>
 						</select>
 					</div>
@@ -60,8 +60,8 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">是否上架</label>
 					<div class="col-sm-6">
-						<label class="radio-inline"> <input type="radio" name="isVisible" value="true"> 上架
-						</label> <label class="radio-inline"> <input type="radio" checked="checked" name="isVisible" value="false"> 下架
+						<label class="radio-inline"> <input type="radio" name="isShangJia" value="true"> 上架
+						</label> <label class="radio-inline"> <input type="radio" checked="checked" name="isShangJia" value="false"> 下架
 						</label>
 					</div>
 

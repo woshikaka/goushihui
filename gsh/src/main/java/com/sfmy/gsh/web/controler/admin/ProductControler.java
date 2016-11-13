@@ -102,28 +102,27 @@ public class ProductControler {
 	}
 
 	@RequestMapping(value = "/addProduct")
-	public String addProduct(HttpServletRequest request, ProductVO productVO, @RequestParam("file") MultipartFile file, Product product, RedirectAttributes ra) throws IOException {
+	public String addProduct(HttpServletRequest request, ProductVO productVO, @RequestParam("file") MultipartFile file, RedirectAttributes ra) throws IOException {
 		// 产品名称
-		String name = product.getName();
+		String name = productVO.getName();
 		if (StringUtils.isBlank(name)) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "产品名称不能为空！");
-			ra.addFlashAttribute("product", product);
+			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
 		if (name.length() > 100) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "产品名称长度不能超过100个字符");
-			ra.addFlashAttribute("product", product);
+			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
 		
 		//验证产品类型
-		
-		if(product.getFirstType().getId()==null||product.getSecType().getId()==null||product.getThirdType().getId()==null){
+		if(productVO.getFirstTypeId()==null||productVO.getSecTypeId()==null||productVO.getThirdTypeId()==null){
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "产品类型为空！");
-			ra.addFlashAttribute("product", product);
+			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
 
@@ -132,14 +131,12 @@ public class ProductControler {
 		if (StringUtils.isBlank(priceStr)) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "价格不能为空！");
-			ra.addFlashAttribute("product", product);
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
 		if (!MyRegexUtils.isDouble(priceStr) && !MyRegexUtils.isPositiveInteger(priceStr)) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "你输入的价格不合法！请重新输入价格");
-			ra.addFlashAttribute("product", product);
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
@@ -147,7 +144,6 @@ public class ProductControler {
 		if (StringUtils.length(decimalPoint) > 2) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "你输入的价格小数位太多！小数点最多只能为2位");
-			ra.addFlashAttribute("product", product);
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
@@ -155,25 +151,21 @@ public class ProductControler {
 		if (price == null || price < 0 || price > 10000) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "你输入的价格不合法！价格只能在0~1万之间");
-			ra.addFlashAttribute("product", product);
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
-		product.setPrice(price);
 
 		// 超市价格
 		String marketPriceStr = productVO.getMarketPriceStr();
 		if (StringUtils.isBlank(marketPriceStr)) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "超市价格不能为空！");
-			ra.addFlashAttribute("product", product);
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
 		if (!MyRegexUtils.isDouble(marketPriceStr) && !MyRegexUtils.isPositiveInteger(marketPriceStr)) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "你输入的超市价格不合法！请重新输入价格");
-			ra.addFlashAttribute("product", product);
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
@@ -181,7 +173,6 @@ public class ProductControler {
 		if (StringUtils.length(marketPriceDecimalPoint) > 2) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "你输入的超市价格小数位太多！小数点最多只能为2位");
-			ra.addFlashAttribute("product", product);
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
@@ -189,17 +180,16 @@ public class ProductControler {
 		if (marketPrice == null || marketPrice < 0 || marketPrice > 10000) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "你输入的超市价格不合法！超市价格只能在0~1万之间");
-			ra.addFlashAttribute("product", product);
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
-		product.setMarketPrice(marketPrice);
+		
 
 		// 验证产品图片
 		if (file == null) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "产品图片为空！请先选择图片。");
-			ra.addFlashAttribute("product", product);
+			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
 		String originalFilename = file.getOriginalFilename();
@@ -207,13 +197,22 @@ public class ProductControler {
 		if (!MyStringUtils.isPicExt(ext)) {
 			ra.addFlashAttribute("isDangerShow", true);
 			ra.addFlashAttribute("dangerMessage", "你选择的不是图片！请重新选择");
-			ra.addFlashAttribute("product", product);
+			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
 		String ossKey = MyStringUtils.getUUID() + "." + ext;
 		OssUtils.upload(ossKey, file.getInputStream());
-		product.setImage(ossKey);
 
+		Product product = new Product();
+		product.setName(productVO.getName());
+		product.setImage(ossKey);
+		product.setMarketPrice(marketPrice);
+		product.setPrice(price);
+		product.setIsShangJia(productVO.getIsShangJia());
+		product.setFirstType(new ProductType(productVO.getFirstTypeId()));
+		product.setSecType(new ProductSecType(productVO.getSecTypeId()));
+		product.setThirdType(new ProductThirdType(productVO.getThirdTypeId()));
+		
 		productService.addProduct(product);
 		ra.addFlashAttribute("isSuccessShow", true);
 		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品添加成功^_^");

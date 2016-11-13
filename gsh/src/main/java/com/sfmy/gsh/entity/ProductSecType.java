@@ -38,6 +38,16 @@ public class ProductSecType {
 			)
 	private List<ProductThirdType> thirdTypes;
 
+	public ProductSecType() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public ProductSecType(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}

@@ -33,6 +33,15 @@ public class ProductType {
 			)
 	private List<ProductSecType> productSecTypes = new ArrayList<ProductSecType>();
 
+	public ProductType() {
+		super();
+	}
+
+	public ProductType(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	public Integer getId() {
 		return id;
 	}

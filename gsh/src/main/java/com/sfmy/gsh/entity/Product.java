@@ -50,10 +50,10 @@ public class Product {
 	@Column(name = "sell_count")
 	private Integer sellCount;
 	/**
-	 * 是否可见
+	 * 是否上架
 	 */
-	@Column(name = "is_visible",nullable=false)
-	private Boolean isVisible;
+	@Column(name = "is_shang_jia",nullable=false)
+	private Boolean isShangJia;
 
 	@OneToOne
 	@JoinColumn(name = "first_type_id",nullable=false)
@@ -130,13 +130,12 @@ public class Product {
 	public void setSellCount(Integer sellCount) {
 		this.sellCount = sellCount;
 	}
-
-	public Boolean getIsVisible() {
-		return isVisible;
+	public Boolean getIsShangJia() {
+		return isShangJia;
 	}
 
-	public void setIsVisible(Boolean isVisible) {
-		this.isVisible = isVisible;
+	public void setIsShangJia(Boolean isShangJia) {
+		this.isShangJia = isShangJia;
 	}
 
 	public Integer getId() {

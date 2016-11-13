@@ -17,6 +17,11 @@ public class ProductThirdType {
 	private Integer id;
 	private String name;
 
+	public ProductThirdType(Integer id) {
+		super();
+		this.id = id;
+	}
+
 	public ProductThirdType() {
 	}
 
