@@ -1,4 +1,4 @@
-package com.zg.diyway.common.utils;
+package com.sfmy.gsh.utils;
 
 import java.io.StringWriter;
 import java.util.List;

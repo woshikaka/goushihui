@@ -42,7 +42,6 @@
 					<table class="table table-striped table-hover table-condensed" id="datatable">
 						<thead>
 							<tr>
-								<th width="20px"><input type="checkbox" onclick="bean.allChecked(this)" disabled="disabled"></th>
 								<th>名称</th>
 							</tr>
 						</thead>

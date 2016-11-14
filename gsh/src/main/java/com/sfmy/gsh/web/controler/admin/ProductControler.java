@@ -2,18 +2,22 @@ package com.sfmy.gsh.web.controler.admin;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.sfmy.gsh.bean.PageBean;
 import com.sfmy.gsh.entity.Product;
 import com.sfmy.gsh.entity.ProductSecType;
 import com.sfmy.gsh.entity.ProductThirdType;
@@ -24,7 +28,7 @@ import com.sfmy.gsh.utils.MyDateFormatUtils;
 import com.sfmy.gsh.utils.MyRegexUtils;
 import com.sfmy.gsh.utils.MyStringUtils;
 import com.sfmy.gsh.utils.OssUtils;
-import com.sfmy.gsh.web.vo.ProductVO;
+import com.sfmy.gsh.web.vo.AddProductVO;
 
 @Controller
 @RequestMapping(value = "/a/product")
@@ -36,8 +40,20 @@ public class ProductControler {
 	private CacheUtils cacheUtils;
 
 	@RequestMapping(value = "/listUI")
-	public String listUI(HttpServletRequest request) {
+	public String listUI(Map<String,String> requestParam,HttpServletRequest request,Model model) {
+		Page<Product> page = productService.pageList(1);
+		
+		PageBean<Product> pageBean = new PageBean<Product>(page.getContent(),page.getSize(),(int) page.getTotalElements());
+		model.addAttribute("pageBean", pageBean);
 		return "admin/product/list";
+		
+//		int currentIndex = page.getNumber() + 1;
+//	    int beginIndex = Math.max(1, currentIndex - 5);
+//	    int endIndex = Math.min(beginIndex + 10, page.getTotalPages());
+//		model.addAttribute("pageBean", page);
+//	    model.addAttribute("beginIndex", beginIndex);
+//	    model.addAttribute("endIndex", endIndex);
+//	    model.addAttribute("currentIndex", currentIndex);
 	}
 
 	@RequestMapping(value = "/addUI")
@@ -102,7 +118,7 @@ public class ProductControler {
 	}
 
 	@RequestMapping(value = "/addProduct")
-	public String addProduct(HttpServletRequest request, ProductVO productVO, @RequestParam("file") MultipartFile file, RedirectAttributes ra) throws IOException {
+	public String addProduct(HttpServletRequest request, AddProductVO productVO, @RequestParam("file") MultipartFile file, RedirectAttributes ra) throws IOException {
 		// 产品名称
 		String name = productVO.getName();
 		if (StringUtils.isBlank(name)) {

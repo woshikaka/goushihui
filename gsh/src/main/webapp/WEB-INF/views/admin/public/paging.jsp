@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <div class="row">
 	<div class="col-md-12">
+		<c:if test="${empty pageBean.recordList}">
+			没有符合的数据！
+		</c:if>
 		<nav>
 			<ul class="pagination pagination-sm">
 				<li><a href="#" onclick="gotoPage('${pageBean.currPageNo-1}')" aria-label="Previous"> <span aria-hidden="true">&laquo;</span></a></li>
@@ -20,15 +23,15 @@
 			</ul>
 		</nav>
 		<ul class="list-inline">
-			<li>每页
+			<%-- <li>每页
 				<select name="pageSize" onchange="gotoPage(${pageBean.currPageNo})">
 					<option value="50" ${'50'==pageBean.pageSize?'selected':''}>50</option>
 					<option value="100" ${'100'==pageBean.pageSize?'selected':''}>100</option>
 					<option value="200" ${'200'==pageBean.pageSize?'selected':''}>200</option>
 					<option value="300" ${'300'==pageBean.pageSize?'selected':''}>300</option>
 				</select>个
-			</li>
-			<%-- <li>每页：${pageBean.pageSize}个</li> --%>
+			</li> --%>
+			<li>每页：${pageBean.pageSize}个</li>
 			<li>总记录：${pageBean.recordCount}</li>
 			<li>共${pageBean.pageCount}页</li>
 			<li><input id="inputPageNo" type="text" style="width:38px;height:20px" placeholder="页码" /><a href="javascript:void(0)" onclick="gotoPage(-100)">跳转</a><span id='pageNoWarn' style='color: #a94442'></span></li>

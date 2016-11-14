@@ -1,6 +1,6 @@
 package com.sfmy.gsh.web.vo;
 
-public class ProductVO {
+public class AddProductVO {
 	private String priceStr;
 	private String marketPriceStr;
 	private String name;
