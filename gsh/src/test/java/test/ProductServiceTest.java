@@ -1,5 +1,7 @@
 package test;
 
+import java.util.Arrays;
+
 import javax.annotation.Resource;
 
 import org.junit.Test;
@@ -20,12 +22,13 @@ public class ProductServiceTest {
 	
 	@Test
 	public void testPageList() {
-		Page<Product> page = productService.pageList(10);
-		System.out.println(page);
+//		Page<Product> page = productService.pageList(10);
+//		System.out.println(page);
 	}
 	
-	public static void main(String[] args) {
-		System.out.println(Math.max(1,5));
+	@Test
+	public void testBatchShangJia() {
+		productService.batchShangJia(Arrays.asList(new Integer[]{1}));
 	}
 	
 }

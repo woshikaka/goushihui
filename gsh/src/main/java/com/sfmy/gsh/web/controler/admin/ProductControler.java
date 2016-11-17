@@ -40,15 +40,21 @@ public class ProductControler {
 	private CacheUtils cacheUtils;
 
 	@RequestMapping(value = "/listUI")
-	public String listUI(Map<String,String> requestParam,HttpServletRequest request,Model model) {
-		Page<Product> page = productService.pageList(1);
+	public String listUI(@RequestParam Map<String,Object> requestParam,HttpServletRequest request,Model model) { 
+		String pageNumber = (String) requestParam.get("pageNumber");
+		if(StringUtils.isBlank(pageNumber)){	
+			requestParam.put("pageNumber",1);
+		}
+		Page<Product> page = productService.pageList(requestParam);
 		
 		PageBean<Product> pageBean = new PageBean<Product>(page.getContent(),page.getSize(),(int) page.getTotalElements());
 		model.addAttribute("pageBean", pageBean);
+		model.addAttribute("requestParam",requestParam);
+
 		return "admin/product/list";
 		
 //		int currentIndex = page.getNumber() + 1;
-//	    int beginIndex = Math.max(1, currentIndex - 5);
+//	    int beginIndex = Math.max(1, currentIndex - 5);i
 //	    int endIndex = Math.min(beginIndex + 10, page.getTotalPages());
 //		model.addAttribute("pageBean", page);
 //	    model.addAttribute("beginIndex", beginIndex);
@@ -233,6 +239,22 @@ public class ProductControler {
 		ra.addFlashAttribute("isSuccessShow", true);
 		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品添加成功^_^");
 		return "redirect:/a/product/addUI";
+	}
+	
+	@RequestMapping(value = "/batchShangJia")
+	public String batchShangJia(@RequestParam("productIds")List<Integer> productIds,HttpServletRequest request,RedirectAttributes ra) {
+		productService.batchShangJia(productIds);
+		ra.addFlashAttribute("isSuccessShow", true);
+		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品批量上架成功^_^");
+		return "redirect:/a/product/listUI";
+	}
+	
+	@RequestMapping(value = "/batchXiaJia")
+	public String batchXiaJia(@RequestParam("productIds")List<Integer> productIds,HttpServletRequest request,RedirectAttributes ra) {
+		productService.batchXiaJia(productIds);
+		ra.addFlashAttribute("isSuccessShow", true);
+		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品批量下架成功^_^");
+		return "redirect:/a/product/listUI";
 	}
 
 }
