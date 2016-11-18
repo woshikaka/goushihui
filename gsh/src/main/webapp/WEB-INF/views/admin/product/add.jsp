@@ -64,7 +64,12 @@
 						</label> <label class="radio-inline"> <input type="radio" checked="checked" name="isShangJia" value="false"> 下架
 						</label>
 					</div>
-
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2 control-label">产品描述与细节</label>
+					<div class="col-sm-9">
+						<%@ include file="/WEB-INF/views/admin/public/ueditor.jsp"%>
+					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">

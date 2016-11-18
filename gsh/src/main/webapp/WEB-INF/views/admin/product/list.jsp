@@ -17,7 +17,7 @@
 					<form id="searchForm" class="form-inline" action="${pageContext.request.contextPath}//a/product/listUI" method="post" onsubmit="disabledButton()">
 						<div class="form-group">
 							<input class="form-control" value="${requestParam.name}" type="text" name="name" placeholder="产品名称"/>
-							<select class="form-control" name="isShangJia">
+							<select class="form-control" name="isShangJia" id="isShangJiaSelect">
 								<option value="">是否上架</option>
 								<option value="true">上架</option>
 								<option value="false">下架</option>
@@ -79,6 +79,10 @@
 </body>
 </html>
 <script>
+	$(function(){
+		$("#isShangJiaSelect").val('${requestParam.isShangJia}');
+	})
+
 	function batchShangJia(){
 		var ids = new Array();
 		$("input[name='productCheckbox']:checked").each( function () {

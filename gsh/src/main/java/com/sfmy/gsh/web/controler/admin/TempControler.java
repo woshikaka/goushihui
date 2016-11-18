@@ -9,11 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TempControler {
 	@RequestMapping(value = "/test")
 	public String test(HttpServletRequest request) {
-		
-		//git test
-		
-		
-		
-		return "test";
+		return "admin/public/ueditor";
 	}
 }
