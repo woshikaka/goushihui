@@ -234,6 +234,7 @@ public class ProductControler {
 		product.setFirstType(new ProductType(productVO.getFirstTypeId()));
 		product.setSecType(new ProductSecType(productVO.getSecTypeId()));
 		product.setThirdType(new ProductThirdType(productVO.getThirdTypeId()));
+		product.setDescription(productVO.getDescription());
 		
 		productService.addProduct(product);
 		ra.addFlashAttribute("isSuccessShow", true);

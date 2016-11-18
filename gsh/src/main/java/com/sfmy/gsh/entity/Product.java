@@ -2,12 +2,15 @@ package com.sfmy.gsh.entity;
 
 import java.util.Date;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -40,6 +43,11 @@ public class Product {
 	@Column(name = "base_price")
 	private Float basePrice;
 
+	/**
+	 * 商品描述
+	 */
+	@Lob
+	@Basic(fetch=FetchType.LAZY)
 	private String description;
 
 	@Column(name = "create_time")
@@ -47,8 +55,8 @@ public class Product {
 	/**
 	 * 销售量
 	 */
-	@Column(name = "sell_count")
-	private Integer sellCount;
+	@Column(name = "sell_count",nullable=false)
+	private Integer sellCount=0;
 	/**
 	 * 是否上架
 	 */

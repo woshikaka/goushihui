@@ -6,7 +6,7 @@
 </head>
 <body>
 	<!-- 加载编辑器的容器 -->
-	<script id="container" name="content" type="text/plain">这里填写商品描述</script>
+	<script id="container" name="content" type="text/plain"></script>
 	<!-- 配置文件 -->
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/resources/umeditor/ueditor.config.js"></script>
