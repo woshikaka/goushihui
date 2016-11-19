@@ -162,13 +162,6 @@
 			</exclusions>
 		</dependency>
 
-		<!-- aws-s3 -->
-		<dependency>
-			<groupId>com.amazonaws</groupId>
-			<artifactId>aws-java-sdk-s3</artifactId>
-			<version>1.10.5.1</version>
-		</dependency>
-
 		<!-- dom4j -->
 		<dependency>
 			<groupId>dom4j</groupId>

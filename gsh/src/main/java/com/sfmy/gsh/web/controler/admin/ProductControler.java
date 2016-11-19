@@ -25,9 +25,9 @@ import com.sfmy.gsh.entity.ProductType;
 import com.sfmy.gsh.service.ProductService;
 import com.sfmy.gsh.utils.CacheUtils;
 import com.sfmy.gsh.utils.MyDateFormatUtils;
+import com.sfmy.gsh.utils.MyOssUtils;
 import com.sfmy.gsh.utils.MyRegexUtils;
 import com.sfmy.gsh.utils.MyStringUtils;
-import com.sfmy.gsh.utils.OssUtils;
 import com.sfmy.gsh.web.vo.AddProductVO;
 
 @Controller
@@ -38,7 +38,7 @@ public class ProductControler {
 
 	@Resource
 	private CacheUtils cacheUtils;
-
+	
 	@RequestMapping(value = "/listUI")
 	public String listUI(@RequestParam Map<String,Object> requestParam,HttpServletRequest request,Model model) { 
 		String pageNumber = (String) requestParam.get("pageNumber");
@@ -222,12 +222,11 @@ public class ProductControler {
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
-		String ossKey = MyStringUtils.getUUID() + "." + ext;
-		OssUtils.upload(ossKey, file.getInputStream());
+		String fileKey = MyOssUtils.upload(MyStringUtils.getUUID() + "." + ext,file.getBytes());
 
 		Product product = new Product();
 		product.setName(productVO.getName());
-		product.setImage(ossKey);
+		product.setImage(fileKey);
 		product.setMarketPrice(marketPrice);
 		product.setPrice(price);
 		product.setIsShangJia(productVO.getIsShangJia());

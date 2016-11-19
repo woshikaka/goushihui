@@ -24,10 +24,7 @@ public class OssUtils {
 	}
 
 	public static void upload(String key,InputStream input) {
-		//String content = "Hello OSS test";
-		// new ByteArrayInputStream(content.getBytes()
 		ossClient.putObject(bucketName,key,input);
-//		ossClient.shutdown();
 	}
 	public static void delete(String key) {
 		ossClient.deleteObject(bucketName,key);

@@ -3,10 +3,7 @@ package com.sfmy.gsh.utils;
 import java.io.StringWriter;
 import java.util.List;
 
-import net.sf.json.util.WebUtils;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.codehaus.jackson.map.ObjectMapper;
 
 public class JsonUtils {
 	static ObjectMapper mapper = new ObjectMapper();
@@ -17,9 +14,8 @@ public class JsonUtils {
 		try {
 			String result = mapper.writeValueAsString(list);
 			return result;
-		} catch (JsonProcessingException e1) {
-			e1.printStackTrace();
-			throw new RuntimeException(e1);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 	
@@ -30,9 +26,8 @@ public class JsonUtils {
 		try {
 			String result = mapper.writeValueAsString(obj);
 			return result;
-		} catch (JsonProcessingException e1) {
-			e1.printStackTrace();
-			throw new RuntimeException(e1);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
 	}
 	
