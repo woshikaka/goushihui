@@ -34,14 +34,14 @@
 			<div class="row">
 				<div class="col-md-12  btn-group btn-group-sm">
 					<button type="button" class="btn btn-default" onclick="showChecked()">批量显示到首页</button>
-					<form action="${pageContext.request.contextPath}/a/ad/show" id="showForm" method="post">
-						<input id="showFormInput" type="hidden" name="adIds" value="">
-					</form>
 					<button type="button" class="btn btn-default" onclick="deleteChecked()">删除</button>
-					<form action="${pageContext.request.contextPath}/a/ad/delete" id="deleteForm" method="post">
-						<input id="deleteFormInput" type="hidden" name="adIds" value="">
-					</form>
 				</div>
+				<form action="${pageContext.request.contextPath}/a/ad/delete" id="deleteForm" method="post">
+					<input id="deleteFormInput" type="hidden" name="adIds" value="">
+				</form>
+				<form action="${pageContext.request.contextPath}/a/ad/show" id="showForm" method="post">
+					<input id="showFormInput" type="hidden" name="adIds" value="">
+				</form>
 			</div>
 			<div class="row">
 				<div class="col-md-12  ">

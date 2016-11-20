@@ -27,6 +27,7 @@
 						<input type="file" class="form-control" name="file" >
 					</div>
 				</div>
+				<script src="//cdn.ckeditor.com/4.6.0/basic/ckeditor.js"></script>
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
 						<button type="submit" class="btn btn-default">添加</button>

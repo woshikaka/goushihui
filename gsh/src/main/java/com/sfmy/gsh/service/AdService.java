@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sfmy.gsh.dao.AdDao;
 import com.sfmy.gsh.entity.Ad;
-import com.sfmy.gsh.utils.OssUtils;
+import com.sfmy.gsh.utils.MyOssUtils;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -35,7 +35,7 @@ public class AdService {
 			for (Integer adId : adIds) {
 				Ad ad = adDao.findOne(adId);
 				adDao.delete(adId);
-				OssUtils.delete(ad.getOssKey());
+				MyOssUtils.delete(ad.getOssKey());
 			}
 			return true;
 		}

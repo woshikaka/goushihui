@@ -3,6 +3,9 @@
 <html lang="zh-CN">
 <head>
 <title>数据采集</title>
+<script src="${pageContext.request.contextPath}/resources/ckEditor/ckeditor.js"></script>
+<%-- <script src="${pageContext.request.contextPath}/resources/ckEditor/sample.js"></script>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ckEditor/samples.css"> --%>
 <%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 </head>
 <body>
@@ -68,8 +71,11 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">产品描述与细节</label>
 					<div class="col-sm-9">
-						<%@ include file="/WEB-INF/views/admin/public/ueditor.jsp"%>
-						<input type="hidden" name="description" value="">
+						<%-- <%@ include file="/WEB-INF/views/admin/public/ckEditor.jsp"%>
+						<input type="hidden" name="description" value=""> --%>
+						<textarea name="description" id="editor1" rows="10" cols="80">
+			                This is my textarea to be replaced with CKEditor.
+			            </textarea>
 					</div>
 				</div>
 				<div class="form-group">
@@ -122,19 +128,38 @@
 		var priceStr = $("input[name='priceStr']").val();
 		if(!priceStr.trim()){
 			$("input[name='priceStr']").focus();
-			swal("价格为空！", "", "error")
+			swal("价格为空！", "", "error");
 			return false;
 		}
+		if(priceStr.match(/^\d+$/)){ //integer
+			// do noting
+		}else if(priceStr.match(/^\d+\.\d+$/)){//float
+			// do noting
+		}else{
+			swal("价格格式不正确！", "", "error");
+			return false;
+		}
+		
 		var marketPriceStr = $("input[name='marketPriceStr']").val();
 		if(!marketPriceStr.trim()){
 			$("input[name='marketPriceStr']").focus();
 			swal("超市价格为空！", "", "error")
 			return false;
 		}
+		if(marketPriceStr.match(/^\d+$/)){ //integer
+			// do noting
+		}else if(marketPriceStr.match(/^\d+\.\d+$/)){//float
+			// do noting
+		}else{
+			swal("超市价格格式不正确！", "", "error");
+			return false;
+		}
 		
-		var ue = UE.getEditor('container');
-		var description = ue.getContent();
-		$("input[name='description']").val(description);
+		//var ue = UE.getEditor('container');
+		//var description = ue.getContent();
+		//var content = CKEDITOR.instances['comment'].getData();
+		//alert(content);
+		//$("input[name='description']").val(content);
 		
 		waitingDialog.show('处理中...', {dialogSize: 'sm'});
 		return true;
@@ -171,4 +196,8 @@
 			});
 		});
 	})
+			CKEDITOR.replace( 'editor1' );
+		CKEDITOR.editorConfig = function( config ) {
+			config.language = 'zh-cn';
+		};
 </script>

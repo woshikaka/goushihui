@@ -3,14 +3,14 @@
 <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
 	<div class="container-fluid">
 		<div class="navbar-header">                        
-			<a class="navbar-brand" href="#"> <span class="glyphicon glyphicon-bookmark"></a> 
+			<a class="navbar-brand" href="#">购食汇管理平台</a> 
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
+				<li class="dropdown"><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="true">首页</a></li>
 				<li class="dropdown "><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="true"> 
 				<span class="glyphicon glyphicon-user "></span>
-				&nbsp;		
-			
+				&nbsp;
 				<span class="caret"></span></a>
 					<ul class="dropdown-menu" role="menu">
 						<!-- <li><a href="#">修改密码</a></li> -->
@@ -26,7 +26,7 @@
 				<li>
 					<a href="#" name="oneLevel">产品管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
 					<ul class="nav nav-second-level">
-						<li><a href="listUI">产品列表</a></li>
+						<li><a href="${pageContext.request.contextPath}/a/product/listUI">产品列表</a></li>
 						<li><a href="${pageContext.request.contextPath}/a/product/addUI">添加产品</a></li>
 					</ul>
 				</li>

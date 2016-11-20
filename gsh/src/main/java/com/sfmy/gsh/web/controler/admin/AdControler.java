@@ -18,8 +18,8 @@ import com.sfmy.gsh.entity.Ad;
 import com.sfmy.gsh.service.AdService;
 import com.sfmy.gsh.utils.CacheUtils;
 import com.sfmy.gsh.utils.MyDateFormatUtils;
+import com.sfmy.gsh.utils.MyOssUtils;
 import com.sfmy.gsh.utils.MyStringUtils;
-import com.sfmy.gsh.utils.OssUtils;
 
 @Controller
 @RequestMapping(value="/a/ad")
@@ -92,8 +92,8 @@ public class AdControler {
 				ra.addFlashAttribute("ad",ad);
 				return "redirect:/a/ad/addUI";
 			}
-			String ossKey = MyStringUtils.getUUID()+"."+ext;
-			OssUtils.upload(ossKey,file.getInputStream());
+//			String ossKey = MyStringUtils.getUUID()+"."+ext;
+			String ossKey = MyOssUtils.upload(MyStringUtils.getUUID()+"."+ext,file.getBytes());
 			ad.setOssKey(ossKey);
 			
 			adService.saveAd(ad);

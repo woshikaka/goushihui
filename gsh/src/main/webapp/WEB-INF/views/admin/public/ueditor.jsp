@@ -34,7 +34,6 @@
 			'fontsize', //字号
 			'paragraph', //段落格式
 			'simpleupload', //单图上传
-			'insertimage', //多图上传
 			'link', //超链接
 			'unlink', //取消链接
 			'emotion', //表情
@@ -50,6 +49,16 @@
 			'lineheight' //行间距
 			] ]
 		});
+		UE.Editor.prototype._bkGetActionUrl = UE.Editor.prototype.getActionUrl;
+		UE.Editor.prototype.getActionUrl = function(action) {
+		    if (action == 'uploadimage' || action == 'uploadscrawl' || action == 'uploadimage') {
+		        return '${pageContext.request.contextPath}/a/product/uploadImageForUEditor';
+		    } else if (action == 'uploadvideo') {
+		        return 'http://a.b.com/video.php';
+		    } else {
+		        return this._bkGetActionUrl.call(this, action);
+		    }
+		}
 	</script>
 </body>
 </html>
