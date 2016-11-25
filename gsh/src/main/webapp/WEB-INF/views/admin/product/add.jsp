@@ -74,7 +74,6 @@
 						<%-- <%@ include file="/WEB-INF/views/admin/public/ckEditor.jsp"%>
 						<input type="hidden" name="description" value=""> --%>
 						<textarea name="description" id="editor1" rows="10" cols="80">
-			                This is my textarea to be replaced with CKEditor.
 			            </textarea>
 					</div>
 				</div>
@@ -196,8 +195,8 @@
 			});
 		});
 	})
-			CKEDITOR.replace( 'editor1' );
-		CKEDITOR.editorConfig = function( config ) {
-			config.language = 'zh-cn';
-		};
+	CKEDITOR.replace( 'editor1' );
+	CKEDITOR.editorConfig = function( config ) {
+		config.language = 'zh-cn';
+	};
 </script>

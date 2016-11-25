@@ -52,6 +52,9 @@ public class Product {
 
 	@Column(name = "create_time")
 	private Date createTime = new Date();
+	
+	@Column(name = "update_time")
+	private Date updateTime = new Date();
 	/**
 	 * 销售量
 	 */
@@ -62,6 +65,12 @@ public class Product {
 	 */
 	@Column(name = "is_shang_jia",nullable=false)
 	private Boolean isShangJia;
+	
+	/**
+	 * 是否top
+	 */
+	@Column(name = "is_top",nullable=false)
+	private Boolean isTop;
 
 	@OneToOne
 	@JoinColumn(name = "first_type_id",nullable=false)
@@ -184,5 +193,21 @@ public class Product {
 
 	public void setThirdType(ProductThirdType thirdType) {
 		this.thirdType = thirdType;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	public Boolean getIsTop() {
+		return isTop;
+	}
+
+	public void setIsTop(Boolean isTop) {
+		this.isTop = isTop;
 	}
 }

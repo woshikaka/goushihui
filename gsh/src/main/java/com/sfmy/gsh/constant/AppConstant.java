@@ -1,4 +1,7 @@
 package com.sfmy.gsh.constant;
 public class AppConstant {
 	public final static Integer PAGE_SIZE = 50;
+	public final static String CACHE_SHOWADS_KEY = "showAds";
+	public final static String CACHE_PRODUCTTYPES_KEY = "productTypes";
+	
 }

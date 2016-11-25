@@ -37,6 +37,14 @@
 						<li><a href="${pageContext.request.contextPath}/a/ad/addUI">添加广告</a></li>
 					</ul>
 				</li>
+				<li>
+					<a href="#" name="oneLevel">首页产品top管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
+					<ul class="nav nav-second-level">
+						<li><a href="${pageContext.request.contextPath}/a/top/topList/1">副食零食top8</a></li>
+						<li><a href="${pageContext.request.contextPath}/a/top/topList/2">酒水饮料top8</a></li>
+						<li><a href="${pageContext.request.contextPath}/a/top/topList/3">粮油调料top8</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
