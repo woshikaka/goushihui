@@ -5,7 +5,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -55,16 +54,28 @@ public class ProductService {
 		return page;
 	}
 
-	public void batchTop(List<Integer> productIds) {
+	public List<Product> batchTop(List<Integer> productIds,Integer productTypeId) {
 		productDao.setIsTopByIds(true,productIds);
+		return productDao.findByIsTopAndFirstType(true,new ProductType(productTypeId));
 	}
 	
-	public void batchCancelTop(List<Integer> productIds) {
+	public List<Product> batchCancelTop(List<Integer> productIds,Integer productTypeId) {
 		productDao.setIsTopByIds(false,productIds);
+		return productDao.findByIsTopAndFirstType(true,new ProductType(productTypeId));
 	}
 
 	public Integer countTopNum(Integer productTypeId) {
 		return productDao.countByIsTopAndFirstType(true,new ProductType(productTypeId));
+	}
+
+	public Product findProductById(Integer id) {
+		Product product = productDao.findOne(id);
+		
+		return product;
+	}
+
+	public void updateProduct(Product product) {
+		productDao.save(product);
 	}
 
 }

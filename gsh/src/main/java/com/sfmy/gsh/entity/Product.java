@@ -14,6 +14,12 @@ import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.LazyToOne;
+import org.hibernate.annotations.LazyToOneOption;
+import org.springframework.context.annotation.Lazy;
+
 @Entity
 @Table(name = "product")
 public class Product {
@@ -36,7 +42,7 @@ public class Product {
 	 * 库存数量
 	 */
 	@Column(name = "stock_count")
-	private Integer stockCount;
+	private Integer stockCount=0;
 	/**
 	 * 底价(采购进来的价格)
 	 **/
@@ -47,7 +53,6 @@ public class Product {
 	 * 商品描述
 	 */
 	@Lob
-	@Basic(fetch=FetchType.LAZY)
 	private String description;
 
 	@Column(name = "create_time")

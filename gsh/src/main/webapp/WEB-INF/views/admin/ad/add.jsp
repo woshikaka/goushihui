@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/admin/public/taglib.jsp"%>
 <html lang="zh-CN">
 <head>
-<title>数据采集</title>
+<title>购食汇管理平台</title>
 <%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <script type="text/javascript">
 	

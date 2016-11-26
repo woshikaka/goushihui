@@ -1,12 +1,14 @@
 package com.sfmy.gsh.web.controler.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -50,7 +52,24 @@ public class ProductControler {
 		PageBean<Product> pageBean = new PageBean<Product>(page.getContent(),page.getSize(),(int) page.getTotalElements());
 		model.addAttribute("pageBean", pageBean);
 		model.addAttribute("requestParam",requestParam);
+		
+		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
+		request.setAttribute("productTypes", productTypes);
 
+		if(CollectionUtils.isNotEmpty(productTypes)){
+			List<ProductSecType> secTypes = new ArrayList<ProductSecType>();
+			for (ProductType productType : productTypes) {
+				secTypes.addAll(productType.getProductSecTypes());
+			}
+			request.setAttribute("secTypes", secTypes);
+			
+			List<ProductThirdType> thirdTypes = new ArrayList<ProductThirdType>();
+			for (ProductSecType productSecType : secTypes) {
+				thirdTypes.addAll(productSecType.getThirdTypes());
+			}
+			request.setAttribute("thirdTypes", thirdTypes);
+		}
+		
 		return "admin/product/list";
 		
 //		int currentIndex = page.getNumber() + 1;
@@ -256,5 +275,22 @@ public class ProductControler {
 		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品批量下架成功^_^");
 		return "redirect:/a/product/listUI";
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/getProductInfoById")
+	public Product getProductInfoById(Integer id) {
+		Product product = productService.findProductById(id);
+		return product;
+	}
+	
+	@RequestMapping(value = "/updateProduct")
+	public String updateProduct(HttpServletRequest request,Product product, RedirectAttributes ra) throws IOException {
+		productService.updateProduct(product);
+		ra.addFlashAttribute("isSuccessShow", true);
+		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品修改成功^_^");
+		return "redirect:/a/product/listUI";
+	}
+
+		
 
 }

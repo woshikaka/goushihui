@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sfmy.gsh.bean.PageBean;
+import com.sfmy.gsh.constant.AppConstant;
 import com.sfmy.gsh.entity.Product;
 import com.sfmy.gsh.service.ProductService;
 import com.sfmy.gsh.utils.CacheUtils;
@@ -58,7 +59,9 @@ public class TopControler {
 			}
 		}
 		
-		productService.batchTop(productIds);
+		List<Product> topProducts = productService.batchTop(productIds, productTypeId);
+		cacheUtils.put(AppConstant.CACHE_TOP8_KEY+productTypeId,topProducts);
+		
 		ra.addFlashAttribute("isSuccessShow",true);
 		ra.addFlashAttribute("successMessage",MyDateFormatUtils.getCurrTime()+" top成功^_^");		
 		return "redirect:/a/top/topList/"+productTypeId;
@@ -66,7 +69,8 @@ public class TopControler {
 	
 	@RequestMapping(value = "/batchCancelTop")
 	public String batchCancelTop(@RequestParam("productIds")List<Integer> productIds,Integer productTypeId,Model model,RedirectAttributes ra) { 
-		productService.batchCancelTop(productIds);
+		List<Product> topProducts = productService.batchCancelTop(productIds,productTypeId);
+		cacheUtils.put(AppConstant.CACHE_TOP8_KEY+productTypeId,topProducts);
 		ra.addFlashAttribute("isSuccessShow",true);
 		ra.addFlashAttribute("successMessage",MyDateFormatUtils.getCurrTime()+" 取消top成功^_^");		
 		return "redirect:/a/top/topList/"+productTypeId;

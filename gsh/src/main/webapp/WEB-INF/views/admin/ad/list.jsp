@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/admin/public/taglib.jsp"%>
 <html lang="zh-CN">
 <head>
-<title>数据采集</title>
+<title>购食汇管理平台</title>
 <%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <%-- <link rel="stylesheet" href="${ctx}/resources/css/bean-list/bean-list.css"> --%>
 <script type="text/javascript">
@@ -105,17 +105,6 @@
 		    confirm: function() {
 		    	$("#deleteFormInput").val(adIds.join(","));
 		    	$("#deleteForm").submit();
-		    	/* $.ajax({
-					type : "POST",
-					url : "${pageContext.request.contextPath}/a/ad/delete",
-					dataType : "json",
-					data : {
-						"adIds" : adIds.join(",")
-					},
-					success : function() {
-						console.log("删除成功!");
-					}
-				}); */
 		    },
 		}); 
 	}

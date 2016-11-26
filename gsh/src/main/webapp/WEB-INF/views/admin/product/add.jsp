@@ -2,7 +2,7 @@
 <%@ include file="/WEB-INF/views/admin/public/taglib.jsp"%>
 <html lang="zh-CN">
 <head>
-<title>数据采集</title>
+<title>购食汇管理平台</title>
 <script src="${pageContext.request.contextPath}/resources/ckEditor/ckeditor.js"></script>
 <%-- <script src="${pageContext.request.contextPath}/resources/ckEditor/sample.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ckEditor/samples.css"> --%>
