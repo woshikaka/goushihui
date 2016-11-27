@@ -58,7 +58,7 @@
 							<c:forEach items="${ads}" var="bean">
 								<tr>
 									<td><input type="checkbox" name="adCheckbox" value="${bean.id}"></td>
-									<td><img src="${ossPublicPre}${bean.ossKey}" width="70"/></td>
+									<td><img src="/upload${bean.ossKey}" width="140"/></td>
 									<td>${bean.href}</td>
 									<td><c:choose>
 											<c:when test="${bean.isUse}">
@@ -109,7 +109,7 @@
 		}); 
 	}
 	
-	function deleteChecked(){
+	function showChecked(){
 		var adIds = new Array();
 		$("input[name='adCheckbox']:checked").each( function () {
 			adIds.push($(this).val());

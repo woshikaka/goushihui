@@ -24,7 +24,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">图片</label>
 					<div class="col-sm-6">
-						<input type="file" class="form-control" name="file" >
+						<input type="file" class="form-control" name="file" ><i style="color:red">建议上传1670*350的图片</i>
 					</div>
 				</div>
 				<script src="//cdn.ckeditor.com/4.6.0/basic/ckeditor.js"></script>
