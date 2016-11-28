@@ -8,8 +8,7 @@
 <link type="text/css" rel="stylesheet"
 	href="/gsh/resources/css/base.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
-<link type="text/css" rel="stylesheet"
-	href="/gsh/resources/css/shop.css" />
+<link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
 </head>
 <style>
 .rect_wrap .search_wrap .search_bd .search_box .search_icon {
@@ -37,10 +36,8 @@
 			</div>
 			<div class="header_left right">
 				<ul>
-					<li><a href="javascript:void(0);"><img
-							src="${pageContext.request.contextPath}/resources/images/user.png"><span>个人中心</span></a></li>
-					<li><a href="javascript:void(0);"><img
-							src="${pageContext.request.contextPath}/resources/images/collect.png"><span>收藏夹</span></a></li>
+					<li><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/resources/images/user.png"><span>个人中心</span></a></li>
+					<li><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/resources/images/collect.png"><span>收藏夹</span></a></li>
 				</ul>
 			</div>
 		</section>
@@ -369,8 +366,7 @@
 					</li>
 					<li>
 						<div class="goods_img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
+							<img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
 						</div>
 						<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
 						<p class="goods_volume">成交3908098盒</p>
@@ -380,8 +376,7 @@
 					</li>
 					<li>
 						<div class="goods_img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
+							<img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
 						</div>
 						<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
 						<p class="goods_volume">成交3908098盒</p>
@@ -404,27 +399,27 @@
 				<div class="left_ad left">
 					<a href="javascript:;">
 						<h3>酒水饮料</h3>
-						<h4>GO></h4> <img
-						src="${pageContext.request.contextPath}/resources/images/index/item_img_1.png">
+						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_1.png">
 					</a>
 				</div>
 				<div class="page_list left">
 					<ul class="clear">
-						<li>
+						<c:forEach items="${products1}" begin="0" end="3" var="bean">
+							<li>
+								<div class="goods_img">
+									<img src="/upload${bean.image}">
+								</div>
+								<p class="goods_name">${bean.name}</p>
+								<p class="goods_volume">成交${bean.sellCount}单</p>
+								<div class="goods_price">
+									<a class="red" href="javascript:;">登录</a>查看专属价格
+									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+								</div>
+							</li>
+						</c:forEach>
+						<%-- <li>
 							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
+								<img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
 							</div>
 							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
 							<p class="goods_volume">成交3908098盒</p>
@@ -453,11 +448,24 @@
 							<div class="goods_price">
 								<span class="new_price">180元</span><span class="old_price">320元</span>
 							</div>
-						</li>
+						</li> --%>
 					</ul>
 					<div class="split_line"></div>
 					<ul class="clear">
-						<li>
+						<c:forEach items="${products1}" begin="4" end="7" var="bean">
+							<li>
+								<div class="goods_img">
+									<img src="/upload${bean.image}">
+								</div>
+								<p class="goods_name">${bean.name}</p>
+								<p class="goods_volume">成交${bean.sellCount}单</p>
+								<div class="goods_price">
+									<a class="red" href="javascript:;">登录</a>查看专属价格
+									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+								</div>
+							</li>
+						</c:forEach>
+						<%-- <li>
 							<div class="goods_img">
 								<img
 									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
@@ -500,7 +508,7 @@
 							<div class="goods_price">
 								<span class="new_price">180元</span><span class="old_price">320元</span>
 							</div>
-						</li>
+						</li> --%>
 					</ul>
 				</div>
 			</div>
@@ -516,24 +524,25 @@
 				<div class="left_ad left">
 					<a href="javascript:;">
 						<h3>副食零食</h3>
-						<h4>GO></h4> <img
-						src="${pageContext.request.contextPath}/resources/images/index/item_img_2.png">
+						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_2.png">
 					</a>
 				</div>
 				<div class="page_list left">
 					<ul class="clear">
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
-						<li>
+						<c:forEach items="${products2}" begin="0" end="3" var="bean">
+							<li>
+								<div class="goods_img">
+									<img src="/upload${bean.image}">
+								</div>
+								<p class="goods_name">${bean.name}</p>
+								<p class="goods_volume">成交${bean.sellCount}单</p>
+								<div class="goods_price">
+									<a class="red" href="javascript:;">登录</a>查看专属价格
+									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+								</div>
+							</li>
+						</c:forEach>
+						<%-- <li>
 							<div class="goods_img">
 								<img
 									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
@@ -565,10 +574,34 @@
 							<div class="goods_price">
 								<span class="new_price">180元</span><span class="old_price">320元</span>
 							</div>
-						</li>
+						</li> --%>
 					</ul>
 					<div class="split_line"></div>
 					<ul class="clear">
+						<c:forEach items="${products2}" begin="4" end="7" var="bean">
+							<li>
+								<div class="goods_img">
+									<img src="/upload${bean.image}">
+								</div>
+								<p class="goods_name">${bean.name}</p>
+								<p class="goods_volume">成交${bean.sellCount}单</p>
+								<div class="goods_price">
+									<a class="red" href="javascript:;">登录</a>查看专属价格
+									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+								</div>
+							</li>
+						</c:forEach>
+						<%-- <li>
+							<div class="goods_img">
+								<img
+									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
+							</div>
+							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
+							<p class="goods_volume">成交3908098盒</p>
+							<div class="goods_price">
+								<span class="new_price">180元</span><span class="old_price">320元</span>
+							</div>
+						</li>
 						<li>
 							<div class="goods_img">
 								<img
@@ -590,29 +623,7 @@
 							<div class="goods_price">
 								<span class="new_price">180元</span><span class="old_price">320元</span>
 							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<a class="red" href="javascript:;">登录</a>查看专属价格
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
+						</li> --%>
 					</ul>
 				</div>
 			</div>
@@ -634,97 +645,35 @@
 				</div>
 				<div class="page_list left">
 					<ul class="clear">
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<a class="red" href="javascript:;">登录</a>查看专属价格
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
+						<c:forEach items="${products3}" begin="0" end="3" var="bean">
+							<li>
+								<div class="goods_img">
+									<img src="/upload${bean.image}">
+								</div>
+								<p class="goods_name">${bean.name}</p>
+								<p class="goods_volume">成交${bean.sellCount}单</p>
+								<div class="goods_price">
+									<a class="red" href="javascript:;">登录</a>查看专属价格
+									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+								</div>
+							</li>
+						</c:forEach>
 					</ul>
 					<div class="split_line"></div>
 					<ul class="clear">
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<a class="red" href="javascript:;">登录</a>查看专属价格
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<a class="red" href="javascript:;">登录</a>查看专属价格
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
+						<c:forEach items="${products3}" begin="4" end="7" var="bean">
+							<li>
+								<div class="goods_img">
+									<img src="/upload${bean.image}">
+								</div>
+								<p class="goods_name">${bean.name}</p>
+								<p class="goods_volume">成交${bean.sellCount}单</p>
+								<div class="goods_price">
+									<a class="red" href="javascript:;">登录</a>查看专属价格
+									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+								</div>
+							</li>
+						</c:forEach>
 					</ul>
 				</div>
 			</div>
@@ -733,14 +682,9 @@
 	</div>
 	<section class="shop_advantage">
 		<ul class="clear">
-			<li><img
-				src="${pageContext.request.contextPath}/resources/images/index/quality_goods.png">万种优质商品
-				在线直供</li>
-			<li><img
-				src="${pageContext.request.contextPath}/resources/images/index/faster.png">零时下单，次日到达</li>
-			<li><img
-				src="${pageContext.request.contextPath}/resources/images/index/sale.png">竞价保障
-				省时省心省钱</li>
+			<li><img src="${pageContext.request.contextPath}/resources/images/index/quality_goods.png">优质商品</li>
+			<li><img src="${pageContext.request.contextPath}/resources/images/index/faster.png">极速配送</li>
+			<li><img src="${pageContext.request.contextPath}/resources/images/index/sale.png">省钱省心</li>
 		</ul>
 	</section>
 

@@ -21,5 +21,7 @@ public interface AdDao extends JpaRepository<Ad,Integer>{
 	@Modifying 
 	@Transactional
 	@Query("update Ad set isUse = :isUse where id not in :ids")
-	public void updateIsUseNotInIds(@Param("isUse")Boolean isUse,@Param("ids")List<Integer>ids); 
+	public void updateIsUseNotInIds(@Param("isUse")Boolean isUse,@Param("ids")List<Integer>ids);
+
+	List<Ad> findByIsUse(boolean isUse); 
 }

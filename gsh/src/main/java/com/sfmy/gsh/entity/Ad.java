@@ -21,7 +21,7 @@ public class Ad {
 	@Column(length = 255, nullable = false)
 	private String href;
 	/**
-	 * 阿里云oss的key
+	 * file的key
 	 */
 	@Column(name = "oss_key", length = 70, nullable = false)
 	private String ossKey;

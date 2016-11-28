@@ -67,4 +67,8 @@ public class AdService {
 		}
 		return showAds;
 	}
+
+	public List<Ad> findShowing() {
+		return adDao.findByIsUse(true);
+	}
 }

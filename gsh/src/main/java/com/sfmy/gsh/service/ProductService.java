@@ -67,6 +67,10 @@ public class ProductService {
 	public Integer countTopNum(Integer productTypeId) {
 		return productDao.countByIsTopAndFirstType(true,new ProductType(productTypeId));
 	}
+	
+	public List<Product> findTop(Integer productTypeId) {
+		return productDao.findByIsTopAndFirstType(true,new ProductType(productTypeId));
+	}
 
 	public Product findProductById(Integer id) {
 		Product product = productDao.findOne(id);
