@@ -215,15 +215,15 @@ public class ProductTypeTest {
 		secType3.setThirdTypes(thirdTypes3);
 		productSecTypes.add(secType3);
 		
-		ProductSecType secType4 = new ProductSecType();
-		secType4.setName("罐头");
-		List<ProductThirdType> thirdTypes4 = new ArrayList<ProductThirdType>();
-		thirdTypes4.add(new ProductThirdType("肉类罐头"));
-		thirdTypes4.add(new ProductThirdType("水产罐头"));
-		thirdTypes4.add(new ProductThirdType("水果罐头"));
-		thirdTypes4.add(new ProductThirdType("进口罐头"));
-		secType4.setThirdTypes(thirdTypes4);
-		productSecTypes.add(secType4);
+//		ProductSecType secType4 = new ProductSecType();
+//		secType4.setName("罐头");
+//		List<ProductThirdType> thirdTypes4 = new ArrayList<ProductThirdType>();
+//		thirdTypes4.add(new ProductThirdType("肉类罐头"));
+//		thirdTypes4.add(new ProductThirdType("水产罐头"));
+//		thirdTypes4.add(new ProductThirdType("水果罐头"));
+//		thirdTypes4.add(new ProductThirdType("进口罐头"));
+//		secType4.setThirdTypes(thirdTypes4);
+//		productSecTypes.add(secType4);
 		
 		productType.setProductSecTypes(productSecTypes);
 		

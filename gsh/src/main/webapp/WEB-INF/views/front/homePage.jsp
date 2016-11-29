@@ -5,8 +5,7 @@
 <html>
 <head>
 <title>商品首页</title>
-<link type="text/css" rel="stylesheet"
-	href="/gsh/resources/css/base.css" />
+<link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
 </head>
@@ -19,29 +18,42 @@
 	padding: 10px;
 }
 
-/* .carousel-control.left {
-	left:  293px;
-	height:  350;
-} */
 .menu_wrap .left_nav .pannel_box .pannel_item.show {
     width: 800px;
 }
+
+.shop_header {
+    background-color: #ddd;
+}
 </style>
 <body>
-	<header class="shop_header">
+	<%-- <header class="shop_header">
 		<section class="container">
 			<div class="left">
-				<span>欢迎来到***</span> <a class="red" href="javascript:void(0);">请登录</a>
-				<a href="register.html">立即注册</a>
+				<span>欢迎<shiro:principal property="name"/></span> 
+				<shiro:notAuthenticated>
+					<a class="red" href="${pageContext.request.contextPath}/loginUI">请登录</a>
+					或
+					<a href="${pageContext.request.contextPath}/registerUI">立即注册</a>
+				</shiro:notAuthenticated>
 			</div>
 			<div class="header_left right">
 				<ul>
-					<li><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/resources/images/user.png"><span>个人中心</span></a></li>
+					<shiro:hasRole name="admin">  
+						<li><a href="${pageContext.request.contextPath}/a/product/listUI"><span>管理员后台</span></a></li>
+					</shiro:hasRole> 
+					<shiro:authenticated>
+					<shiro:lacksRole name="admin">
+						<li><a href="${pageContext.request.contextPath}/m/center"><img src="${pageContext.request.contextPath}/resources/images/user.png"><span><shiro:principal property="name"/></span></a></li>
+					</shiro:lacksRole>
+					<li><a href="${pageContext.request.contextPath}/logout"><span>退出</span></a></li>
+					</shiro:authenticated>
 					<li><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/resources/images/collect.png"><span>收藏夹</span></a></li>
 				</ul>
 			</div>
 		</section>
-	</header>
+	</header> --%>
+	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
 	<section class="rect_wrap">
 		<div class="container">
 			<div class="logo_box">logo</div>
@@ -173,149 +185,10 @@
 												</div>
 											</li>
 										</c:forEach>
-										<!-- <li class="sort_li">
-											<h4>饮料</h4>
-											<div>
-												<a href="javascript:;">饮用水</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">矿泉水</a><a href="javascript:;">矿泉水</a><a
-													href="javascript:;">矿泉水</a><a href="javascript:;">矿泉水</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">可乐</a><a
-													href="javascript:;">可乐</a><a href="javascript:;">可乐</a><a
-													href="javascript:;">可乐</a><a href="javascript:;">可乐</a>
-											</div>
-										</li>
-										<li class="sort_li">
-											<h4>酒水</h4>
-											<div>
-												<a href="javascript:;">葡萄酒</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a>
-											</div>
-										</li> -->
 									</ul>
 								</div>
 							</li>
 							</c:forEach>
-							<!-- <li class="pannel_item">
-								<div class="item_content">
-									<ul>
-										<li class="sort_li">
-											<h4>酒水</h4>
-											<div>
-												<a href="javascript:;">葡萄酒</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a>
-											</div>
-										</li>
-										<li class="sort_li">
-											<h4>饮料</h4>
-											<div>
-												<a href="javascript:;">饮用水</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">矿泉水</a><a href="javascript:;">矿泉水</a><a
-													href="javascript:;">矿泉水</a><a href="javascript:;">矿泉水</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">可乐</a><a
-													href="javascript:;">可乐</a><a href="javascript:;">可乐</a><a
-													href="javascript:;">可乐</a><a href="javascript:;">可乐</a>
-											</div>
-										</li>
-										<li class="sort_li">
-											<h4>酒水</h4>
-											<div>
-												<a href="javascript:;">葡萄酒</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</li>
-							<li class="pannel_item">
-								<div class="item_content">
-									<ul>
-										<li class="sort_li">
-											<h4>饼干</h4>
-											<div>
-												<a href="javascript:;">葡萄酒</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a>
-											</div>
-										</li>
-										<li class="sort_li">
-											<h4>休闲食品</h4>
-											<div>
-												<a href="javascript:;">饮用水</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">矿泉水</a><a href="javascript:;">矿泉水</a><a
-													href="javascript:;">矿泉水</a><a href="javascript:;">矿泉水</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">可乐</a><a
-													href="javascript:;">可乐</a><a href="javascript:;">可乐</a><a
-													href="javascript:;">可乐</a><a href="javascript:;">可乐</a>
-											</div>
-										</li>
-										<li class="sort_li">
-											<h4>酒水</h4>
-											<div>
-												<a href="javascript:;">葡萄酒</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</li> -->
-							<!-- <li class="pannel_item">
-								<div class="item_content">
-									<ul>
-										<li class="sort_li">
-											<h4>调味品</h4>
-											<div>
-												<a href="javascript:;">葡萄酒</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a>
-											</div>
-										</li>
-										<li class="sort_li">
-											<h4>粮油</h4>
-											<div>
-												<a href="javascript:;">饮用水</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">矿泉水</a><a href="javascript:;">矿泉水</a><a
-													href="javascript:;">矿泉水</a><a href="javascript:;">矿泉水</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">可乐</a><a
-													href="javascript:;">可乐</a><a href="javascript:;">可乐</a><a
-													href="javascript:;">可乐</a><a href="javascript:;">可乐</a>
-											</div>
-										</li>
-										<li class="sort_li">
-											<h4>酒水</h4>
-											<div>
-												<a href="javascript:;">葡萄酒</a><a href="javascript:;">葡萄酒</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒积极</a><a
-													href="javascript:;">白酒积极</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a><a
-													href="javascript:;">白酒</a><a href="javascript:;">白酒</a>
-											</div>
-										</li>
-									</ul>
-								</div>
-							</li> -->
 						</ul>
 					</div>
 				</div>
@@ -389,131 +262,6 @@
 		</section>
 		<!--结束推荐热销专卖商品-->
 		<section class="ad_box"></section>
-		<!--酒水饮料-->
-		<section class="item_wrap page_box floor_1">
-			<div class="page_title">
-				<h3 class="title left">酒水饮料</h3>
-				<a href="javascript:;" class="more right">查看更多>></a>
-			</div>
-			<div class="page_content clear">
-				<div class="left_ad left">
-					<a href="javascript:;">
-						<h3>酒水饮料</h3>
-						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_1.png">
-					</a>
-				</div>
-				<div class="page_list left">
-					<ul class="clear">
-						<c:forEach items="${products1}" begin="0" end="3" var="bean">
-							<li>
-								<div class="goods_img">
-									<img src="/upload${bean.image}">
-								</div>
-								<p class="goods_name">${bean.name}</p>
-								<p class="goods_volume">成交${bean.sellCount}单</p>
-								<div class="goods_price">
-									<a class="red" href="javascript:;">登录</a>查看专属价格
-									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
-								</div>
-							</li>
-						</c:forEach>
-						<%-- <li>
-							<div class="goods_img">
-								<img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<a class="red" href="javascript:;">登录</a>查看专属价格
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li> --%>
-					</ul>
-					<div class="split_line"></div>
-					<ul class="clear">
-						<c:forEach items="${products1}" begin="4" end="7" var="bean">
-							<li>
-								<div class="goods_img">
-									<img src="/upload${bean.image}">
-								</div>
-								<p class="goods_name">${bean.name}</p>
-								<p class="goods_volume">成交${bean.sellCount}单</p>
-								<div class="goods_price">
-									<a class="red" href="javascript:;">登录</a>查看专属价格
-									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
-								</div>
-							</li>
-						</c:forEach>
-						<%-- <li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<a class="red" href="javascript:;">登录</a>查看专属价格
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<a class="red" href="javascript:;">登录</a>查看专属价格
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li> --%>
-					</ul>
-				</div>
-			</div>
-		</section>
-		<!--结束酒水饮料-->
 		<!--副食零食-->
 		<section class="item_wrap page_box floor_2">
 			<div class="page_title">
@@ -529,6 +277,65 @@
 				</div>
 				<div class="page_list left">
 					<ul class="clear">
+						<c:forEach items="${products1}" begin="0" end="3" var="bean">
+							<li>
+								<div class="goods_img">
+									<img src="/upload${bean.image}">
+								</div>
+								<p class="goods_name">${bean.name}</p>
+								<p class="goods_volume">成交${bean.sellCount}单</p>
+								<div class="goods_price">
+									<shiro:notAuthenticated>
+										<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
+									</shiro:notAuthenticated>
+									<shiro:authenticated>
+										<span class="new_price">${bean.price}元</span>
+										<span class="old_price">${bean.marketPrice}元</span>
+									</shiro:authenticated>
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+					<div class="split_line"></div>
+					<ul class="clear">
+						<c:forEach items="${products1}" begin="4" end="7" var="bean">
+							<li>
+								<div class="goods_img">
+									<img src="/upload${bean.image}">
+								</div>
+								<p class="goods_name">${bean.name}</p>
+								<p class="goods_volume">成交${bean.sellCount}单</p>
+								<div class="goods_price">
+									<shiro:notAuthenticated>
+										<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
+									</shiro:notAuthenticated>
+									<shiro:authenticated>
+										<span class="new_price">${bean.price}元</span>
+										<span class="old_price">${bean.marketPrice}元</span>
+									</shiro:authenticated>
+								</div>
+							</li>
+						</c:forEach>
+					</ul>
+				</div>
+			</div>
+		</section>
+		<!--结束副食零食-->
+		<!--酒水饮料-->
+		<section class="item_wrap page_box floor_1">
+			<div class="page_title">
+				<h3 class="title left">酒水饮料</h3>
+				<a href="javascript:;" class="more right">查看更多>></a>
+			</div>
+			<div class="page_content clear">
+				<div class="left_ad left">
+					<a href="javascript:;">
+						<h3>酒水饮料</h3>
+						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_1.png">
+					</a>
+				</div>
+				<div class="page_list left">
+					<ul class="clear">
 						<c:forEach items="${products2}" begin="0" end="3" var="bean">
 							<li>
 								<div class="goods_img">
@@ -537,44 +344,16 @@
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
 								<div class="goods_price">
-									<a class="red" href="javascript:;">登录</a>查看专属价格
-									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+									<shiro:notAuthenticated>
+										<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
+									</shiro:notAuthenticated>
+									<shiro:authenticated>
+										<span class="new_price">${bean.price}元</span>
+										<span class="old_price">${bean.marketPrice}元</span>
+									</shiro:authenticated>
 								</div>
 							</li>
 						</c:forEach>
-						<%-- <li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<a class="red" href="javascript:;">登录</a>查看专属价格
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li> --%>
 					</ul>
 					<div class="split_line"></div>
 					<ul class="clear">
@@ -586,49 +365,21 @@
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
 								<div class="goods_price">
-									<a class="red" href="javascript:;">登录</a>查看专属价格
-									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+									<shiro:notAuthenticated>
+										<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
+									</shiro:notAuthenticated>
+									<shiro:authenticated>
+										<span class="new_price">${bean.price}元</span>
+										<span class="old_price">${bean.marketPrice}元</span>
+									</shiro:authenticated>
 								</div>
 							</li>
 						</c:forEach>
-						<%-- <li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<a class="red" href="javascript:;">登录</a>查看专属价格
-							</div>
-						</li>
-						<li>
-							<div class="goods_img">
-								<img
-									src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-							</div>
-							<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-							<p class="goods_volume">成交3908098盒</p>
-							<div class="goods_price">
-								<span class="new_price">180元</span><span class="old_price">320元</span>
-							</div>
-						</li> --%>
 					</ul>
 				</div>
 			</div>
 		</section>
-		<!--结束副食零食-->
+		<!--结束酒水饮料-->
 		<!--粮油调味-->
 		<section class="item_wrap page_box floor_3">
 			<div class="page_title">
@@ -653,8 +404,13 @@
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
 								<div class="goods_price">
-									<a class="red" href="javascript:;">登录</a>查看专属价格
-									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+									<shiro:notAuthenticated>
+										<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
+									</shiro:notAuthenticated>
+									<shiro:authenticated>
+										<span class="new_price">${bean.price}元</span>
+										<span class="old_price">${bean.marketPrice}元</span>
+									</shiro:authenticated>
 								</div>
 							</li>
 						</c:forEach>
@@ -669,8 +425,13 @@
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
 								<div class="goods_price">
-									<a class="red" href="javascript:;">登录</a>查看专属价格
-									<span class="new_price">${bean.price}元</span><span class="old_price">${bean.marketPrice}元</span>
+									<shiro:notAuthenticated>
+										<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
+									</shiro:notAuthenticated>
+									<shiro:authenticated>
+										<span class="new_price">${bean.price}元</span>
+										<span class="old_price">${bean.marketPrice}元</span>
+									</shiro:authenticated>
 								</div>
 							</li>
 						</c:forEach>

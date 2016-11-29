@@ -28,7 +28,7 @@ public class Product {
 	@Column(length = 100, nullable = false)
 	private String image;
 
-	@Column(name = "market_price")
+	@Column(name = "market_price",nullable=false)
 	private Double marketPrice;
 	/**
 	 * 库存数量
@@ -67,7 +67,7 @@ public class Product {
 	 * 是否top
 	 */
 	@Column(name = "is_top",nullable=false)
-	private Boolean isTop;
+	private Boolean isTop=false;
 
 	@OneToOne
 	@JoinColumn(name = "first_type_id",nullable=false)

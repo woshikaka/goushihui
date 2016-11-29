@@ -47,7 +47,7 @@ public class LoginController {
 	public String logout(HttpServletRequest request) {
 		Subject currentUser = SecurityUtils.getSubject();
 		currentUser.logout();
-		return "/front/gshIndex";
+		return "redirect:/homePage";
 	}
 	
 	/**
@@ -137,6 +137,6 @@ public class LoginController {
 			return "redirect:/a/product/addUI";
 		}
 		
-		return "/front/gshIndex";
+		return "redirect:/homePage";
 	}
 }
