@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sfmy.gsh.constant.AdType;
 import com.sfmy.gsh.entity.Ad;
 
 public interface AdDao extends JpaRepository<Ad,Integer>{
@@ -23,5 +24,7 @@ public interface AdDao extends JpaRepository<Ad,Integer>{
 	@Query("update Ad set isUse = :isUse where id not in :ids")
 	public void updateIsUseNotInIds(@Param("isUse")Boolean isUse,@Param("ids")List<Integer>ids);
 
-	List<Ad> findByIsUse(boolean isUse); 
+	List<Ad> findByIsUse(boolean isUse);
+
+	List<Ad> findByAdType(AdType adType); 
 }

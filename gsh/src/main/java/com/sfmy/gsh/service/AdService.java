@@ -9,6 +9,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sfmy.gsh.constant.AdType;
 import com.sfmy.gsh.dao.AdDao;
 import com.sfmy.gsh.entity.Ad;
 import com.sfmy.gsh.utils.MyOssUtils;
@@ -70,5 +71,9 @@ public class AdService {
 
 	public List<Ad> findShowing() {
 		return adDao.findByIsUse(true);
+	}
+	
+	public List<Ad> findAd(AdType adType) {
+		return adDao.findByAdType(adType);
 	}
 }

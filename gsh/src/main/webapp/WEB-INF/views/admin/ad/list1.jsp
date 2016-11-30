@@ -33,7 +33,7 @@
 			</div> --%>
 			<div class="row">
 				<div class="col-md-12  btn-group btn-group-sm">
-					<button type="button" class="btn btn-default" onclick="showChecked('roll')">批量显示选中的轮播广告</button>
+					<button type="button" class="btn btn-default" onclick="showChecked()">显示选中的长条广告</button>
 					<button type="button" class="btn btn-default" onclick="deleteChecked()">删除</button>
 				</div>
 				<form action="${pageContext.request.contextPath}/a/ad/delete" id="deleteForm" method="post">
@@ -41,7 +41,7 @@
 				</form>
 				<form action="${pageContext.request.contextPath}/a/ad/show" id="showForm" method="post">
 					<input id="showFormInput" type="hidden" name="adIds" value="">
-					<input id="showFormInput" type="hidden" name="adType" value="roll">
+					<input id="showFormInput" type="hidden" name="adType" value="bar">
 				</form>
 			</div>
 			<div class="row">
@@ -126,10 +126,10 @@
 			}); 
 			return;
 		}
-		if(adIds.length > 5){
+		if(adIds.length > 1){
 			$.confirm({
 				title:"提醒",
-			    text: "对多只能选择5个广告！你当前一共选了"+adIds.length+"个！",
+			    text: "对多只能选择1个广告！你当前一共选了"+adIds.length+"个！",
 			    confirm: function() {
 			    	
 			    },
@@ -139,7 +139,7 @@
 		
 		$.confirm({
 			title:"提醒",
-		    text: "点击确定后，首页的轮播广告将立即切换为最新的广告，确定立即切换？",
+		    text: "点击确定后，首页的长条广告将立即切换为最新的广告，确定立即切换？",
 		    confirmButtonClass: "btn-warning",
 		    confirmButton: "确定",
 		    confirm: function() {

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.sfmy.gsh.constant.AdType;
 import com.sfmy.gsh.constant.AppConstant;
 import com.sfmy.gsh.entity.Ad;
 import com.sfmy.gsh.entity.Product;
@@ -42,6 +43,13 @@ public class HomePageController {
 			showAds = adService.findShowing();
 			cacheUtils.put("showAds", showAds);
 		}
+		Ad barAd = cacheUtils.get(AppConstant.CACHE_BAR_AD_KEY,Ad.class);
+		if(barAd == null){
+			List<Ad> temp = adService.findAd(AdType.BAR);
+			if(CollectionUtils.isNotEmpty(temp)){
+				barAd = temp.get(0);
+			}
+		}
 		
 		//导购类目
 		List<ProductType> productTypes = cacheUtils.get(AppConstant.CACHE_PRODUCTTYPES_KEY,List.class);
@@ -68,6 +76,7 @@ public class HomePageController {
 		}
 		
 		model.addAttribute("showAds",showAds);
+		model.addAttribute("barAd",barAd);
 		model.addAttribute("productTypes",productTypes);
 		model.addAttribute("secTypes",secTypes);
 		model.addAttribute("thirdTypes",thirdTypes);

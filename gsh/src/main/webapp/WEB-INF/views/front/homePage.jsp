@@ -25,6 +25,11 @@
 .shop_header {
     background-color: #ddd;
 }
+
+/* .ad_box{
+	height: 139px;
+	width: 1138px;
+} */
 </style>
 <body>
 	<%-- <header class="shop_header">
@@ -165,8 +170,6 @@
 							<c:forEach items="${productTypes}" var="bean">
 								<li class="nav_item"><a href="javascript:;">${bean.name}</a><i class="icon-angle-right"></i></li>
 							</c:forEach>
-							<!-- <li class="nav_item"><a href="javascript:;">副食零食</a><i class="icon-angle-right"></i></li>
-							<li class="nav_item"><a href="javascript:;">粮油调料</a><i class="icon-angle-right"></i></li> -->
 						</ul>
 					</div>
 					<div class="pannel_box">
@@ -196,6 +199,7 @@
 		</div>
 	</section>
 	<div class="container">
+	
 		<!--推荐热销专卖商品-->
 		<section class="best_sellers_warp page_box">
 			<div class="page_title">
@@ -261,7 +265,8 @@
 			</div>
 		</section>
 		<!--结束推荐热销专卖商品-->
-		<section class="ad_box"></section>
+		<%-- <section class="ad_box"><img src="/upload${barAd.ossKey}"></section> --%>
+		<img style="width:1140px" src="/upload${barAd.ossKey}">
 		<!--副食零食-->
 		<section class="item_wrap page_box floor_2">
 			<div class="page_title">
@@ -451,7 +456,7 @@
 
 	<section class="footer_main">
 		<div class="container">
-			<ul class="item clear">
+			<!-- <ul class="item clear">
 				<li>
 					<h6>平台使用说明</h6>
 					<ul>
@@ -497,9 +502,8 @@
 						<li><a href="javascript:;">新手入门</a></li>
 					</ul>
 				</li>
-			</ul>
-			<div class="bottom">© 2016 Taobao.com 版权所有
-				网络文化经营许可证：文网文[2010]040号|增值电信业务</div>
+			</ul> -->
+			<div class="bottom">© 2016 Taobao.com 版权所有 网络文化经营许可证：文网文[2010]040号|增值电信业务</div>
 		</div>
 	</section>
 </body>

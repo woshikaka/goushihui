@@ -33,7 +33,8 @@
 				<li>
 					<a href="#" name="oneLevel">首页广告管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
 					<ul class="nav nav-second-level">
-						<li><a href="${pageContext.request.contextPath}/a/ad/adListUI">广告列表</a></li>
+						<li><a href="${pageContext.request.contextPath}/a/ad/adListUI">轮播广告列表</a></li>
+						<li><a href="${pageContext.request.contextPath}/a/ad/barAdListUI">长条广告列表</a></li>
 						<li><a href="${pageContext.request.contextPath}/a/ad/addUI">添加广告</a></li>
 					</ul>
 				</li>
