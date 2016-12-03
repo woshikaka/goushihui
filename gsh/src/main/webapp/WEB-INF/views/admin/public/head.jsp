@@ -23,10 +23,10 @@
 					<li><a href="${pageContext.request.contextPath}/a/product/listUI"><span>管理员后台</span></a></li>
 				</shiro:hasRole> 
 				<shiro:authenticated>
-				<%-- <li><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/resources/images/shopping_cart.png"><span>购物车</span></a></li> --%>
 				<shiro:lacksRole name="admin">
 					<li><a href="${pageContext.request.contextPath}/m/center"><img src="${pageContext.request.contextPath}/resources/images/user.png"><span>个人中心</span></a></li>
 				</shiro:lacksRole>
+				<li><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/resources/images/shopping_cart.png"><span>购物车</span></a></li>
 				<li><a href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-out" style="margin-left: 9px;"></span><span>退出</span></a></li>
 				</shiro:authenticated>
 			</ul>
@@ -36,7 +36,7 @@
 <script>
     $(function(){
         $(".header_left li a").hover(function(){
-            var img_url = $(this).find('img').attr('src').replace('.png','-hover.png');
+            var img_url = $(this).find('img').attr('src').replace('-hover','').replace('.png','-hover.png');
             $(this).find('img').attr('src',img_url)
         },function(){
             var img_url = $(this).find('img').attr('src').replace('-hover.png','.png');

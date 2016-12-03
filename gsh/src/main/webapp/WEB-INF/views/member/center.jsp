@@ -4,13 +4,13 @@
 <%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <html>
 <head>
-    <meta charset="UTF-8">
+   <!--  <meta charset="UTF-8">
     <meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <!-- <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" /> -->
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
     <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,initial-scale=1">  
     <meta name="keywords" content="" />
-    <meta name="description" content="" />
+    <meta name="description" content="" /> -->
     <title></title>
     <!-- <link rel="icon" href="favicon.ico"> -->
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
@@ -28,7 +28,7 @@
     </style>
 </head>
 <body>
-    <header class="shop_header">
+    <%-- <header class="shop_header">
        <section class="container">
              <div class="left">
                 <span>欢迎来到***</span>
@@ -43,7 +43,8 @@
                 </ul>
             </div>
        </section>
-    </header>
+    </header> --%>
+    <%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
     <section class="center_header">
         <div class="container">
             <div class="logo_box"></div>
@@ -220,71 +221,10 @@
             </div>
         </div>
     </section>
-    
-    <section class="footer_main">
-        <div class="container">
-            <ul class="item clear">
-                <li>
-                    <h6>平台使用说明</h6>
-                    <ul>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h6>平台使用说明</h6>
-                    <ul>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h6>平台使用说明</h6>
-                    <ul>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h6>平台使用说明</h6>
-                    <ul>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <h6>平台使用说明</h6>
-                    <ul>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                        <li><a href="javascript:;">新手入门</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="bottom">© 2016 Taobao.com 版权所有 网络文化经营许可证：文网文[2010]040号|增值电信业务</div>
-        </div>
-    </section>
+	<%@ include file="/WEB-INF/views/admin/public/foot.jsp"%>    
 </body>
 </html>
 
 <script>
-    $(function(){
-        $(".header_left li a").hover(function(){
-            var img_url = $(this).find('img').attr('src').replace('.png','-hover.png');
-            $(this).find('img').attr('src',img_url)
-        },function(){
-            var img_url = $(this).find('img').attr('src').replace('-hover.png','.png');
-            $(this).find('img').attr('src',img_url)
-        })
-    })
 </script>
 

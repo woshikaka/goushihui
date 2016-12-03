@@ -8,12 +8,17 @@
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
+<style type="text/css">
+.login_con{
+	height:490px
+}
+</style>
 </head>
 <body>
 
 	<section class="login_header">
 		<div class="logo">
-			<img src="">
+			<a href="${pageContext.request.contextPath}/homePage"><img src="${pageContext.request.contextPath}/resources/images/logo.png" style="margin-left: 68px"></a>
 		</div>
 	</section>
 	<section class="login_con">
@@ -43,7 +48,7 @@
 		</div>
 
 	</section>
-	<footer class="login_footer"> © 2016 Taobao.com 版权所有 网络文化经营许可证：文网文[2010]040号|增值电信业务经营许可证：浙B2-20080224-1|信息网络传播视听节目许可证：1109364号 </footer>
+	<%@ include file="/WEB-INF/views/admin/public/foot.jsp"%>
 </body>
 </html>
 <script>

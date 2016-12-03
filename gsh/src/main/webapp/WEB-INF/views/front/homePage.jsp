@@ -32,36 +32,11 @@
 } */
 </style>
 <body>
-	<%-- <header class="shop_header">
-		<section class="container">
-			<div class="left">
-				<span>欢迎<shiro:principal property="name"/></span> 
-				<shiro:notAuthenticated>
-					<a class="red" href="${pageContext.request.contextPath}/loginUI">请登录</a>
-					或
-					<a href="${pageContext.request.contextPath}/registerUI">立即注册</a>
-				</shiro:notAuthenticated>
-			</div>
-			<div class="header_left right">
-				<ul>
-					<shiro:hasRole name="admin">  
-						<li><a href="${pageContext.request.contextPath}/a/product/listUI"><span>管理员后台</span></a></li>
-					</shiro:hasRole> 
-					<shiro:authenticated>
-					<shiro:lacksRole name="admin">
-						<li><a href="${pageContext.request.contextPath}/m/center"><img src="${pageContext.request.contextPath}/resources/images/user.png"><span><shiro:principal property="name"/></span></a></li>
-					</shiro:lacksRole>
-					<li><a href="${pageContext.request.contextPath}/logout"><span>退出</span></a></li>
-					</shiro:authenticated>
-					<li><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/resources/images/collect.png"><span>收藏夹</span></a></li>
-				</ul>
-			</div>
-		</section>
-	</header> --%>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
 	<section class="rect_wrap">
 		<div class="container">
-			<div class="logo_box">logo</div>
+			<!-- <div class="logo_box"></div> -->
+			<a href="${pageContext.request.contextPath}/homePage"><img src="${pageContext.request.contextPath}/resources/images/logo.png" style="margin-top:-35px;"/></a>
 			<div class="search_wrap">
 				<div class="search_bd">
 					<div class="search_box">
@@ -285,7 +260,7 @@
 						<c:forEach items="${products1}" begin="0" end="3" var="bean">
 							<li>
 								<div class="goods_img">
-									<img src="/upload${bean.image}">
+									<a href="${pageContext.request.contextPath}/product/detail/${bean.id}"><img src="/upload${bean.image}"></a>
 								</div>
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
@@ -306,7 +281,7 @@
 						<c:forEach items="${products1}" begin="4" end="7" var="bean">
 							<li>
 								<div class="goods_img">
-									<img src="/upload${bean.image}">
+									<a href="${pageContext.request.contextPath}/product/detail/${bean.id}"><img src="/upload${bean.image}"></a>
 								</div>
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
@@ -344,7 +319,7 @@
 						<c:forEach items="${products2}" begin="0" end="3" var="bean">
 							<li>
 								<div class="goods_img">
-									<img src="/upload${bean.image}">
+									<a href="${pageContext.request.contextPath}/product/detail/${bean.id}"><img src="/upload${bean.image}"></a>
 								</div>
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
@@ -365,7 +340,7 @@
 						<c:forEach items="${products2}" begin="4" end="7" var="bean">
 							<li>
 								<div class="goods_img">
-									<img src="/upload${bean.image}">
+									<a href="${pageContext.request.contextPath}/product/detail/${bean.id}"><img src="/upload${bean.image}"></a>
 								</div>
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
@@ -404,7 +379,7 @@
 						<c:forEach items="${products3}" begin="0" end="3" var="bean">
 							<li>
 								<div class="goods_img">
-									<img src="/upload${bean.image}">
+									<a href="${pageContext.request.contextPath}/product/detail/${bean.id}"><img src="/upload${bean.image}"></a>
 								</div>
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
@@ -425,7 +400,7 @@
 						<c:forEach items="${products3}" begin="4" end="7" var="bean">
 							<li>
 								<div class="goods_img">
-									<img src="/upload${bean.image}">
+									<a href="${pageContext.request.contextPath}/product/detail/${bean.id}"><img src="/upload${bean.image}"></a>
 								</div>
 								<p class="goods_name">${bean.name}</p>
 								<p class="goods_volume">成交${bean.sellCount}单</p>
@@ -453,59 +428,8 @@
 			<li><img src="${pageContext.request.contextPath}/resources/images/index/sale.png">省钱省心</li>
 		</ul>
 	</section>
+	<%@ include file="/WEB-INF/views/admin/public/foot.jsp"%>
 
-	<section class="footer_main">
-		<div class="container">
-			<!-- <ul class="item clear">
-				<li>
-					<h6>平台使用说明</h6>
-					<ul>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-					</ul>
-				</li>
-				<li>
-					<h6>平台使用说明</h6>
-					<ul>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-					</ul>
-				</li>
-				<li>
-					<h6>平台使用说明</h6>
-					<ul>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-					</ul>
-				</li>
-				<li>
-					<h6>平台使用说明</h6>
-					<ul>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-					</ul>
-				</li>
-				<li>
-					<h6>平台使用说明</h6>
-					<ul>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-						<li><a href="javascript:;">新手入门</a></li>
-					</ul>
-				</li>
-			</ul> -->
-			<div class="bottom">© 2016 Taobao.com 版权所有 网络文化经营许可证：文网文[2010]040号|增值电信业务</div>
-		</div>
-	</section>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/shop.js"></script>
 <script>
