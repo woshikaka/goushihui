@@ -1,5 +1,6 @@
 package com.sfmy.gsh.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +81,12 @@ public class ProductService {
 
 	public void updateProduct(Product product) {
 		productDao.save(product);
+	}
+	
+	public List<Product> hot5() {
+		List<Product> result = new ArrayList<Product>();
+		result = productDao.findTop5ByIsTopOrderByUpdateTimeDescSellCountDesc(true);
+		return result;
 	}
 
 }

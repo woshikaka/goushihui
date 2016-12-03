@@ -1,6 +1,7 @@
 package test;
 
 import java.util.Arrays;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -29,6 +30,12 @@ public class ProductServiceTest {
 	@Test
 	public void testBatchShangJia() {
 		productService.batchShangJia(Arrays.asList(new Integer[]{1}));
+	}
+	
+	@Test
+	public void testHot5() {
+		List<Product> hot5 = productService.hot5();
+		System.out.println(hot5.size());
 	}
 	
 }

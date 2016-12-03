@@ -10,10 +10,6 @@
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
 </head>
 <style>
-.rect_wrap .search_wrap .search_bd .search_box .search_icon {
-	padding: 8px 14px;
-}
-
 .page_box .page_title .title {
 	padding: 10px;
 }
@@ -33,41 +29,7 @@
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
-	<section class="rect_wrap">
-		<div class="container">
-			<!-- <div class="logo_box"></div> -->
-			<a href="${pageContext.request.contextPath}/homePage"><img src="${pageContext.request.contextPath}/resources/images/logo.png" style="margin-top:-35px;"/></a>
-			<div class="search_wrap">
-				<div class="search_bd">
-					<div class="search_box">
-						<div class="search_icon">
-							<i class="icon-search"></i>
-						</div>
-						<input type="text" name="" placeholder="请输入条码/商品名称/类别查询"
-							class="search_input">
-						<button class="search_btn right">搜索</button>
-					</div>
-				</div>
-				<div class="search_hd">
-					<a href="javascript:;">高级<br>搜索
-					</a>
-				</div>
-				<div class="search_ft">
-					<ul class="clear">
-						<li><a href="javascript:;">今日特惠</a></li>
-						<li><a href="javascript:;">今日特惠</a></li>
-						<li><a href="javascript:;">今日特惠</a></li>
-						<li><a href="javascript:;">今日特惠</a></li>
-					</ul>
-				</div>
-			</div>
-			<div class="shopping_cart right">
-				<img
-					src="${pageContext.request.contextPath}/resources/images/index/cart.png"
-					class="cart_icon"> 我的购物车 <i class="shop_num">20</i>
-			</div>
-		</div>
-	</section>
+	<%@ include file="/WEB-INF/views/admin/public/head1.jsp"%>
 	<section class="menu_wrap">
 		<div class="top_nav">
 			<div class="container">
@@ -76,8 +38,8 @@
 						src="${pageContext.request.contextPath}/resources/images/index/menu_list.png">
 				</div>
 				<ul class="top_nav_menu clear">
-					<li class="select"><a href="javascript:;">首页</a></li>
-					<li><a href="javascript:;">今日降价</a></li>
+					<!-- <li class="select"><a href="javascript:;">首页</a></li> -->
+					<!-- <li><a href="javascript:;">今日降价</a></li> -->
 					<li><a href="javascript:;">最新上架</a></li>
 					<li><a href="javascript:;">关于我们</a></li>
 				</ul>
@@ -185,55 +147,18 @@
 				<ul class="clear">
 					<li>
 						<div class="goods_img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
+							<img src="/upload${hotProduct.ossKey}">
 						</div>
 						<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
 						<p class="goods_volume">成交3908098盒</p>
 						<div class="goods_price">
-							<a class="red" href="javascript:;">登录</a>查看专属价格
-						</div>
-					</li>
-					<li>
-						<div class="goods_img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-						</div>
-						<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-						<p class="goods_volume">成交3908098盒</p>
-						<div class="goods_price">
-							<span class="new_price">180元</span><span class="old_price">320元</span>
-						</div>
-					</li>
-					<li>
-						<div class="goods_img">
-							<img
-								src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-						</div>
-						<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-						<p class="goods_volume">成交3908098盒</p>
-						<div class="goods_price">
-							<a class="red" href="javascript:;">登录</a>查看专属价格
-						</div>
-					</li>
-					<li>
-						<div class="goods_img">
-							<img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-						</div>
-						<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-						<p class="goods_volume">成交3908098盒</p>
-						<div class="goods_price">
-							<span class="new_price">180元</span><span class="old_price">320元</span>
-						</div>
-					</li>
-					<li>
-						<div class="goods_img">
-							<img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg">
-						</div>
-						<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-						<p class="goods_volume">成交3908098盒</p>
-						<div class="goods_price">
-							<span class="new_price">180元</span><span class="old_price">320元</span>
+							<shiro:notAuthenticated>
+								<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
+							</shiro:notAuthenticated>
+							<shiro:authenticated>
+								<span class="new_price">${hotProduct.price}元</span>
+								<span class="old_price">${hotProduct.marketPrice}元</span>
+							</shiro:authenticated>
 						</div>
 					</li>
 				</ul>

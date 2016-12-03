@@ -15,7 +15,7 @@ import com.sfmy.gsh.utils.CacheUtils;
  * 产品详情页
  */
 @Controller
-public class ProductController {
+public class ProductDetailController {
 	@Resource
 	private ProductService productService;
 	

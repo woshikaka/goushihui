@@ -28,4 +28,7 @@ public interface ProductDao extends JpaRepository<Product,Integer>,JpaSpecificat
 	public Integer countByIsTopAndFirstType(boolean isTop, ProductType productType);
 
 	public List<Product> findByIsTopAndFirstType(boolean isTop, ProductType productType);
+
+	public List<Product> findTop5ByIsTopOrderByUpdateTimeDescSellCountDesc(boolean isTop);
+
 }

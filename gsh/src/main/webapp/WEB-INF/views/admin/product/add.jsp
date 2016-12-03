@@ -45,9 +45,10 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">产品图片<i style="color: red">*</i></label>
 					<div class="col-sm-6">
-						<input type="file" class="form-control" name="file">
+						<input type="file" class="form-control" name="file"><i style="color:red">产品图片建议上传400*400的图片</i>
 					</div>
 				</div>
+				
 				<div class="form-group">
 					<label class="col-sm-2 control-label">价格<i style="color: red">*</i></label>
 					<div class="col-sm-6">
