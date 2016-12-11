@@ -27,7 +27,7 @@
                         <table>
                             <tbody>
                                 <tr><td>超市价：</td><td><i class="line_through">￥${product.marketPrice}</i></td></tr>
-                                <tr><td>购食汇价格：</td><td><span class="orange">￥${product.price}</span><span class="sales">（立省￥${product.marketPrice-product.price}）</span></td></tr>
+                                <tr><td>购食汇价格：</td><td><span class="orange">￥${product.price}</span><span class="sales">（立省￥${economy}）</span></td></tr>
                                 <tr><td>库存：</td><td>剩余<i class="red">${product.stockCount}</i>件</td></tr>
                                 <tr><td>销量</td><td>已售<i class="red">${product.sellCount}</i>件</td></tr>
                                 <!-- <tr><td>规格：</td><td>1100g</td></tr>

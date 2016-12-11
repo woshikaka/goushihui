@@ -1,5 +1,7 @@
 package com.sfmy.gsh.web.controler.front;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.sfmy.gsh.entity.Product;
 import com.sfmy.gsh.service.CarService;
 import com.sfmy.gsh.service.ProductService;
+import com.sfmy.gsh.utils.MyArith;
 import com.sfmy.gsh.utils.CacheUtils;
 import com.sfmy.gsh.utils.CookieUtils;
 import com.sfmy.gsh.utils.MySecurityUtils;
@@ -42,6 +45,7 @@ public class ProductDetailController {
 		List<Product> viewLog = productService.findViewLogByIds(viewLogIds);
 		
 		model.addAttribute("product",product);
+		model.addAttribute("economy",MyArith.sub(product.getMarketPrice(),product.getPrice()));
 		model.addAttribute("viewLog",viewLog);
 		model.addAttribute("carCnt",carCnt);
 		return "front/productDetail";
