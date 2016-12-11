@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/views/admin/public/taglib.jsp"%>
-<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +7,7 @@
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
+<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
@@ -39,6 +39,10 @@
                         <div class="btn_box">
                             <!-- <a href="javascript:;" id="buy-now" class="btn">立即购买</a> -->
                             <a href="javascript:;" id="add-cart" class="btn"><img src="${pageContext.request.contextPath}/resources/images/detail/shopping_cart.png">加入购物车</a>
+                            <form id="addCartForm" action="${pageContext.request.contextPath}/c/putCat" method="post">
+                            	<input type="hidden" name="productId" value="${product.id}"/>
+                            	<input type="hidden" name="productCnt" value=""/>
+                            </form> 
                         </div>
                     </div>
                 </div>
@@ -56,35 +60,21 @@
                 <h3>看了又看</h3>
                 <div class="page_list">
                     <ul class="clear">
+                    	<c:forEach items="${viewLog}" var="bean">
                         <li>
-                            <div class="goods_img"><img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg"></div>
-                            <p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-                            <p class="goods_volume">成交3908098盒</p>
-                            <div class="goods_price"><a class="red" href="javascript:;">登录</a>查看专属价格</div>
+                            <div class="goods_img"><a href="${pageContext.request.contextPath}/product/detail/${bean.id}"><img src="/upload${bean.image}"></a></div>
+                            <p class="goods_name">${bean.name}</p>
+                            <div class="goods_price">
+                            <shiro:notAuthenticated>
+								<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
+							</shiro:notAuthenticated>
+							<shiro:authenticated>
+								<span class="new_price">${bean.price}元</span>
+								<span class="old_price">${bean.marketPrice}元</span>
+							</shiro:authenticated>
+                            </div>
                         </li>
-                        <li>
-                            <div class="goods_img"><img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg"></div>
-                            <p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-                            <p class="goods_volume">成交3908098盒</p>
-                            <div class="goods_price"><span class="new_price">180元</span><span class="old_price">320元</span></div>
-                        </li>
-                        <li>
-                            <div class="goods_img"><img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg"></div>
-                            <p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-                            <p class="goods_volume">成交3908098盒</p>
-                            <div class="goods_price"><a class="red" href="javascript:;">登录</a>查看专属价格</div>
-                        </li>
-                        <li>
-                            <div class="goods_img"><img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg"></div>
-                            <p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-                            <p class="goods_volume">成交3908098盒</p>
-                            <div class="goods_price"><span class="new_price">180元</span><span class="old_price">320元</span></div>
-                        </li><li>
-                            <div class="goods_img"><img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg"></div>
-                            <p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-                            <p class="goods_volume">成交3908098盒</p>
-                            <div class="goods_price"><span class="new_price">180元</span><span class="old_price">320元</span></div>
-                        </li>
+                    	</c:forEach>
                     </ul>
                 </div>
             </div>
@@ -97,59 +87,7 @@
             <li><img src="${pageContext.request.contextPath}/resources/images/index/sale.png">竞价保障 省时省心省钱</li>
         </ul>
     </section>
-
-<section class="footer_main">
-    <div class="container">
-        <ul class="item clear">
-            <li>
-                <h6>平台使用说明</h6>
-                <ul>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                </ul>
-            </li>
-            <li>
-                <h6>平台使用说明</h6>
-                <ul>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                </ul>
-            </li>
-            <li>
-                <h6>平台使用说明</h6>
-                <ul>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                </ul>
-            </li>
-            <li>
-                <h6>平台使用说明</h6>
-                <ul>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                </ul>
-            </li>
-            <li>
-                <h6>平台使用说明</h6>
-                <ul>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                    <li><a href="javascript:;">新手入门</a></li>
-                </ul>
-            </li>
-        </ul>
-        <div class="bottom">© 2016 Taobao.com 版权所有 网络文化经营许可证：文网文[2010]040号|增值电信业务</div>
-    </div>
-</section>  
+<%@ include file="/WEB-INF/views/admin/public/foot.jsp"%>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/shop.js"></script>
 <script>
@@ -170,7 +108,26 @@
             
             $("#buy-num").val(nowBuyNum);
         })
+        
+        $("#add-cart").on('click',function(){
+	        var nowBuyNum = $("#buy-num").val();
+			if(!nowBuyNum.trim()){
+				swal("数量格式不正确！请充填！");
+				return false;
+			}
+			if(nowBuyNum.match(/^\d+$/)){ //integer
+				// do noting
+			}else{
+				swal("数量格式不正确！请充填！");
+				return false;
+			}
+			
+			$("#addCartForm input[name='productCnt']").val(nowBuyNum);
+			$("#addCartForm").submit();
+			return true;
+        })
             
+        
     })
 </script>
 </html>

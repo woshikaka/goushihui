@@ -89,4 +89,16 @@ public class ProductService {
 		return result;
 	}
 
+	public List<Product> findProductByIds(List<Integer> ids) {
+		return productDao.findProductByIds(ids);
+	}
+
+	public List<Product> findViewLogByIds(List<Integer> viewLogIds) {
+		List<Product> viewLog = new ArrayList<Product>();
+		for (Integer id : viewLogIds) {
+			viewLog.add(productDao.findOne(id));
+		}
+		return viewLog;
+	}
+
 }

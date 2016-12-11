@@ -31,7 +31,7 @@
 	<!-- Shiro Filter -->
 	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
 		<property name="securityManager" ref="securityManager" />
-		<!-- <property name="loginUrl" value="/unauthorized" /> -->
+		<property name="loginUrl" value="/loginUI" />
 		<property name="filterChainDefinitions">
 			<value>
 				<!-- /loginUI = anon
@@ -41,6 +41,7 @@
 				/resources/** = anon -->
 				/m/** = authc
 				/a/** = authc
+				/c/** = authc
 				/** = anon
 			</value>
 		</property>

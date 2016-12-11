@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <style>
-.rect_wrap .search_wrap .search_bd .search_box .search_icon {
+/* .rect_wrap .search_wrap .search_bd .search_box .search_icon {
 	padding: 8px 14px;
-}
+} */
 </style>
 <section class="rect_wrap">
 		<div class="container">
@@ -19,23 +19,21 @@
 						<button class="search_btn right">搜索</button>
 					</div>
 				</div>
-				<div class="search_hd">
+				<!-- <div class="search_hd">
 					<a href="javascript:;">高级<br>搜索
 					</a>
-				</div>
-				<div class="search_ft">
+				</div> -->
+				<!-- <div class="search_ft">
 					<ul class="clear">
 						<li><a href="javascript:;">今日特惠</a></li>
 						<li><a href="javascript:;">今日特惠</a></li>
 						<li><a href="javascript:;">今日特惠</a></li>
 						<li><a href="javascript:;">今日特惠</a></li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 			<div class="shopping_cart right">
-				<img
-					src="${pageContext.request.contextPath}/resources/images/index/cart.png"
-					class="cart_icon"> 我的购物车 <i class="shop_num">20</i>
+				<a href="${pageContext.request.contextPath}/c/carUI" style="color: #fff"><img src="${pageContext.request.contextPath}/resources/images/index/cart.png" class="cart_icon"> 我的购物车 <i class="shop_num">${carCnt}</i></a>
 			</div>
 		</div>
 	</section>

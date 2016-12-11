@@ -60,7 +60,14 @@ public class TopControler {
 		}
 		
 		List<Product> topProducts = productService.batchTop(productIds, productTypeId);
-		cacheUtils.put(AppConstant.CACHE_TOP8_KEY+productTypeId,topProducts);
+		if (1==productTypeId.intValue()) {
+			cacheUtils.put(AppConstant.CACHE_LINGSHI_TOP8_KEY,topProducts);
+		} else if(2==productTypeId.intValue()) {
+			cacheUtils.put(AppConstant.CACHE_YINLIAO_TOP8_KEY,topProducts);
+		}else if(3==productTypeId.intValue()){
+			cacheUtils.put(AppConstant.CACHE_LIANGYOU_TOP8_KEY,topProducts);
+		}
+//		cacheUtils.put(AppConstant.CACHE_TOP8_KEY+productTypeId,topProducts);
 		
 		ra.addFlashAttribute("isSuccessShow",true);
 		ra.addFlashAttribute("successMessage",MyDateFormatUtils.getCurrTime()+" top成功^_^");		
@@ -70,7 +77,15 @@ public class TopControler {
 	@RequestMapping(value = "/batchCancelTop")
 	public String batchCancelTop(@RequestParam("productIds")List<Integer> productIds,Integer productTypeId,Model model,RedirectAttributes ra) { 
 		List<Product> topProducts = productService.batchCancelTop(productIds,productTypeId);
-		cacheUtils.put(AppConstant.CACHE_TOP8_KEY+productTypeId,topProducts);
+//		cacheUtils.put(AppConstant.CACHE_TOP8_KEY+productTypeId,topProducts);
+		if (1==productTypeId.intValue()) {
+			cacheUtils.put(AppConstant.CACHE_LINGSHI_TOP8_KEY,topProducts);
+		} else if(2==productTypeId.intValue()) {
+			cacheUtils.put(AppConstant.CACHE_YINLIAO_TOP8_KEY,topProducts);
+		}else if(3==productTypeId.intValue()){
+			cacheUtils.put(AppConstant.CACHE_LIANGYOU_TOP8_KEY,topProducts);
+		}
+		
 		ra.addFlashAttribute("isSuccessShow",true);
 		ra.addFlashAttribute("successMessage",MyDateFormatUtils.getCurrTime()+" 取消top成功^_^");		
 		return "redirect:/a/top/topList/"+productTypeId;

@@ -26,7 +26,7 @@
 				<shiro:lacksRole name="admin">
 					<li><a href="${pageContext.request.contextPath}/m/center"><img src="${pageContext.request.contextPath}/resources/images/user.png"><span>个人中心</span></a></li>
 				</shiro:lacksRole>
-				<li><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/resources/images/shopping_cart.png"><span>购物车</span></a></li>
+				<li><a href="${pageContext.request.contextPath}/c/carUI"><img src="${pageContext.request.contextPath}/resources/images/shopping_cart.png"><span>购物车</span></a></li>
 				<li><a href="${pageContext.request.contextPath}/logout"><span class="glyphicon glyphicon-log-out" style="margin-left: 9px;"></span><span>退出</span></a></li>
 				</shiro:authenticated>
 			</ul>

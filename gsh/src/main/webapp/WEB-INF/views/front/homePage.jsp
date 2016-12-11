@@ -1,10 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/views/admin/public/taglib.jsp"%>
-<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>商品首页</title>
+<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
@@ -22,10 +22,6 @@
     background-color: #ddd;
 }
 
-/* .ad_box{
-	height: 139px;
-	width: 1138px;
-} */
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
@@ -145,12 +141,13 @@
 			</div>
 			<div class="page_list">
 				<ul class="clear">
+					<c:forEach items="${hotProducts}" var="hotProduct">
 					<li>
 						<div class="goods_img">
-							<img src="/upload${hotProduct.ossKey}">
+							<a href="${pageContext.request.contextPath}/product/detail/${hotProduct.id}"><img src="/upload${hotProduct.image}"></a>
 						</div>
-						<p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-						<p class="goods_volume">成交3908098盒</p>
+						<p class="goods_name">${hotProduct.name}</p>
+						<p class="goods_volume">成交${hotProduct.sellCount}单</p>
 						<div class="goods_price">
 							<shiro:notAuthenticated>
 								<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
@@ -161,6 +158,7 @@
 							</shiro:authenticated>
 						</div>
 					</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</section>

@@ -26,6 +26,11 @@ public class User implements Serializable{
 	@Column(length=32)
 	private String salt;
 	
+	public User() {
+	}
+	public User(Integer id) {
+		this.id = id;
+	}
 	public Integer getId() {     
 		return id;
 	}
