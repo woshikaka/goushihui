@@ -4,10 +4,10 @@
 <html>
 <head>
 <title>商品首页</title>
-<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
 <link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
+<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 </head>
 <style>
 .page_box .page_title .title {

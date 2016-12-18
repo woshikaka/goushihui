@@ -14,9 +14,10 @@
 						<div class="search_icon">
 							<i class="icon-search"></i>
 						</div>
-						<input type="text" name="" placeholder="请输入条码/商品名称/类别查询"
-							class="search_input">
-						<button class="search_btn right">搜索</button>
+						<form id="searchForm" action="${pageContext.request.contextPath}/search" method="post" onsubmit="return searchCheck()">
+							<input id="keywordInput" type="text" name="keyword" class="search_input">
+							<button type="submit" class="search_btn right">搜索</button>
+						</form>
 					</div>
 				</div>
 				<!-- <div class="search_hd">
@@ -37,3 +38,13 @@
 			</div>
 		</div>
 	</section>
+	<script>
+		function searchCheck(){
+			var keyword = $("#keywordInput").val();
+			if(!keyword.trim()){
+				swal("请输入需要查找的关键字！");
+				return false;
+			}
+			return true;
+		}
+</script>

@@ -5,10 +5,10 @@
 
 <head>
     <title>搜索列表</title>
-	<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
+	<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
@@ -68,12 +68,22 @@
         <section class="best_sellers_warp page_box">
             <div class="page_list">
                 <ul class="clear">
+                	<c:forEach items="${pageBean.recordList}" var="bean">
                     <li>
-                        <div class="goods_img"><img src="${pageContext.request.contextPath}/resources/images/goods/1.jpg"></div>
-                        <p class="goods_name">稻香村月饼礼盒中秋送礼</p>
-                        <p class="goods_volume">成交3908098盒</p>
-                        <div class="goods_price"><a class="red" href="javascript:;">登录</a>查看专属价格</div>
+                        <div class="goods_img"><img src="/upload${bean.image}"></div>
+                        <p class="goods_name">${bean.name}</p>
+                        <p class="goods_volume">成交${bean.sellCount}单</p>
+                        <div class="goods_price">
+                        	<shiro:notAuthenticated>
+								<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
+							</shiro:notAuthenticated>
+							<shiro:authenticated>
+								<span class="new_price">${bean.price}元</span>
+								<span class="old_price">${bean.marketPrice}元</span>
+							</shiro:authenticated>
+                        </div>
                     </li>
+                	</c:forEach>
                 </ul>
             </div>
             <div class="paging_warp clear">

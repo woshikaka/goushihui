@@ -18,7 +18,9 @@ import com.sfmy.gsh.dao.ProductDao;
 import com.sfmy.gsh.entity.Product;
 import com.sfmy.gsh.entity.ProductType;
 import com.sfmy.gsh.predicate.impl.ProductPredicate;
+import com.sfmy.gsh.predicate.impl.SearchProductPredicate;
 import com.sfmy.gsh.predicate.impl.TopPredicate;
+import com.sfmy.gsh.web.dto.SearchProductDTO;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -99,6 +101,13 @@ public class ProductService {
 			viewLog.add(productDao.findOne(id));
 		}
 		return viewLog;
+	}
+
+	public Page<Product> search(SearchProductDTO dto) {
+		SearchProductPredicate predicate = new SearchProductPredicate(dto);
+		PageRequest pageRequest = new PageRequest(dto.getPageNumber()-1,AppConstant.PAGE_SIZE);
+		Page<Product> page = productDao.findAll(predicate,pageRequest);
+		return page;
 	}
 
 }
