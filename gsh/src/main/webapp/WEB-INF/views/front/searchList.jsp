@@ -28,7 +28,7 @@
                 <div class="nav_menu_box">
                     	<ul>
 							<c:forEach items="${productTypes}" var="bean">
-								<li class="nav_item"><a href="javascript:;">${bean.name}</a><i class="icon-angle-right"></i></li>
+								<li class="nav_item"><a onclick="productTypeSearch(${bean.id},'${bean.name}')" href="javascript:;">${bean.name}</a><i class="icon-angle-right"></i></li>
 							</c:forEach>
 						</ul>
                 </div>
@@ -40,10 +40,10 @@
 									<ul>
 										<c:forEach items="${productType.productSecTypes}" var="secType">
 											<li class="sort_li">
-												<h4>${secType.name}</h4>
+												<a href="javascript:;" onclick="productSecTypeSearch(${productType.id},'${productType.name}',${secType.id},'${secType.name}')"><h4>${secType.name}</h4></a>
 												<div>
 													<c:forEach items="${secType.thirdTypes}" var="thirdType">
-														<a href="javascript:;">${thirdType.name}</a>
+														<a href="javascript:;" onclick="productThirdTypeSearch(${productType.id},'${productType.name}',${secType.id},'${secType.name}',${thirdType.id},'${thirdType.name}')">${thirdType.name}</a>
 													</c:forEach>
 												</div>
 											</li>
@@ -59,7 +59,28 @@
     </section>
     <div class="container search_list">
         <div class="search_location">
-            您搜索的“<span class="red">粮油调料&gt;调味品&gt;醋</span>”，共有 <span class="red">7</span> 件商品：
+        	<%-- <c:if test="${dto.productTypeId != null }">
+           		
+        		 您搜索的“<span class="red">${dto.productTypeName}
+        		 <c:if test="${dto.secTypeId != null }">
+        			&gt; ${dto.secTypeName}
+        		 </c:if>
+        		 </span>”，
+        	</c:if> --%>
+        	
+			<c:choose>
+				<c:when test="${dto.thirdTypeId != null}">
+					您搜索的“<span class="red">${dto.productTypeName} &gt; ${dto.secTypeName} &gt; ${dto.thirdTypeName}</span>”，
+				</c:when>
+				<c:when test="${dto.secTypeId != null}">
+					您搜索的“<span class="red">${dto.productTypeName} &gt; ${dto.secTypeName}</span>”，
+				</c:when>
+				<c:when test="${dto.productTypeId != null}">
+					您搜索的“<span class="red">${dto.productTypeName}</span>”，
+				</c:when>
+			</c:choose>        	
+        	<!--  您搜索的“<span class="red">粮油调料&gt;调味品&gt;醋</span>”， -->
+           	 共有 <span class="red">7</span> 件商品：
         </div>
         <div class="sort_warp">
             <!-- <h4>综合排序</h4> -->
@@ -144,9 +165,30 @@
 
 
         })
-        
-
     })
+    
+    function productTypeSearch(productTypeId,productTypeName){
+    	$("#searchForm").append("<input type='hidden' name='productTypeId' value='"+productTypeId+"'>");
+    	$("#searchForm").append("<input type='hidden' name='productTypeName' value='"+productTypeName+"'>");
+    	$("#searchForm").submit();
+    }
+    function productSecTypeSearch(productTypeId,productTypeName,secTypeId,secTypeName){
+    	$("#searchForm").append("<input type='hidden' name='productTypeId' value='"+productTypeId+"'>");
+    	$("#searchForm").append("<input type='hidden' name='productTypeName' value='"+productTypeName+"'>");
+    	$("#searchForm").append("<input type='hidden' name='secTypeId' value='"+secTypeId+"'>");
+    	$("#searchForm").append("<input type='hidden' name='secTypeName' value='"+secTypeName+"'>");
+    	$("#searchForm").submit();
+    }
+    function productThirdTypeSearch(productTypeId,productTypeName,secTypeId,secTypeName,thirdTypeId,thirdTypeName){
+    	$("#searchForm").append("<input type='hidden' name='productTypeId' value='"+productTypeId+"'>");
+    	$("#searchForm").append("<input type='hidden' name='productTypeName' value='"+productTypeName+"'>");
+    	$("#searchForm").append("<input type='hidden' name='secTypeId' value='"+secTypeId+"'>");
+    	$("#searchForm").append("<input type='hidden' name='secTypeName' value='"+secTypeName+"'>");
+    	$("#searchForm").append("<input type='hidden' name='thirdTypeId' value='"+thirdTypeId+"'>");
+    	$("#searchForm").append("<input type='hidden' name='thirdTypeName' value='"+thirdTypeName+"'>");
+    	$("#searchForm").submit();
+    }
+    
 </script>
 </html>
     

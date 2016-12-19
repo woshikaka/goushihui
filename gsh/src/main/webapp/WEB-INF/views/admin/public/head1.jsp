@@ -42,8 +42,9 @@
 		function searchCheck(){
 			var keyword = $("#keywordInput").val();
 			if(!keyword.trim()){
-				swal("请输入需要查找的关键字！");
-				return false;
+				//swal("请输入需要查找的关键字！");
+				//$("#keywordInput").focus();
+				//return false;
 			}
 			return true;
 		}

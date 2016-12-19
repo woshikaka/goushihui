@@ -55,6 +55,7 @@ public class SearchController {
 		model.addAttribute("secTypes", secTypes);
 		model.addAttribute("thirdTypes", thirdTypes);
 		model.addAttribute("pageBean", pageBean);
+		model.addAttribute("dto", dto);
 		
 		return "front/searchList";
 	}

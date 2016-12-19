@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.sfmy.gsh.entity.Product;
+import com.sfmy.gsh.entity.ProductType;
 import com.sfmy.gsh.web.dto.SearchProductDTO;
 
 public class SearchProductPredicate implements Specification<Product>{
@@ -29,9 +30,15 @@ public class SearchProductPredicate implements Specification<Product>{
 			predicates.add(cb.like(root.get("name"),"%"+dto.getKeyword()+"%"));
 			predicates.add(cb.like(root.get("description"),"%"+dto.getKeyword()+"%"));
 		}
-//		if(StringUtils.isNotBlank((String)requestParam.get("isShangJia"))){
-//			predicates.add(cb.equal(root.get("isShangJia"),Boolean.valueOf((String)requestParam.get("isShangJia"))));
-//		}
+		if(dto.getThirdTypeId()!=null){
+			predicates.add(cb.equal(root.get("thirdType"),new ProductType(dto.getThirdTypeId())));
+		}
+		if(dto.getSecTypeId()!=null){
+			predicates.add(cb.equal(root.get("secType"),new ProductType(dto.getSecTypeId())));
+		}
+		if(dto.getProductTypeId()!=null){
+			predicates.add(cb.equal(root.get("firstType"),new ProductType(dto.getProductTypeId())));
+		}
 		return cb.and(predicates.toArray(new Predicate[predicates.size()]));
    	}
 
