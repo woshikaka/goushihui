@@ -2,7 +2,7 @@ package com.sfmy.gsh.web.dto;
 
 public class SearchProductDTO {
 	private String keyword;
-	private Integer pageNumber=1;
+	private Integer currPageNo=1;
 	private Integer productTypeId;
 	private String productTypeName;
 	private Integer secTypeId;
@@ -65,11 +65,12 @@ public class SearchProductDTO {
 		this.keyword = keyword;
 	}
 
-	public Integer getPageNumber() {
-		return pageNumber;
+	public Integer getCurrPageNo() {
+		return currPageNo;
 	}
 
-	public void setPageNumber(Integer pageNumber) {
-		this.pageNumber = pageNumber;
+	public void setCurrPageNo(Integer currPageNo) {
+		this.currPageNo = currPageNo;
 	}
+
 }

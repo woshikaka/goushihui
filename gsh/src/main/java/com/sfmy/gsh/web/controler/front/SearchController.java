@@ -49,6 +49,7 @@ public class SearchController {
 		
 		Page<Product> page = productService.search(dto);
 		PageBean<Product> pageBean = new PageBean<Product>(page.getContent(),page.getSize(),(int) page.getTotalElements());
+		pageBean.setCurrPageNo(dto.getCurrPageNo());
 		
 		model.addAttribute("carCnt",carCnt);
 		model.addAttribute("productTypes", productTypes);

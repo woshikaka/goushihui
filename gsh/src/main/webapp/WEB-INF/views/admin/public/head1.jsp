@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ include file="/WEB-INF/views/admin/public/taglib.jsp"%>
 <style>
 /* .rect_wrap .search_wrap .search_bd .search_box .search_icon {
 	padding: 8px 14px;
@@ -15,8 +16,20 @@
 							<i class="icon-search"></i>
 						</div>
 						<form id="searchForm" action="${pageContext.request.contextPath}/search" method="post" onsubmit="return searchCheck()">
-							<input id="keywordInput" type="text" name="keyword" class="search_input">
+							<input id="keywordInput" type="text" name="keyword" value="${dto.keyword}" class="search_input">
 							<button type="submit" class="search_btn right">搜索</button>
+							<c:if test="${dto.productTypeId != null}">
+								<input type="hidden" name="productTypeId" value="${dto.productTypeId}">
+								<input type="hidden" name="productTypeName" value="${dto.productTypeName}">
+							</c:if>
+							<c:if test="${dto.secTypeId != null}">
+								<input type="hidden" name="secTypeId" value="${dto.secTypeId}">
+								<input type="hidden" name="secTypeName" value="${dto.secTypeName}">
+							</c:if>
+							<c:if test="${dto.thirdTypeId != null}">
+								<input type="hidden" name="thirdTypeId" value="${dto.thirdTypeId}">
+								<input type="hidden" name="thirdTypeName" value="${dto.thirdTypeName}">
+							</c:if>
 						</form>
 					</div>
 				</div>

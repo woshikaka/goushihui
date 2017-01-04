@@ -79,8 +79,7 @@
 					您搜索的“<span class="red">${dto.productTypeName}</span>”，
 				</c:when>
 			</c:choose>        	
-        	<!--  您搜索的“<span class="red">粮油调料&gt;调味品&gt;醋</span>”， -->
-           	 共有 <span class="red">7</span> 件商品：
+           	 共有 <span class="red">${pageBean.recordCount}</span> 件商品：
         </div>
         <div class="sort_warp">
             <!-- <h4>综合排序</h4> -->
@@ -107,8 +106,11 @@
                 	</c:forEach>
                 </ul>
             </div>
-            <div class="paging_warp clear">
-                <div class="paging_info left">共有<i class="red">35</i>条查询记录 每页 <i class="red">35</i>条</div>
+            <c:if test="${empty pageBean.recordList}">
+				没有符合的数据！
+			</c:if>
+           <%--  <div class="paging_warp clear">
+                <div class="paging_info left"> 每页 <i class="red">${pageBean.pageSize}</i>条</div>
                 <div class="paging_num right">
                     <a href="javascript:void(0);" class="page-prev" page="1"><span>上一页</span></a>
                     <a href="javascript:void(0);" class="page-span" page="1">1</a>  <span class="page-selected">2</span>  
@@ -117,7 +119,29 @@
                     共3页到第<input type="text" value="1">页
                     <span class="confirm btn btn-primary">确定</span>
                 </div>
+            </div> --%>
+            <c:if test="${!empty pageBean.recordList}">
+            <div class="paging_warp clear">
+                <div class="paging_info left"> 每页 <i class="red">${pageBean.pageSize}</i>条</div>
+                <div class="paging_num right">
+                    <a href="javascript:void(0);" class="page-prev" onclick="gotoPage('${pageBean.currPageNo-1}')"><span>上一页</span></a>
+                    <c:forEach begin="${pageBean.beginPageIndex}" end="${pageBean.endPageIndex}" var="pageNo">
+					<c:choose>
+						<c:when test="${pageNo == pageBean.currPageNo}">
+							<%-- <li class="active"><a href="#" onclick="gotoPage(${pageNo})">${pageNo}</a></li> --%>
+							<span class="page-selected" onclick="gotoPage(${pageNo})">${pageNo}</span>
+						</c:when>
+						<c:otherwise>
+							<a href="javascript:void(0);" class="page-span" onclick="gotoPage(${pageNo})">${pageNo}</a>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>
+                    <a href="javascript:void(0);" class="page-next" onclick="gotoPage('${pageBean.currPageNo+1}')"><span>下一页</span></a>
+                    共${pageBean.pageCount}页<!-- 到第<input type="text" value="1">页
+                    <span class="confirm btn btn-primary">确定</span> -->
+                </div>
             </div>
+            </c:if>
         </section>
     </div>
 	<section class="shop_advantage">
@@ -167,12 +191,25 @@
         })
     })
     
+    function clear(){
+    	$("#searchForm").find("input[name='productTypeId']").remove();
+    	$("#searchForm").find("input[name='productTypeName']").remove();
+    	
+    	$("#searchForm").find("input[name='secTypeId']").remove();
+    	$("#searchForm").find("input[name='secTypeName']").remove();
+    	
+    	$("#searchForm").find("input[name='thirdTypeId']").remove();
+    	$("#searchForm").find("input[name='thirdTypeName']").remove();
+    }
+    
     function productTypeSearch(productTypeId,productTypeName){
+    	clear();
     	$("#searchForm").append("<input type='hidden' name='productTypeId' value='"+productTypeId+"'>");
     	$("#searchForm").append("<input type='hidden' name='productTypeName' value='"+productTypeName+"'>");
     	$("#searchForm").submit();
     }
     function productSecTypeSearch(productTypeId,productTypeName,secTypeId,secTypeName){
+    	clear();
     	$("#searchForm").append("<input type='hidden' name='productTypeId' value='"+productTypeId+"'>");
     	$("#searchForm").append("<input type='hidden' name='productTypeName' value='"+productTypeName+"'>");
     	$("#searchForm").append("<input type='hidden' name='secTypeId' value='"+secTypeId+"'>");
@@ -180,6 +217,7 @@
     	$("#searchForm").submit();
     }
     function productThirdTypeSearch(productTypeId,productTypeName,secTypeId,secTypeName,thirdTypeId,thirdTypeName){
+    	clear();
     	$("#searchForm").append("<input type='hidden' name='productTypeId' value='"+productTypeId+"'>");
     	$("#searchForm").append("<input type='hidden' name='productTypeName' value='"+productTypeName+"'>");
     	$("#searchForm").append("<input type='hidden' name='secTypeId' value='"+secTypeId+"'>");
@@ -189,6 +227,16 @@
     	$("#searchForm").submit();
     }
     
+    function gotoPage(pageNo){
+    	if(pageNo==0){
+    		return;
+    	}
+    	var pageCount = ${pageBean.pageCount}
+    	if(pageNo==pageCount+1){
+    		return;
+    	}
+		$("#searchForm").append("<input type='hidden' name='currPageNo' value='" + pageNo +"'>").submit();
+	}
 </script>
 </html>
     

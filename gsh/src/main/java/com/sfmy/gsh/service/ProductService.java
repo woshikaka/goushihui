@@ -105,7 +105,7 @@ public class ProductService {
 
 	public Page<Product> search(SearchProductDTO dto) {
 		SearchProductPredicate predicate = new SearchProductPredicate(dto);
-		PageRequest pageRequest = new PageRequest(dto.getPageNumber()-1,AppConstant.PAGE_SIZE);
+		PageRequest pageRequest = new PageRequest(dto.getCurrPageNo()-1,AppConstant.PAGE_SIZE);
 		Page<Product> page = productDao.findAll(predicate,pageRequest);
 		return page;
 	}
