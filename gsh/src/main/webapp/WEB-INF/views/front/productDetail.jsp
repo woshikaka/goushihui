@@ -80,13 +80,13 @@
             </div>
         </div>
     </section>
-    <section class="shop_advantage">
-        <ul class="clear">
-            <li><img src="${pageContext.request.contextPath}/resources/images/index/quality_goods.png">万种优质商品 在线直供</li>
-            <li><img src="${pageContext.request.contextPath}/resources/images/index/faster.png">零时下单，次日到达</li>
-            <li><img src="${pageContext.request.contextPath}/resources/images/index/sale.png">竞价保障 省时省心省钱</li>
-        </ul>
-    </section>
+	<section class="shop_advantage">
+		<ul class="clear">
+			<li><img src="${pageContext.request.contextPath}/resources/images/index/quality_goods.png">优质商品</li>
+			<li><img src="${pageContext.request.contextPath}/resources/images/index/faster.png">极速配送</li>
+			<li><img src="${pageContext.request.contextPath}/resources/images/index/sale.png">省钱省心</li>
+		</ul>
+	</section>
 <%@ include file="/WEB-INF/views/admin/public/foot.jsp"%>
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/shop.js"></script>
@@ -112,13 +112,13 @@
         $("#add-cart").on('click',function(){
 	        var nowBuyNum = $("#buy-num").val();
 			if(!nowBuyNum.trim()){
-				swal("数量格式不正确！请充填！");
+				swal("数量格式不正确！请重填！");
 				return false;
 			}
 			if(nowBuyNum.match(/^\d+$/)){ //integer
 				// do noting
 			}else{
-				swal("数量格式不正确！请充填！");
+				swal("数量格式不正确！请重填！");
 				return false;
 			}
 			

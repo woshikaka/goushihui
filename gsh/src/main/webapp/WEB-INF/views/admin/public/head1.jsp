@@ -30,6 +30,15 @@
 								<input type="hidden" name="thirdTypeId" value="${dto.thirdTypeId}">
 								<input type="hidden" name="thirdTypeName" value="${dto.thirdTypeName}">
 							</c:if>
+							<c:if test="${dto.salesHigh2Low != null}">
+								<input type="hidden" name="salesHigh2Low" value="true">
+							</c:if>
+							<c:if test="${dto.priceLow2High != null}">
+								<input type="hidden" name="priceLow2High" value="true">
+							</c:if>
+							<c:if test="${dto.defaultSort != null}">
+								<input type="hidden" name="defaultSort" value="true">
+							</c:if>
 						</form>
 					</div>
 				</div>

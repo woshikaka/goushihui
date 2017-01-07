@@ -9,6 +9,9 @@ public class SearchProductDTO {
 	private String secTypeName;
 	private Integer thirdTypeId;
 	private String thirdTypeName;
+	private Boolean salesHigh2Low;
+	private Boolean priceLow2High;
+	private Boolean defaultSort;
 	public Integer getThirdTypeId() {
 		return thirdTypeId;
 	}
@@ -73,4 +76,27 @@ public class SearchProductDTO {
 		this.currPageNo = currPageNo;
 	}
 
+	public Boolean getSalesHigh2Low() {
+		return salesHigh2Low;
+	}
+
+	public void setSalesHigh2Low(Boolean salesHigh2Low) {
+		this.salesHigh2Low = salesHigh2Low;
+	}
+
+	public Boolean getPriceLow2High() {
+		return priceLow2High;
+	}
+
+	public void setPriceLow2High(Boolean priceLow2High) {
+		this.priceLow2High = priceLow2High;
+	}
+
+	public Boolean getDefaultSort() {
+		return defaultSort;
+	}
+
+	public void setDefaultSort(Boolean defaultSort) {
+		this.defaultSort = defaultSort;
+	}
 }

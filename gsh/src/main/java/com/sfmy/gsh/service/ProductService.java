@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -104,8 +105,17 @@ public class ProductService {
 	}
 
 	public Page<Product> search(SearchProductDTO dto) {
+		Sort sort = null;
+		if(BooleanUtils.isTrue(dto.getSalesHigh2Low())){
+			sort = new Sort(new Order(Sort.Direction.DESC,"sellCount"));
+		}
+		if(BooleanUtils.isTrue(dto.getPriceLow2High())){
+			sort = new Sort(new Order(Sort.Direction.ASC,"price"));
+		}
+		
+		
 		SearchProductPredicate predicate = new SearchProductPredicate(dto);
-		PageRequest pageRequest = new PageRequest(dto.getCurrPageNo()-1,AppConstant.PAGE_SIZE);
+		PageRequest pageRequest = new PageRequest(dto.getCurrPageNo()-1,AppConstant.PAGE_SIZE,sort);
 		Page<Product> page = productDao.findAll(predicate,pageRequest);
 		return page;
 	}

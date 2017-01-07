@@ -9,6 +9,12 @@
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
 	<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
+<style>
+.menu_wrap .left_nav .pannel_box .pannel_item.show {
+    width: 800px;
+    height: 400px;
+}
+</style>
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
@@ -83,7 +89,7 @@
         </div>
         <div class="sort_warp">
             <!-- <h4>综合排序</h4> -->
-            <ul><li>综合排序</li><li>销量从高到低</li><li>价格从低到高</li><li>上架时间</li></ul>
+            <ul><li id="defaultSort" class="select" onclick="defaultSort()">综合排序</li><li id="salesSort" onclick="salesHigh2Low()">销量从高到低</li><li id="priceSort" onclick="priceLow2High()">价格从低到高</li></ul>
         </div>
         <section class="best_sellers_warp page_box">
             <div class="page_list">
@@ -129,7 +135,7 @@
 					<c:choose>
 						<c:when test="${pageNo == pageBean.currPageNo}">
 							<%-- <li class="active"><a href="#" onclick="gotoPage(${pageNo})">${pageNo}</a></li> --%>
-							<span class="page-selected" onclick="gotoPage(${pageNo})">${pageNo}</span>
+							<span class="page-selected">${pageNo}</span>
 						</c:when>
 						<c:otherwise>
 							<a href="javascript:void(0);" class="page-span" onclick="gotoPage(${pageNo})">${pageNo}</a>
@@ -189,7 +195,55 @@
 
 
         })
+        
+        
+        /* <div class="sort_warp">
+        <!-- <h4>综合排序</h4> -->
+        <ul><li id="defaultSort" class="select">综合排序</li><li id="salesSort" onclick="salesHigh2Low()">销量从高到低</li><li id="priceSort">价格从低到高</li><li id="shangjiaSort">上架时间</li></ul>
+    </div> */
+    
+    	
+        var salesHigh2Low = '${dto.salesHigh2Low}';
+        var priceLow2High = '${dto.priceLow2High}';
+        var defaultSort = '${dto.defaultSort}';
+    	if(salesHigh2Low){
+    		$("div .sort_warp li").removeClass("select");
+    		$("#salesSort").addClass("select");
+    	}
+    	if(priceLow2High){
+    		$("div .sort_warp li").removeClass("select");
+    		$("#priceSort").addClass("select");
+    	}
+    	if(defaultSort){
+    		$("div .sort_warp li").removeClass("select");
+    		$("#defaultSort").addClass("select");
+    	}
+        
     })
+    
+    function defaultSort(){
+    	clear1();
+    	$("#searchForm").append("<input type='hidden' name='defaultSort' value='true'>");
+    	$("#searchForm").submit();
+    }
+    
+    function salesHigh2Low(){
+    	clear1();
+    	$("#searchForm").append("<input type='hidden' name='salesHigh2Low' value='true'>");
+    	$("#searchForm").submit();
+    }
+    
+    function priceLow2High(){
+    	clear1();
+    	$("#searchForm").append("<input type='hidden' name='priceLow2High' value='true'>");
+    	$("#searchForm").submit();
+    }
+    
+    function clear1(){
+    	$("#searchForm").find("input[name='salesHigh2Low']").remove();
+    	$("#searchForm").find("input[name='priceLow2High']").remove();
+    	$("#searchForm").find("input[name='defaultSort']").remove();
+    }
     
     function clear(){
     	$("#searchForm").find("input[name='productTypeId']").remove();
