@@ -29,7 +29,7 @@ public class AdDaoTest {
 		Integer[] ids = new Integer[]{1,2};
 //		Map<String,List<Integer>> map = new HashMap<String,List<Integer>>();
 //		map.put("ids",Arrays.asList(ids));
-		adDao.updateIsUseNotInIds(false,Arrays.asList(ids));
+//		adDao.updateIsUseNotInIds(false,Arrays.asList(ids));
 		
 	}
 }

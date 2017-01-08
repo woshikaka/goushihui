@@ -55,7 +55,7 @@ public class AdService {
 		return adDao.findById(adIds);
 	}
 
-	public List<Ad> show(List<Integer> adIds) {
+	public List<Ad> show(List<Integer> adIds,AdType adType) {
 		List<Ad> showAds = new ArrayList<Ad>();
 		if(CollectionUtils.isNotEmpty(adIds)){
 			for (Integer adId : adIds) {
@@ -64,13 +64,13 @@ public class AdService {
 				adDao.save(ad);
 				showAds.add(ad);
 			}
-			adDao.updateIsUseNotInIds(false,adIds);
+			adDao.updateIsUseNotInIds(false,adIds,adType);
 		}
 		return showAds;
 	}
 
-	public List<Ad> findShowing() {
-		return adDao.findByIsUse(true);
+	public List<Ad> findShowing(AdType adType) {
+		return adDao.findByIsUseAndAdType(true,adType);
 	}
 	
 	public List<Ad> findAd(AdType adType) {

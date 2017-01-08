@@ -96,7 +96,7 @@
                 <ul class="clear">
                 	<c:forEach items="${pageBean.recordList}" var="bean">
                     <li>
-                        <div class="goods_img"><img src="/upload${bean.image}"></div>
+                        <div class="goods_img"><a href="${pageContext.request.contextPath}/product/detail/${bean.id}"><img src="/upload${bean.image}"></a></div>
                         <p class="goods_name">${bean.name}</p>
                         <p class="goods_volume">成交${bean.sellCount}单</p>
                         <div class="goods_price">

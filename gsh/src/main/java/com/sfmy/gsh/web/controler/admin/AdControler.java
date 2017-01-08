@@ -125,18 +125,19 @@ public class AdControler {
 	 */
 	@RequestMapping(value = "/show")
 	public String show(@RequestParam("adIds") List<Integer> ads, HttpServletRequest request, RedirectAttributes ra) {
-		List<Ad> showAds = adService.show(ads);
+		String adTypeStr = request.getParameter("adType");
+		AdType adType = EnumUtils.getEnum(AdType.class,adTypeStr.toUpperCase());
+		
+		List<Ad> showAds = adService.show(ads,adType);
 		ra.addFlashAttribute("isSuccessShow", true);
 		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 广告切换显示成功^_^");
 		
-		String adTypeStr = request.getParameter("adType");
-		AdType adType = EnumUtils.getEnum(AdType.class,adTypeStr.toUpperCase());
 		
 		if (AdType.ROLL==adType) {
 			cacheUtils.put("showAds", showAds);
 			return "redirect:/a/ad/adListUI";
 		} else if((AdType.BAR==adType)){
-			cacheUtils.put(AppConstant.CACHE_BAR_AD_KEY, showAds);
+			cacheUtils.put(AppConstant.CACHE_BAR_AD_KEY, showAds.get(0));
 			return "redirect:/a/ad/barAdListUI";
 		}else{
 			return null;

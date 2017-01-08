@@ -1,5 +1,7 @@
 package com.sfmy.gsh.web.controler.front;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -46,7 +48,7 @@ public class HomePageController {
 		//轮询广告
 		List<Ad> showAds = cacheUtils.get(AppConstant.CACHE_SHOWADS_KEY,List.class);
 		if(CollectionUtils.isEmpty(showAds)){
-			showAds = adService.findShowing();
+			showAds = adService.findShowing(AdType.ROLL);
 			cacheUtils.put("showAds", showAds);
 		}
 		Ad barAd = cacheUtils.get(AppConstant.CACHE_BAR_AD_KEY,Ad.class);
@@ -121,5 +123,34 @@ public class HomePageController {
 			para = "?salesHigh2Low=true";
 		}
 		return "forward:/search"+para;
+	}
+	
+	@RequestMapping("/navShop")
+	public String navShop(Integer navTypeId,Integer navSecTypeId,String navSecTypeName,Integer navThirdTypeId,String navThirdTypeName,HttpServletRequest request) {
+		StringBuilder para = new StringBuilder();
+		if(navTypeId!=null){
+			if (navTypeId.intValue() == 1) {
+				para.append("?productTypeId=1&productTypeName=副食零食");
+			} else if(navTypeId.intValue() == 2){
+				para.append("?productTypeId=2&productTypeName=酒水饮料");
+			} else if(navTypeId.intValue() == 3){
+				para.append("?productTypeId=3&productTypeName=粮油调味");
+			}
+		}
+		
+		if (navSecTypeId!=null) {
+			para.append("&");
+			para.append("secTypeName="+new String(navSecTypeName.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8));
+			para.append("&");
+			para.append("secTypeId="+navSecTypeId);
+		}
+		
+		if(navThirdTypeId!=null){
+			para.append("&");
+			para.append("thirdTypeName="+new String(navThirdTypeName.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8));
+			para.append("&");
+			para.append("thirdTypeId="+navThirdTypeId);
+		}
+		return "forward:/search"+para.toString();
 	}
 }

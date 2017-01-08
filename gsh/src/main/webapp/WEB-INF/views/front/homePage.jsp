@@ -97,7 +97,7 @@
 					<div class="nav_menu_box">
 						<ul>
 							<c:forEach items="${productTypes}" var="bean">
-								<li class="nav_item"><a href="javascript:;">${bean.name}</a><i class="icon-angle-right"></i></li>
+								<li class="nav_item"><a href="${pageContext.request.contextPath}/navShop?navTypeId=${bean.id}">${bean.name}</a><i class="icon-angle-right"></i></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -109,10 +109,10 @@
 									<ul>
 										<c:forEach items="${productType.productSecTypes}" var="secType">
 											<li class="sort_li">
-												<h4>${secType.name}</h4>
+												<a href="${pageContext.request.contextPath}/navShop?navTypeId=${productType.id}&navSecTypeId=${secType.id}&navSecTypeName=${secType.name}"><h4>${secType.name}</h4></a>
 												<div>
 													<c:forEach items="${secType.thirdTypes}" var="thirdType">
-														<a href="javascript:;">${thirdType.name}</a>
+														<a href="${pageContext.request.contextPath}/navShop?navTypeId=${productType.id}&navSecTypeId=${secType.id}&navSecTypeName=${secType.name}&navThirdTypeId=${thirdType.id}&navThirdTypeName=${thirdType.name}">${thirdType.name}</a>
 													</c:forEach>
 												</div>
 											</li>
