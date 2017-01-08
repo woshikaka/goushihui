@@ -18,10 +18,6 @@
     width: 800px;
 }
 
-.shop_header {
-    background-color: #ddd;
-}
-
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
@@ -137,7 +133,7 @@
 		<section class="best_sellers_warp page_box">
 			<div class="page_title">
 				<h3 class="title left">推荐热销专卖商品</h3>
-				<a href="javascript:;" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/more?salesHigh2Low=true" class="more right">查看更多>></a>
 			</div>
 			<div class="page_list">
 				<ul class="clear">
@@ -169,11 +165,11 @@
 		<section class="item_wrap page_box floor_2">
 			<div class="page_title">
 				<h3 class="title left">副食零食</h3>
-				<a href="javascript:;" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/more?productTypeId=1" class="more right">查看更多>></a>
 			</div>
 			<div class="page_content clear">
 				<div class="left_ad left">
-					<a href="javascript:;">
+					<a href="${pageContext.request.contextPath}/more?productTypeId=1">
 						<h3>副食零食</h3>
 						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_2.png">
 					</a>
@@ -228,11 +224,11 @@
 		<section class="item_wrap page_box floor_1">
 			<div class="page_title">
 				<h3 class="title left">酒水饮料</h3>
-				<a href="javascript:;" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/more?productTypeId=2" class="more right">查看更多>></a>
 			</div>
 			<div class="page_content clear">
 				<div class="left_ad left">
-					<a href="javascript:;">
+					<a href="${pageContext.request.contextPath}/more?productTypeId=2">
 						<h3>酒水饮料</h3>
 						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_1.png">
 					</a>
@@ -287,11 +283,11 @@
 		<section class="item_wrap page_box floor_3">
 			<div class="page_title">
 				<h3 class="title left">粮油调味</h3>
-				<a href="javascript:;" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/more?productTypeId=3" class="more right">查看更多>></a>
 			</div>
 			<div class="page_content clear">
 				<div class="left_ad left">
-					<a href="javascript:;">
+					<a href="${pageContext.request.contextPath}/more?productTypeId=3">
 						<h3>粮油调味</h3>
 						<h4>GO></h4> <img
 						src="${pageContext.request.contextPath}/resources/images/index/item_img_3.png">

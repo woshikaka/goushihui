@@ -4,6 +4,9 @@
 /* .rect_wrap .search_wrap .search_bd .search_box .search_icon {
 	padding: 8px 14px;
 } */
+.shop_header {
+    background-color: #ddd;
+}
 </style>
 <section class="rect_wrap">
 		<div class="container">

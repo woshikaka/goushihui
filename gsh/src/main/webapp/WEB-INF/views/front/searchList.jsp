@@ -5,10 +5,10 @@
 
 <head>
     <title>搜索列表</title>
+	<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
-	<%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <style>
 .menu_wrap .left_nav .pannel_box .pannel_item.show {
     width: 800px;

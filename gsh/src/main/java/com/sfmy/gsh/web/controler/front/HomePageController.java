@@ -9,6 +9,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sfmy.gsh.constant.AdType;
 import com.sfmy.gsh.constant.AppConstant;
@@ -101,5 +102,24 @@ public class HomePageController {
 		model.addAttribute("products2",products2);
 		model.addAttribute("products3",products3);
 		return "front/homePage";
+	}
+	
+	@RequestMapping("/more")
+	public String more(Integer productTypeId,Boolean salesHigh2Low,Model model,HttpServletRequest request,RedirectAttributes ra) {
+		String para = "";
+		if(productTypeId!=null){
+			if (productTypeId.intValue() == 1) {
+				para = "?productTypeId=1&productTypeName=副食零食";
+			} else if(productTypeId.intValue() == 2){
+				para = "?productTypeId=2&productTypeName=酒水饮料";
+			} else if(productTypeId.intValue() == 3){
+				para = "?productTypeId=3&productTypeName=粮油调味";
+			}
+		}
+		
+		if(salesHigh2Low!=null && salesHigh2Low){
+			para = "?salesHigh2Low=true";
+		}
+		return "forward:/search"+para;
 	}
 }
