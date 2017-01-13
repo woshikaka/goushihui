@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,8 +30,9 @@ public class ProductSecType {
 //	@Enumerated(EnumType.STRING)
 //	private ProductFirstType firstType;
 	
-	@OneToMany(cascade={CascadeType.ALL})
-	@LazyCollection(LazyCollectionOption.FALSE)
+//	@OneToMany(cascade={CascadeType.ALL})
+//	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
 	@JoinTable(
 			name="product_sec_type_product_third_type",
 			joinColumns = {@JoinColumn(name = "product_sec_id", referencedColumnName = "id")},

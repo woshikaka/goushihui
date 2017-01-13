@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -69,15 +70,15 @@ public class Product {
 	@Column(name = "is_top",nullable=false)
 	private Boolean isTop=false;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "first_type_id",nullable=false)
 	private ProductType firstType;
 
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "sec_type_id",nullable=false)
 	private ProductSecType secType;
 	
-	@OneToOne
+	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "third_type_id",nullable=false)
 	private ProductThirdType thirdType;
 

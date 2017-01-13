@@ -90,6 +90,13 @@
 
 	<tx:annotation-driven />
 
+	<!-- 懒加载配置 -->
+<!-- 	<bean name="openEntityManagerInViewInterceptor" class="org.springframework.orm.jpa.support.OpenEntityManagerInViewInterceptor">  
+        <property name="entityManagerFactory">
+        	<ref bean="entityManagerFactory" />
+        </property>
+    </bean> -->
+
 	<jpa:repositories base-package="com.sfmy.gsh.dao" />
 
 	<bean id="cacheManagerFactory" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">

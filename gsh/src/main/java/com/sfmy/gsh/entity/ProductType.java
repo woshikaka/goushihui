@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,9 +13,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 
 
 @Entity
@@ -24,8 +22,8 @@ public class ProductType {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String name;
-	@OneToMany(cascade={CascadeType.ALL})
-	@LazyCollection(LazyCollectionOption.FALSE)
+	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
+//	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(
 			name="product_type_product_sec_type",
 			joinColumns = {@JoinColumn(name = "product_type_id", referencedColumnName = "id")},

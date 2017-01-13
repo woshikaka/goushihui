@@ -20,7 +20,5 @@ public class ProductTypeServiceTest {
 	
 	@Test
 	public void testSaveUser() {
-		List<ProductType> types = productTypeService.findAll();
-		System.out.println(types.get(0).getProductSecTypes().get(0).getName());
 	}
 }
