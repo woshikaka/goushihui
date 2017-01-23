@@ -4,13 +4,6 @@
 <%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <html>
 <head>
-   <!--  <meta charset="UTF-8">
-    <meta name="renderer" content="webkit|ie-comp|ie-stand">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no,initial-scale=1">  
-    <meta name="keywords" content="" />
-    <meta name="description" content="" /> -->
     <title></title>
     <!-- <link rel="icon" href="favicon.ico"> -->
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
@@ -47,35 +40,35 @@
     <%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
     <section class="center_header">
         <div class="container">
-            <div class="logo_box"></div>
+            <!-- <div class="logo_box"></div> -->
             <ul class="center_header_nav clear">
                 <li><a href="javascript:;">首页</a></li>
-                <li><a href="javascript:;">账户设置<i class="icon-chevron-down"></i></a></li>
-                <li><a href="javascript:;">消息</a></li>
+                <!-- <li><a href="javascript:;">账户设置<i class="icon-chevron-down"></i></a></li>
+                <li><a href="javascript:;">消息</a></li> -->
             </ul>
-            <div class="search_box right">
+            <!-- <div class="search_box right">
                 <form>
                     <input type="text" name="">
                     <button class="">搜索</button>
                 </form>
-            </div>
+            </div> -->
         </div>
     </section>
     <section class="center_con">
         <div class="container clear">
              <div class="center_menu left">
                 <h5>我的购食汇</h5>
-                <ul><li class="select"><a href="javascript:;">账户浏览</a></li>
+                <ul><li class="select"><a href="javascript:;" style="color:#f04848;">账户浏览</a></li>
                     <li class="select"><a href="javascript:;">我的订单</a></li>
-                    <li class="select"><a href="javascript:;">我的地址</a></li>
+                    <li class="select"><a href="${pageContext.request.contextPath}/m/address">我的地址</a></li>
                     <li class="select"><a href="javascript:;">修改密码</a></li>
                 </ul>
-                <h5>我的级别</h5>
+                <!-- <h5>我的级别</h5>
                 <ul>
                     <li class="select"><a href="javascript:;">我的积分</a></li>
                     <li class="select"><a href="javascript:;">我的礼品</a></li>
                     <li class="select"><a href="javascript:;">积分规则</a></li>
-                </ul>
+                </ul> -->
             </div>
             <div class="center_main left">
                 <div class="base_info center_border clear">

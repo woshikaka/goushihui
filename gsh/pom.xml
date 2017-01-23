@@ -83,7 +83,7 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.2.21.Final</version>
 		</dependency>
-		
+
 		<!-- Security -->
 		<dependency>
 			<groupId>org.apache.shiro</groupId>
@@ -238,6 +238,19 @@
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<version>3.2.1</version>
+		</dependency>
+
+		<!-- 
+		<dependency> 
+			<groupId>com.alipay</groupId> 
+			<artifactId>sdk-java</artifactId> 
+			<version>20170117151523</version> 
+		</dependency> 
+		-->
+		<dependency>
+			<groupId>commons-httpclient</groupId>
+			<artifactId>commons-httpclient</artifactId>
+			<version>3.1</version>
 		</dependency>
 	</dependencies>
 	<build>

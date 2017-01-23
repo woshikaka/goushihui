@@ -18,6 +18,19 @@ public class Address {
 	@ManyToOne
 	@JoinColumn(name = "user_id",nullable=false)
 	private User user;
+	
+	/**
+	 * 联系人
+	 */
+	@Column(nullable=false,length=10)
+	private String contact;
+	
+	/**
+	 * 联系电话
+	 */
+	@Column(nullable=false,length=20)
+	private String mobile;
+	
 	/**
 	 * 详细地址
 	 */
@@ -49,5 +62,17 @@ public class Address {
 	}
 	public void setId(Integer id) {
 		this.id = id;
+	}
+	public String getContact() {
+		return contact;
+	}
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+	public String getMobile() {
+		return mobile;
+	}
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
 	}
 }

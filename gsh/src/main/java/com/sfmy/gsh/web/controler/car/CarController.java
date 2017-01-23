@@ -89,6 +89,9 @@ public class CarController {
 		return "car/carUI";
 	}
 
+	/**
+	 * 购物车界面中添加地址
+	 */
 	@RequestMapping(value = "/addAddress")
 	public String addAddress(String detailed, Boolean isDefaut, HttpServletRequest request, RedirectAttributes ra) {
 		ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
