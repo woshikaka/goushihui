@@ -2,10 +2,10 @@ package com.sfmy.gsh.service;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.crypto.RandomNumberGenerator;
 import org.apache.shiro.crypto.SecureRandomNumberGenerator;
 import org.apache.shiro.crypto.hash.Md5Hash;
-import org.apache.shiro.crypto.hash.Sha256Hash;
 import org.apache.shiro.util.ByteSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -43,5 +43,29 @@ public class UserService {
 
 	public User findUserByName(String name) {
 		return userDao.findUserByName(name);
+	}
+	
+	public Boolean inputPasswordEqualsSourcePassword(Integer userId,String password) {
+		if(StringUtils.isBlank(password)){
+			return false;
+		}
+		
+		User user = userDao.findOne(userId);
+		
+		String hashedPassword = new Md5Hash(password,user.getSalt(),1024).toString();
+		return StringUtils.equals(user.getPassword(),hashedPassword);
+	}
+	
+	public void modifyPassword(Integer userId,String newPassword) {
+		RandomNumberGenerator rng = new SecureRandomNumberGenerator();
+		ByteSource byteSource = rng.nextBytes();
+		String salt = byteSource.toHex();//随机盐
+		
+		String hashedPassword = new Md5Hash(newPassword,salt,1024).toString();
+		
+		User user = userDao.findOne(userId);
+		user.setPassword(hashedPassword);
+		user.setSalt(salt);
+		userDao.save(user);
 	}
 }

@@ -97,12 +97,10 @@
 			<div class="center_menu left">
 				<h5>我的购食汇</h5>
 				<ul>
-					<li class="select"><a
-						href="${pageContext.request.contextPath}/m/center">账户浏览</a></li>
+					<li class="select"><a href="${pageContext.request.contextPath}/m/center">账户浏览</a></li>
 					<li class="select"><a href="javascript:;">我的订单</a></li>
-					<li class="select"><a href="javascript:;"
-						style="color: #f04848;">我的地址</a></li>
-					<li class="select"><a href="javascript:;">修改密码</a></li>
+					<li class="select"><a href="javascript:;" style="color: #f04848;">我的地址</a></li>
+					<li class="select"><a href="${pageContext.request.contextPath}/m/password">修改密码</a></li>
 				</ul>
 				<!-- <h5>我的级别</h5>
                 <ul>
