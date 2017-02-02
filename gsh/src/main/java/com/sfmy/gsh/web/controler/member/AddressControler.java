@@ -43,11 +43,14 @@ public class AddressControler {
 	}
 	
 	@RequestMapping(value = "/setDefaut/{id}")
-	public String setDefaut(@PathVariable Integer id) {
+	public String setDefaut(@PathVariable Integer id,RedirectAttributes ra) {
 		ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		Integer currUserId = shiroUser.getId();
 		
 		addressService.setDefaut(new User(currUserId),id);
+		ra.addFlashAttribute("isSuccessShow", true);
+		ra.addFlashAttribute("successMessage", "设置默认地址成功(*^__^*) ");
+		
 		return "redirect:/m/address";
 	}
 	

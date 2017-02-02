@@ -80,7 +80,7 @@
 		<div class="container">
 			<!-- <div class="logo_box"></div> -->
 			<ul class="center_header_nav clear">
-				<li><a href="javascript:;">首页</a></li>
+				<li><a href="${pageContext.request.contextPath}/homePage">首页</a></li>
 				<!-- <li><a href="javascript:;">账户设置<i class="icon-chevron-down"></i></a></li>
                 <li><a href="javascript:;">消息</a></li> -->
 			</ul>
@@ -112,7 +112,7 @@
 			<div class="center_main left">
 				<%@ include file="/WEB-INF/views/admin/public/alertInfo.jsp"%>
 				<div class="address">
-					<button class="btn btn-primary" style="height:30px" data-toggle="modal" data-target="#addModal"">新增收货地址</button><span style="color: #999;margin-left:20px">您已创建${fn:length(address)}收货地址，最多可创建5个</span>
+					<button class="btn btn-primary" style="height:30px" data-toggle="modal" data-target="#addModal"">新增收货地址</button><span style="color: #999;margin-left:20px">您已创建${fn:length(address)}个收货地址，最多可创建5个</span>
 					<div class="address_list">
 						<c:forEach items="${address}" var="bean">
 							<div class="address_iteam">

@@ -14,7 +14,7 @@
 	<%@ include file="/WEB-INF/views/admin/public/head1.jsp"%>
     <section class="crumb_warp">
         <div class="container">
-            <a href="index.html">${product.firstType.name}</a>><a href="javascript:;">${product.secType.name}</a>><a>${product.thirdType.name}</a>
+            <a href="${pageContext.request.contextPath}/navShop?navTypeId=${product.firstType.id}">${product.firstType.name}</a>><a href="${pageContext.request.contextPath}/navShop?navTypeId=${product.firstType.id}&navSecTypeId=${product.secType.id}&navSecTypeName=${product.secType.name}">${product.secType.name}</a>><a href="${pageContext.request.contextPath}/navShop?navTypeId=${product.firstType.id}&navSecTypeId=${product.secType.id}&navSecTypeName=${product.secType.name}&navThirdTypeId=${product.thirdType.id}&navThirdTypeName=${product.thirdType.name}">${product.thirdType.name}</a>
         </div>
     </section>
     <section class="shop_detail_warp">

@@ -42,7 +42,7 @@
         <div class="container">
             <!-- <div class="logo_box"></div> -->
             <ul class="center_header_nav clear">
-                <li><a href="javascript:;">首页</a></li>
+                <li><a href="${pageContext.request.contextPath}/homePage">首页</a></li>
                 <!-- <li><a href="javascript:;">账户设置<i class="icon-chevron-down"></i></a></li>
                 <li><a href="javascript:;">消息</a></li> -->
             </ul>

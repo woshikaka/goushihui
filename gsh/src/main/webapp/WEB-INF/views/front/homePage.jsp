@@ -32,8 +32,8 @@
 				<ul class="top_nav_menu clear">
 					<!-- <li class="select"><a href="javascript:;">首页</a></li> -->
 					<!-- <li><a href="javascript:;">今日降价</a></li> -->
-					<li><a href="javascript:;">最新上架</a></li>
-					<li><a href="javascript:;">关于我们</a></li>
+					<!-- <li><a href="javascript:;">最新上架</a></li>
+					<li><a href="javascript:;">关于我们</a></li> -->
 				</ul>
 			</div>
 		</div>
