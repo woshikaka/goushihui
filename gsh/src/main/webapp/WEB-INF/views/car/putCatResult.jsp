@@ -16,10 +16,10 @@
         <div class="top_nav">
             <div class="container">
                 <div class="classify_title"><strong>商品分类</strong><img src="${pageContext.request.contextPath}/resources/images/index/menu_list.png"></div>
-                <ul class="top_nav_menu clear">
+                <!-- <ul class="top_nav_menu clear">
                     <li><a href="javascript:;">最新上架</a></li>
                     <li><a href="javascript:;">关于我们</a></li>
-                </ul>
+                </ul> -->
             </div>
         </div>
         <div class=" clear menu_nav">

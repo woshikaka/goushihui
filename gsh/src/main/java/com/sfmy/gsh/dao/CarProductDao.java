@@ -17,4 +17,6 @@ public interface CarProductDao extends JpaRepository<CarProduct,Integer>{
 	@Query("select c.count from CarProduct c where user = ?1")
 	List<Integer> findProductCntByUser(User user);
 
+	Integer deleteByUserAndId(User user, Integer id);
+
 }

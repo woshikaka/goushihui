@@ -35,7 +35,7 @@ public class MyArith {
      * @param v2 乘数
      * @return 两个参数的积
      */
-    public static double mul(double v1,double v2){
+    public static Double mul(Double v1,Double v2){
         BigDecimal b1 = new BigDecimal(Double.toString(v1));
         BigDecimal b2 = new BigDecimal(Double.toString(v2));
         return b1.multiply(b2).doubleValue();

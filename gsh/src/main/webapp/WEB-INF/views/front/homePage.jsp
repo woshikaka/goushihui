@@ -18,6 +18,11 @@
     width: 800px;
 }
 
+.ad_image{
+	position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
 </style>
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
@@ -63,14 +68,14 @@
 							<c:when test="${status.index==0}">
 								<div class="item active">
 									<a href="${ad.href}" target="_blank">
-									<img src="/upload${ad.ossKey}" style="height: 350px" alt="...">
+									<img src="/upload${ad.ossKey}" class="ad_image" style="height: 350px" alt="...">
 									</a>
 								</div>
 							</c:when>
 							<c:otherwise>
 								<div class="item">
 									<a href="${ad.href}" target="_blank">
-									<img src="/upload${ad.ossKey}" style="height: 350px" alt="...">
+									<img src="/upload${ad.ossKey}" class="ad_image" style="height: 350px" alt="...">
 									</a>
 								</div>
 							</c:otherwise>

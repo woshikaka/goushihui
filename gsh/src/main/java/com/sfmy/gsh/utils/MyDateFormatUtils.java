@@ -22,4 +22,5 @@ public class MyDateFormatUtils {
 		return DateFormatUtils.format(calendar, TIME_FORMAT);
 	}
 	
+	
 }

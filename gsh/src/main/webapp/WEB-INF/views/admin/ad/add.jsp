@@ -31,7 +31,7 @@
 				<div class="form-group">
 					<label class="col-sm-2 control-label">图片</label>
 					<div class="col-sm-6">
-						<input type="file" class="form-control" name="file" ><i style="color:red">注意：轮播广告建议上传1670*350的图片，长条广告建议上传1140*130的图片</i>
+						<input type="file" class="form-control" name="file" ><i style="color:red">注意：轮播广告建议上传1920*350的图片，长条广告建议上传1140*130的图片</i>
 					</div>
 				</div>
 				<script src="//cdn.ckeditor.com/4.6.0/basic/ckeditor.js"></script>

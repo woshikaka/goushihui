@@ -9,11 +9,10 @@ import java.util.TimeZone;
 
 public class Temp {
 	public static void main(String[] args) throws ParseException {
-		DateFormat utcFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SS");
-		utcFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
-
-		Date date = utcFormat.parse("2017-01-22T08:13:13.29");
-		System.out.println(date.toLocaleString());
+		System.out.println(0.05+0.01);
+        System.out.println(1.0-0.42);
+        System.out.println(4.015*100);
+        System.out.println(123.3/100);
 	}
 }
 

@@ -35,6 +35,13 @@ public class Order {
 	private User user;
 	
 	/**
+	 * 支付信息
+	 */
+	@OneToOne
+	@JoinColumn(name="pay_info_id",nullable=false)
+	private OrderPayInfo payInfo;
+	
+	/**
 	 * 收货地址
 	 */
 	@OneToOne
@@ -51,7 +58,7 @@ public class Order {
 	/**
 	 * 合计总价
 	 */
-	@Column(name="total_price",nullable=false)
+	@Column(name="total_price",nullable=false,columnDefinition="double(10,2)")
 	private Double totalPrice;
 	
 	/**
@@ -59,7 +66,13 @@ public class Order {
 	 */
 	@Column(name="toal_quantity",nullable=false)
 	private Integer toalQuantity;
-
+	
+	/**
+	 * 商户订单号
+	 */
+	@Column(name="out_trade_no",length=64,nullable=false)
+	private String outTradeNo;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -122,5 +135,21 @@ public class Order {
 
 	public void setToalQuantity(Integer toalQuantity) {
 		this.toalQuantity = toalQuantity;
+	}
+
+	public String getOutTradeNo() {
+		return outTradeNo;
+	}
+
+	public void setOutTradeNo(String outTradeNo) {
+		this.outTradeNo = outTradeNo;
+	}
+
+	public OrderPayInfo getPayInfo() {
+		return payInfo;
+	}
+
+	public void setPayInfo(OrderPayInfo payInfo) {
+		this.payInfo = payInfo;
 	}
 }

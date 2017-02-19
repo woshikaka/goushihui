@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee [url]http://java.sun.com/xml/ns/j2ee/web-jsptaglibrary_2_0.xsd[/url]"
+	version="2.0">
+	<tlib-version>1.0</tlib-version>
+	<short-name>gsh</short-name>
+	<function>
+		<description>用于2个数字相乘</description>
+		<name>mul</name>
+		<function-class>com.sfmy.gsh.utils.MyArith</function-class>
+		<function-signature>java.lang.Double mul(java.lang.Double,java.lang.Double)</function-signature>
+		<example>${gsh:mul(d1,d2)}</example>
+	</function>
+</taglib>  

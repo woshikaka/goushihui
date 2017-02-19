@@ -42,6 +42,7 @@
 				/m/** = authc
 				/a/** = authc
 				/c/** = authc
+				/p/** = authc
 				/** = anon
 			</value>
 		</property>

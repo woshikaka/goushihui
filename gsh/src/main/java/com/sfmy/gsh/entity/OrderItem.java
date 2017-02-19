@@ -34,7 +34,7 @@ public class OrderItem {
 	/**
 	 * 总价
 	 */
-	@Column(name="total_price",nullable=false)
+	@Column(name="total_price",nullable=false,columnDefinition="double(10,2)")
 	private Double totalPrice;
 	
 	@ManyToOne

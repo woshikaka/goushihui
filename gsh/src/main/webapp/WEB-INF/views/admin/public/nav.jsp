@@ -7,7 +7,7 @@
 		</div>
 		<div id="navbar" class="navbar-collapse collapse">
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown"><a href="${pageContext.request.contextPath}/homePage">首页</a></li>
+				<li class="dropdown"><a href="${pageContext.request.contextPath}/homePage" target="_blank">首页</a></li>
 				<li class="dropdown "><a href="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-expanded="true"> 
 				<span class="glyphicon glyphicon-user "></span>
 				&nbsp;

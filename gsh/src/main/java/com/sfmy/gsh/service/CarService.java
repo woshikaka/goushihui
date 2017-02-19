@@ -49,4 +49,9 @@ public class CarService {
 		}
 		return cnt;
 	}
+
+	public boolean deleteCarProduct(User user, Integer carProductId) {
+		Integer deleteCnt = carProductDao.deleteByUserAndId(user,carProductId);
+		return deleteCnt!=null&&deleteCnt>0;
+	}
 }

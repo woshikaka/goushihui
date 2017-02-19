@@ -33,7 +33,8 @@
                                 <!-- <tr><td>规格：</td><td>1100g</td></tr>
                                 <tr><td>起订量：</td><td>1盒（不可退）</td></tr>
                                 <tr><td>供应商：</td><td>福州小米百货</td></tr> -->
-                                <tr><td>数量：</td><td><div class="buy_num"><button id="minus-btn"">-</button><input type="text" value="1" id="buy-num"><button id="add-btn"">+</button></div></td></tr>
+                                <!-- <tr><td>数量：</td><td><div class="buy_num"><button id="minus-btn"">-</button><input type="text" value="1" id="buy-num"><button id="add-btn"">+</button></div></td></tr> -->
+                                <tr><td>数量：</td><td><div class="buy_num_warp"><button id="minus-btn" class="minus-btn">-</button><input type="text" value="1" class="buy-num" id="buy-num"><button id="add-btn" class="add-btn">+</button></div></td></tr>
                             </tbody>
                         </table>
                         <div class="btn_box">
@@ -91,24 +92,8 @@
 </body>
 <script src="${pageContext.request.contextPath}/resources/js/shop.js"></script>
 <script>
+	shop.opptBuyNum();
     $(function(){
-        $("#minus-btn").on('click',function(){
-            var nowBuyNum = $("#buy-num").val();
-            if(nowBuyNum==1){
-                $(this).attr('disabled')
-            }else{
-                $(this).removeAttr('disabled')
-                nowBuyNum--;
-            }
-            $("#buy-num").val(nowBuyNum);
-        })
-        $("#add-btn").on('click',function(){
-            var nowBuyNum = $("#buy-num").val();
-                nowBuyNum++;
-            
-            $("#buy-num").val(nowBuyNum);
-        })
-        
         $("#add-cart").on('click',function(){
 	        var nowBuyNum = $("#buy-num").val();
 			if(!nowBuyNum.trim()){
