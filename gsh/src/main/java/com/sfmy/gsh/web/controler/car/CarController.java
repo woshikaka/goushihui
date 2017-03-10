@@ -16,7 +16,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.util.WebUtils;
@@ -62,9 +61,20 @@ public class CarController {
 	 */
 	@RequestMapping("/tempSaveSelected")
 	@ResponseBody
-	public String tempSaveSelected(@RequestBody List<CarProduct> carProducts,HttpServletRequest request) {
-		WebUtils.setSessionAttribute(request,AppConstant.CAR_SELECTED+MySecurityUtils.getCurrUserId(),carProducts);
+	public String tempSaveSelected(@RequestBody List<CarProductVO> carProductVOs,HttpServletRequest request) {
+		WebUtils.setSessionAttribute(request,AppConstant.CAR_SELECTED+MySecurityUtils.getCurrUserId(),carProductVOs);
 		return "true";
+	}
+	
+	@RequestMapping("/getTempSaveSelected")
+	@ResponseBody
+	public Map<String,Object> getTempSaveSelected(HttpServletRequest request) {
+		List<CarProductVO> carProductVOs = (List<CarProductVO>) WebUtils.getSessionAttribute(request, AppConstant.CAR_SELECTED+MySecurityUtils.getCurrUserId());
+		
+		Map<String,Object> result = new HashMap<String, Object>();
+		result.put("code",1);
+		result.put("data", carProductVOs);
+		return result;
 	}
 	
 	/**
@@ -171,6 +181,7 @@ public class CarController {
 	 * 购物车界面中添加地址
 	 */
 	@RequestMapping(value = "/addAddress")
+	@Deprecated
 	public String addAddress(String detailed, Boolean isDefaut, HttpServletRequest request, RedirectAttributes ra) {
 		ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		Integer currUserId = shiroUser.getId();

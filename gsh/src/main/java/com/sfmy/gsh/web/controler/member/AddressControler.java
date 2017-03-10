@@ -1,6 +1,8 @@
 package com.sfmy.gsh.web.controler.member;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sfmy.gsh.bean.ShiroUser;
@@ -23,6 +26,22 @@ import com.sfmy.gsh.service.AddressService;
 public class AddressControler {
 	@Resource
 	private AddressService addressService;
+	
+	/**
+	 * 收货地址列表(给前端用的)
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping(value = "/addressList")
+	public Map<String,Object> addressList() {
+		ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+		Integer currUserId = shiroUser.getId();
+		
+		Map<String,Object> result = new HashMap<String, Object>();
+		result.put("code",1);
+		result.put("data", addressService.findAllAddress(currUserId));
+		return result;
+	}
 	
 	@RequestMapping(value = "/address")
 	public String addressList(Model model) {

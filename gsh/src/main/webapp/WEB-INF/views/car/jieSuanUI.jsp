@@ -9,59 +9,29 @@
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/col.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shop.css" />
 </head>
-<style>
-.jiesuan_btn{
-	height: 74px;
-    background-color: #f04848;
-    padding: 0 5%;
-    font-size: 22px;
-    color: #fff;
-    margin-left: 4%;
-}
-</style>
 
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
 	<%@ include file="/WEB-INF/views/admin/public/head1.jsp"%>
     <section class="place_order">
-        <div class="container">
+        <div class="container" ng-app="jieSuanApp" ng-controller="jieSuanCtrl">
             <div class="address_warp box">
-                <h3>收货地址<a href="javascript:;">我的地址>></a></h3>
+                <h3>收货地址<a href="${pageContext.request.contextPath}/m/address" target="_blank">我的地址>></a></h3>
                 <div class="address_list">
                     <ul>
-                        <li class="select">
+                        <li ng-repeat="item in addressList">
                             <div class="ads_box">
                                 <label for="ads-1">
-                                    <input type="radio" id="ads-1"  name="address" checked>
-                                    <span class="user_ads">福建省福州市鼓楼区**小区13栋8层203</span>
-                                    <span class="name">（王晶晶&nbsp;收）</span>
-                                    <span class="tel">1830598475</span>
-                                    <span id="default-ads">默认地址</span>
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ads_box">
-                                <label for="ads-2">
-                                    <input type="radio" id="ads-2"  name="address">
-                                    <span class="user_ads">福建省福州市鼓楼区**小区13栋8层203</span>
-                                    <span class="name">（王晶晶&nbsp;收）</span>
-                                    <span class="tel">1830598475</span>
-                                </label>
-                            </div>
-                        </li>
-                        <li>
-                            <div class="ads_box">
-                                <label for="ads-3">
-                                    <input type="radio" id="ads-3"  name="address">
-                                    <span class="user_ads">福建省福州市鼓楼区**小区13栋8层203</span>
-                                    <span class="name">（王晶晶&nbsp;收）</span>
-                                    <span class="tel">1830598475</span>
+                                    <input type="radio" name="address" ng-click="switchAddress(item)" ng-model="$parent.selectedAddressId" value="{{item.id}}" ng-checked="item.isDefaut">
+                                    <span class="user_ads" ng-bind="item.detailed"></span>
+                                    <span class="name">（{{item.contact}}&nbsp;收）</span>
+                                    <span class="tel" ng-bind="item.mobile"></span>
+                                    <span ng-show="item.isDefaut" style="color:red">默认地址</span>
                                 </label>
                             </div>
                         </li>
                     </ul>
-                    <a href="javascript:;" id="add-new-ads">添加收货地址</a>
+                    <!-- <a href="javascript:;" id="add-new-ads">添加收货地址</a> -->
                 </div>
             </div>
             <div class="confirm_warp box">
@@ -70,71 +40,86 @@
                     <table>
                         <thead>
                             <tr>
-                                <th width="55%">商品</th>
-                                <th width="15%">单价</th>
-                                <th width="15%">数量</th>
-                                <th width="15%">小计</th>
+                                <th width="700px">商品</th>
+                                <th width="120px">单价</th>
+                                <th width="120px">数量</th>
+                                <th width="200px">小计</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr ng-repeat="carProduct in carProductList">
                                 <td>
                                     <div class="prp_detail">
                                         <div class="img_box">
-                                            <img src="../images/detail/detial_img.png">
+                                            <img src="{{carProduct.image}}">
                                         </div>
-                                        <p>我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称</p>
+                                        <p>{{carProduct.name}}</p>
                                     </div>
                                 </td>
-                                <td><strong>1000</strong></td>
+                                <td><strong>{{carProduct.price}}</strong></td>
+                                <td>{{carProduct.subCnt}}</td>
                                 <td>
-                                    2
-                                </td>
-                                <td>
-                                    <strong class="red">￥1000</strong>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <div class="prp_detail">
-                                        <div class="img_box">
-                                            <img src="../images/detail/detial_img.png">
-                                        </div>
-                                        <p>我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称我是商品名称</p>
-                                    </div>
-                                </td>
-                                <td><strong>1000</strong></td>
-                                <td>
-                                    2
-                                </td>
-                                <td>
-                                    <strong class="red">￥1000</strong>
+                                    <strong class="red">￥{{carProduct.subtotal}}</strong>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
                     <div class="confirm_ads_warp">
-                        收货地址：<span id="confirm-ads-name"></span>
-
+						收货地址：<span>{{receiveInfo}}</span>
                     </div>
                 </div>
             </div>
             <div class="payment_warp box clear">
-                <div class="method">
+                <%-- <div class="method">
                     <label for="pay-wechat"><input type="radio" id="pay-wechat" name="payment" checked><img src="${pageContext.request.contextPath}/resources/images/cart/wechat.png"></label>
-                </div>
+                </div> --%>
                 <div class="method">
-                    <label for="pay-alipay"><input type="radio" id="pay-alipay" name="payment"><img src="${pageContext.request.contextPath}/resources/images/cart/alipay.png"></label>
+                    <label for="pay-alipay"><input type="radio" id="pay-alipay" checked name="payment"><img src="${pageContext.request.contextPath}/resources/images/cart/alipay.png"></label>
                 </div>
                 
                 <button class="right"> 提交订单</button>
-                <span class="right">应付总额：<strong class="red">￥390988</strong></span>
+                <span class="right">应付总额：<strong class="red">￥{{sumPayable}}</strong></span>
             </div>
         </div>
     </section>
 	<%@ include file="/WEB-INF/views/admin/public/foot.jsp"%>
 </body>
-</html>
+<script src="${pageContext.request.contextPath}/resources/js/angular1.4.6.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/layui/lay/dest/layui.all.js"></script>
 <script>
+	var app = angular.module('jieSuanApp', []);
+	app.controller('jieSuanCtrl', function($scope, $http,$location,$window) {
+		$scope.addressList=[];
+		$scope.carProductList=[];
+		$scope.sumPayable=0;
+		$scope.receiveInfo = "";
+		$scope.selectedAddressId = "";
+		
+		//切换地址
+		$scope.switchAddress = function(item){
+			$scope.receiveInfo = item.detailed+"  "+item.contact+"  "+item.mobile;
+		}
+		
+		$http.get("${pageContext.request.contextPath}/m/addressList").success(function (response) {
+			$scope.addressList = response.data;
+			
+			angular.forEach($scope.addressList,function(item, index){
+				if(item.isDefaut){
+					$scope.receiveInfo = item.detailed+"  "+item.contact+"  "+item.mobile;
+					$scope.selectedAddressId = item.id;
+				}
+			})
+		});
+		
+		$http.get("${pageContext.request.contextPath}/c/getTempSaveSelected").success(function (response) {
+			$scope.carProductList = response.data;
+			angular.forEach($scope.carProductList,function(item, index){
+				$scope.sumPayable = (parseFloat($scope.sumPayable)+parseFloat(item.subtotal)).toFixed(2);
+			})
+		});
+		
+		
+	});
 </script>
+</html>
     
