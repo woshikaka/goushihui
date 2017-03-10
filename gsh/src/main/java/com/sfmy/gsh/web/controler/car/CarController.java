@@ -14,9 +14,12 @@ import org.apache.shiro.SecurityUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.util.WebUtils;
 
 import com.sfmy.gsh.bean.ShiroUser;
 import com.sfmy.gsh.constant.AppConstant;
@@ -54,6 +57,24 @@ public class CarController {
 	@Resource
 	private CacheUtils cacheUtils;
 
+	/**
+	 * 临时保存在购物车中选中的商品
+	 */
+	@RequestMapping("/tempSaveSelected")
+	@ResponseBody
+	public String tempSaveSelected(@RequestBody List<CarProduct> carProducts,HttpServletRequest request) {
+		WebUtils.setSessionAttribute(request,AppConstant.CAR_SELECTED+MySecurityUtils.getCurrUserId(),carProducts);
+		return "true";
+	}
+	
+	/**
+	 * 结算UI
+	 */
+	@RequestMapping(value="/jieSuanUI")
+	public String jieSuanUI(HttpServletRequest request) {
+		return "car/jieSuanUI";
+	}
+	
 	/**
 	 * 把商品放入购物车
 	 */

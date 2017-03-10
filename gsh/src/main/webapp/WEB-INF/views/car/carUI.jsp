@@ -72,7 +72,7 @@
                 <div class="other" ng-show="carProducts.length!=0" style="padding: 0 0 0 3%;">
                     <label for="has-check">已选（<i class="check_num">{{checkedCnt}}</i>）</label>
                     <!-- <a href="javascript:;">批量删除</a> -->
-                    <button class="jiesuan_btn right">去结算</button>
+                    <button class="jiesuan_btn right" ng-click="quJieSuan()">去结算</button>
                     <span class="right">应付总额：<strong class="red">￥</strong><strong class="red" ng-bind="sumPayable"></strong></span>
                 </div>
             </div>
@@ -83,7 +83,7 @@
 <script src="${pageContext.request.contextPath}/resources/layui/lay/dest/layui.all.js"></script>
 <script>
 	var app = angular.module('carApp', []);
-	app.controller('carCtrl', function($scope, $http) {
+	app.controller('carCtrl', function($scope, $http,$location,$window) {
 		$scope.carProducts=[];
 		$scope.checkedAll = false;
 		$scope.checkedCnt = 0;
@@ -116,7 +116,7 @@
 			$scope.sumPayable = 0;
 			angular.forEach($scope.carProducts,function(item, index){
 				if(item.checked){
-					$scope.sumPayable = $scope.sumPayable+item.subtotal;
+					$scope.sumPayable = (parseFloat($scope.sumPayable)+parseFloat(item.subtotal)).toFixed(2);
 				}
 			})
 		}
@@ -136,7 +136,7 @@
 				return;
 			}
 			carProduct.subCnt = carProduct.subCnt-1;
-			carProduct.subtotal = carProduct.subCnt * carProduct.price;
+			carProduct.subtotal = (parseFloat(carProduct.subCnt)*parseFloat(carProduct.price)).toFixed(2);
 			countSumPayable();
 		}
 		$scope.add = function(carProduct){
@@ -145,7 +145,7 @@
 				return;
 			}
 			carProduct.subCnt = carProduct.subCnt+1;
-			carProduct.subtotal = carProduct.subCnt * carProduct.price;
+			carProduct.subtotal = (parseFloat(carProduct.subCnt)*parseFloat(carProduct.price)).toFixed(2);
 			countSumPayable();
 		}
 		
@@ -163,9 +163,28 @@
 				layer.msg('请输入1~100之间的整数', {icon: 5});
 				carProduct.subCnt = 1;
 			}
-			carProduct.subtotal = carProduct.subCnt * carProduct.price;
+			carProduct.subtotal = (parseFloat(carProduct.subCnt)*parseFloat(carProduct.price)).toFixed(2);
 			countSumPayable();
 		}		
+		
+		$scope.quJieSuan = function(){
+			if($scope.checkedCnt<=0){
+				layer.msg('至少要选择一个产品，才能去结算', {icon: 5});
+				return false;
+			}
+			
+			var selectedCarProducts = new Array();
+			angular.forEach($scope.carProducts,function(item, index){
+				if(item.checked){
+					selectedCarProducts.push(item);
+				}
+			})
+			
+			$http.post("${pageContext.request.contextPath}/c/tempSaveSelected",angular.toJson(selectedCarProducts)).success(function(data) {
+				$window.location = $location.protocol()+"://"+$location.host()+":"+$location.port()+"/gsh/c/jieSuanUI";
+            });
+			
+		}
 	});
 </script>
 </html>

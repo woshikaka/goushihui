@@ -10,4 +10,5 @@ public class AppConstant {
 	public final static String CACHE_YINLIAO_TOP8_KEY = "yinliaoTop8";
 	public final static String CACHE_LIANGYOU_TOP8_KEY = "liangyouTop8";
 	public final static String CACHE_HOT_TOP5_KEY = "hotTop5";
+	public final static String CAR_SELECTED = "car_selected";
 }
