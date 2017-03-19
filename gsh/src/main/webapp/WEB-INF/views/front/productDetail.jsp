@@ -95,7 +95,7 @@
 	shop.opptBuyNum();
     $(function(){
         $("#add-cart").on('click',function(){
-	        var nowBuyNum = $("#buy-num").val();
+	        /* var nowBuyNum = $("#buy-num").val();
 			if(!nowBuyNum.trim()){
 				swal("数量格式不正确！请重填！");
 				return false;
@@ -105,9 +105,9 @@
 			}else{
 				swal("数量格式不正确！请重填！");
 				return false;
-			}
+			} */
 			
-			$("#addCartForm input[name='productCnt']").val(nowBuyNum);
+			$("#addCartForm input[name='productCnt']").val(1);
 			$("#addCartForm").submit();
 			return true;
         })
