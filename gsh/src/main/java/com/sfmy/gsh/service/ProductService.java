@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.BooleanUtils;
+import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -16,7 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.sfmy.gsh.constant.AppConstant;
 import com.sfmy.gsh.dao.ProductDao;
+import com.sfmy.gsh.dao.ProductSecTypeDao;
+import com.sfmy.gsh.dao.ProductTypeDao;
 import com.sfmy.gsh.entity.Product;
+import com.sfmy.gsh.entity.ProductSecType;
+import com.sfmy.gsh.entity.ProductThirdType;
 import com.sfmy.gsh.entity.ProductType;
 import com.sfmy.gsh.predicate.impl.ProductPredicate;
 import com.sfmy.gsh.predicate.impl.SearchProductPredicate;
@@ -28,6 +33,12 @@ import com.sfmy.gsh.web.dto.SearchProductDTO;
 public class ProductService {
 	@Resource
 	private ProductDao productDao;
+	
+	@Resource
+	private ProductTypeDao productTypeDao;
+	
+	@Resource
+	private ProductSecTypeDao productSecTypeDao;
 
 	public void addProduct(Product product) {
 		productDao.save(product);
@@ -78,7 +89,6 @@ public class ProductService {
 
 	public Product findProductById(Integer id) {
 		Product product = productDao.findOne(id);
-		
 		return product;
 	}
 
@@ -118,6 +128,18 @@ public class ProductService {
 		PageRequest pageRequest = new PageRequest(dto.getCurrPageNo()-1,AppConstant.PAGE_SIZE,sort);
 		Page<Product> page = productDao.findAll(predicate,pageRequest);
 		return page;
+	}
+
+	public Product findProductByIdForEager(Integer id) {
+		Product product = productDao.findById(id);
+//		Hibernate.initialize(product.getFirstType());
+//		Hibernate.initialize(product.getSecType());
+//		Hibernate.initialize(product.getThirdType());
+		
+		product.setFirstType(new ProductType(product.getFirstType().getId()));
+		product.setSecType(new ProductSecType(product.getSecType().getId()));
+		product.setThirdType(new ProductThirdType(product.getThirdType().getId()));
+		return product;
 	}
 
 }

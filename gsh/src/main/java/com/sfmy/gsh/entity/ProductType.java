@@ -1,5 +1,6 @@
 package com.sfmy.gsh.entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +18,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "product_type")
-public class ProductType {
+public class ProductType implements Serializable{
+	private static final long serialVersionUID = 3897602541246594199L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

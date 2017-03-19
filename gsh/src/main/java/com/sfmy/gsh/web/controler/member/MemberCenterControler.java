@@ -20,6 +20,6 @@ public class MemberCenterControler {
 	
 	@RequestMapping(value = "/center")
 	public String listUI(HttpServletRequest request) {
-		return "member/center";
+		return "member/order";
 	}
 }

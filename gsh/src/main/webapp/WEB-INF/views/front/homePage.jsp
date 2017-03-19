@@ -165,7 +165,7 @@
 		</section>
 		<!--结束推荐热销专卖商品-->
 		<%-- <section class="ad_box"><img src="/upload${barAd.ossKey}"></section> --%>
-		<img style="width:1140px" src="/upload${barAd.ossKey}">
+		<a href="${barAd.href}"><img style="width:1140px" src="/upload${barAd.ossKey}"></a>
 		<!--副食零食-->
 		<section class="item_wrap page_box floor_2">
 			<div class="page_title">

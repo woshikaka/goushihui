@@ -1,5 +1,6 @@
 package com.sfmy.gsh.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -12,16 +13,14 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.LazyCollection;
-import org.hibernate.annotations.LazyCollectionOption;
 /**
  * 产品二级类型
  * @author 黄燕针
  */
 @Entity
 @Table(name = "product_sec_type")
-public class ProductSecType {
+public class ProductSecType implements Serializable{
+	private static final long serialVersionUID = -2894518398013751732L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;

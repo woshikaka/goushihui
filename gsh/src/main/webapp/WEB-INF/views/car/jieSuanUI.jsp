@@ -8,15 +8,56 @@
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/base.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/col.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shop.css" />
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="/gsh/resources/jquery/jquery.min.js"></script>
 </head>
 
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
-	<%@ include file="/WEB-INF/views/admin/public/head1.jsp"%>
+	<section class="rect_wrap">
+		<div class="container">
+			<!-- <div class="logo_box"></div> -->
+			<a href="${pageContext.request.contextPath}/homePage"><img src="${pageContext.request.contextPath}/resources/images/logo.png" style="margin-top:-35px;"/></a>
+			<div class="search_wrap">
+				<div class="search_bd">
+					<div class="search_box">
+						<div class="search_icon">
+							<i class="icon-search"></i>
+						</div>
+						<form id="searchForm" action="${pageContext.request.contextPath}/search" method="post" onsubmit="return searchCheck()">
+							<input id="keywordInput" type="text" name="keyword" value="${dto.keyword}" class="search_input">
+							<button type="submit" class="search_btn right">搜索</button>
+							<c:if test="${dto.productTypeId != null}">
+								<input type="hidden" name="productTypeId" value="${dto.productTypeId}">
+								<input type="hidden" name="productTypeName" value="${dto.productTypeName}">
+							</c:if>
+							<c:if test="${dto.secTypeId != null}">
+								<input type="hidden" name="secTypeId" value="${dto.secTypeId}">
+								<input type="hidden" name="secTypeName" value="${dto.secTypeName}">
+							</c:if>
+							<c:if test="${dto.thirdTypeId != null}">
+								<input type="hidden" name="thirdTypeId" value="${dto.thirdTypeId}">
+								<input type="hidden" name="thirdTypeName" value="${dto.thirdTypeName}">
+							</c:if>
+							<c:if test="${dto.salesHigh2Low != null}">
+								<input type="hidden" name="salesHigh2Low" value="true">
+							</c:if>
+							<c:if test="${dto.priceLow2High != null}">
+								<input type="hidden" name="priceLow2High" value="true">
+							</c:if>
+							<c:if test="${dto.defaultSort != null}">
+								<input type="hidden" name="defaultSort" value="true">
+							</c:if>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
     <section class="place_order">
         <div class="container" ng-app="jieSuanApp" ng-controller="jieSuanCtrl">
             <div class="address_warp box">
-                <h3>收货地址<a href="${pageContext.request.contextPath}/m/address" target="_blank">我的地址>></a></h3>
+                <h3>选择收货地址<a href="${pageContext.request.contextPath}/m/address" target="_blank">我的地址>></a></h3>
                 <div class="address_list">
                     <ul>
                         <li ng-repeat="item in addressList">

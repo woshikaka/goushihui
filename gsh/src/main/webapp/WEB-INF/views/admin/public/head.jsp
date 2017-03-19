@@ -20,7 +20,7 @@
         <div class="header_left right">
 			<ul>
 				<shiro:hasRole name="admin">  
-					<li><a href="${pageContext.request.contextPath}/a/product/listUI"><span>管理员后台</span></a></li>
+					<li><a href="${pageContext.request.contextPath}/a/product/listUI" target="_blank"><span>管理员后台</span></a></li>
 				</shiro:hasRole> 
 				<shiro:authenticated>
 				<shiro:lacksRole name="admin">

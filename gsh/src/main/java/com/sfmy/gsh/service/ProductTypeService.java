@@ -41,14 +41,5 @@ public class ProductTypeService {
 		}
 		
 		cacheUtils.put("productTypes", productTypes);
-//		List<ProductType> allProductTypes = productTypeDao.findAll();
-//		for (ProductType productType : allProductTypes) {
-//			List<ProductSecType> productSecTypes = productType.getProductSecTypes();
-//			for (ProductSecType productSecType : productSecTypes) {
-//				productSecType.getThirdTypes();
-//			}
-//			
-//		}
-//		return allProductTypes;
 	}
 }

@@ -34,4 +34,6 @@ public interface ProductDao extends JpaRepository<Product,Integer>,JpaSpecificat
 	@Query("select p from Product p where p.id in :ids")
 	public List<Product> findProductByIds(@Param("ids")List<Integer> ids);
 
+	public Product findById(Integer id);
+
 }

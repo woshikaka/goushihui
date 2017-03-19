@@ -279,7 +279,7 @@ public class ProductControler {
 	@ResponseBody
 	@RequestMapping(value = "/getProductInfoById")
 	public Product getProductInfoById(Integer id) {
-		Product product = productService.findProductById(id);
+		Product product = productService.findProductByIdForEager(id);
 		return product;
 	}
 	

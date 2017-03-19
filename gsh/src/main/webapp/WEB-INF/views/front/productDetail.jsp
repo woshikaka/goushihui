@@ -34,7 +34,7 @@
                                 <tr><td>起订量：</td><td>1盒（不可退）</td></tr>
                                 <tr><td>供应商：</td><td>福州小米百货</td></tr> -->
                                 <!-- <tr><td>数量：</td><td><div class="buy_num"><button id="minus-btn"">-</button><input type="text" value="1" id="buy-num"><button id="add-btn"">+</button></div></td></tr> -->
-                                <tr><td>数量：</td><td><div class="buy_num_warp"><button id="minus-btn" class="minus-btn">-</button><input type="text" value="1" class="buy-num" id="buy-num"><button id="add-btn" class="add-btn">+</button></div></td></tr>
+                                <!-- <tr><td>数量：</td><td><div class="buy_num_warp"><button id="minus-btn" class="minus-btn">-</button><input type="text" value="1" class="buy-num" id="buy-num"><button id="add-btn" class="add-btn">+</button></div></td></tr> -->
                             </tbody>
                         </table>
                         <div class="btn_box">

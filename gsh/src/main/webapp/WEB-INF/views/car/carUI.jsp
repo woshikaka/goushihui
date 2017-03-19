@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ include file="/WEB-INF/views/admin/public/taglib.jsp"%>
-<%@ taglib prefix="gsh" uri="/WEB-INF/tlds/mul.tld"%>
+<%-- <%@ taglib prefix="gsh" uri="/WEB-INF/tlds/mul.tld"%> --%>
 <!DOCTYPE html>
 <html>
 
@@ -9,6 +9,8 @@
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/base.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/col.css" />
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/shop.css" />
+	<link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+	<script src="/gsh/resources/jquery/jquery.min.js"></script>
 </head>
 <style>
 .jiesuan_btn{
