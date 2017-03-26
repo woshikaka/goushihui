@@ -153,7 +153,7 @@
                                     <p class="goods_name elip">我是商品名称商品名称名称门洞if奖哦i到金佛i解放</p>
                                 </td>
                                 <td>
-                                    10
+                                    1033333
                                 </td>
                                 <td class="market_price">
                                     ￥2908
@@ -214,7 +214,7 @@
             </div>
         </div>
     </section>
-	<%@ include file="/WEB-INF/views/admin/public/foot.jsp"%>    
+	<%-- <%@ include file="/WEB-INF/views/admin/public/foot.jsp"%> --%>    
 </body>
 </html>
 

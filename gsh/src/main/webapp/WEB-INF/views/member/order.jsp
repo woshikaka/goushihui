@@ -9,9 +9,7 @@
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/base.css" />
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/col.css" />
 	<link type="text/css" rel="stylesheet" href="/gsh/resources/css/shop.css" />
-   <!--  <script src="js/jquery-1.11.3.min.js"></script> -->
-   <!--  <script src="js/vue.min.js"></script>
-    <script src="js/shop.js"></script> -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
     <script src="${pageContext.request.contextPath}/resources/js/shop.js"></script>
     <style type="text/css">
     	.num_desc{
@@ -54,7 +52,7 @@
                     <li class="select"><a href="javascript:;">积分规则</a></li>
                 </ul> -->
             </div>
-            <div class="center_main left">
+            <div class="center_main left" ng-app="orderApp" ng-controller="orderCtrl">
                 <div class="my_order center_border">
                     <h2 class="title">我的订单<!-- <a href="javascript:;" class="right">查看全部订单>></a> --></h2>
                     <table class="order_list">
@@ -62,87 +60,84 @@
                             <tr>
                                 <th width="16%">订单编号</th>
                                 <th width="37%">商品名称</th>
-                                <th width="8%">数量</th>
+                                <th width="5%">个数</th>
+                                <th width="8%">总数</th>
                                 <!-- <th width="13%">市场价格</th> -->
                                 <th width="13%">订单金额</th>
                                 <th width="13%">交易状态</th>
-                                <th width="13%">操作</th>
+                                <!-- <th width="13%">操作</th> -->
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1234488098098</td>
+                            <tr ng-repeat="order in orders">
+                                <td ng-bind="order.outTradeNo"></td>
                                 <td>
-                                    <p class="goods_name elip">我是商品名称商品名称名称我是商品名称商品名称名称门洞if奖哦i到金佛i解放门洞if奖哦i到金佛i解放</p>
-                                    <p class="goods_name elip">我是商品名称商品名称名称门洞if奖哦i到金佛i解放</p>
-                                    <p class="goods_name elip">我是商品名称商品名称名称门洞if奖哦i到金佛i解放</p>
+                                    <p class="goods_name elip" ng-repeat="name in order.names">{{name}}</p>
                                 </td>
                                 <td>
-                                    10
+                                    <p class="goods_name elip" style="width:100px" ng-repeat="quantity in order.quantitys track by $index">{{quantity}}</p>
                                 </td>
+                                <td ng-bind="order.toalQuantity"></td>
                                 <td>
-                                    <span class="red">￥1000</span>
+                                    <span class="red">￥{{order.totalPrice}}</span>
                                 </td>
                                 <td class="order_staus">
-                                    <p >交易成功</p>
+                                    <p ng-bind="order.status"></p>
                                 </td>
-                                <td>
+                                <!-- <td>
                                     <a class="" href="javascript:;">订单详情</a>
-                                </td>
+                                </td> -->
                             </tr>
-                            <!-- <tr>
-                                <td>1234488098098</td>
-                                <td>
-                                    <p class="goods_name elip">我是商品名称商品名称名称我是商品名称商品名称名称门洞if奖哦i到金佛i解放门洞if奖哦i到金佛i解放</p>
-                                    <p class="goods_name elip">我是商品名称商品名称名称门洞if奖哦i到金佛i解放</p>
-                                    <p class="goods_name elip">我是商品名称商品名称名称门洞if奖哦i到金佛i解放</p>
-                                </td>
-                                <td>
-                                    10
-                                </td>
-                                <td class="market_price">￥2908</td>
-                                <td>
-                                    <span class="red">￥1000</span>
-                                </td>
-                                <td class="order_staus">
-                                    <p >交易成功</p>
-                                </td>
-                                <td class="market_price"> <a class="" href="javascript:;">订单详情</a></td>
-                            </tr> -->
-                            <!-- <tr>
-                                <td>1234488098098</td>
-                                <td>
-                                    <p class="goods_name elip">我是商品名称商品名称名称我是商品名称商品名称名称门洞if奖哦i到金佛i解放门洞if奖哦i到金佛i解放</p>
-                                    <p class="goods_name elip">我是商品名称商品名称名称门洞if奖哦i到金佛i解放</p>
-                                    <p class="goods_name elip">我是商品名称商品名称名称门洞if奖哦i到金佛i解放</p>
-                                </td>
-                                <td>
-                                    10
-                                </td>
-                                <td class="market_price"  class="market_price">
-                                    ￥2908
-                                </td>
-                                <td>
-                                    <span class="red">￥1000</span>
-                                </td>
-                                <td class="order_staus">
-                                    <p >交易成功</p>
-                                    <a class="" href="javascript:;">订单详情</a>
-                                </td>
-                                <td>
-                                    10
-                                </td>
-                            </tr> -->
                         </tbody>
                     </table>
+                    <div id="paging"></div>
                 </div>
             </div>
         </div>
     </section>
-	<%@ include file="/WEB-INF/views/admin/public/foot.jsp"%>    
+	<%-- <%@ include file="/WEB-INF/views/admin/public/foot.jsp"%> --%>    
 </body>
+<script src="${pageContext.request.contextPath}/resources/js/angular1.4.6.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/layui/lay/dest/layui.all.js"></script>
+<script>
+var app = angular.module('orderApp', []);
+app.controller('orderCtrl', function($scope, $http,$location,$window) {
+	var laypage = layui.laypage;
+	var layer = layui.layer;
+	
+	$scope.orders=[];
+	$scope.pageParam={"currPageNo":1};
+	$scope.totalPages=0;
+	
+	$http.post("${pageContext.request.contextPath}/m/orderPage",angular.toJson($scope.pageParam)).success(function(response) {
+		$scope.orders = response.data.items;
+		$scope.totalPages = response.data.totalPages;
+			
+		laypage({
+		    cont: 'paging',
+		    pages: $scope.totalPages,
+		    skin: '#1E9FFF',
+			skip: false,
+			jump: function(obj,first){
+				if(!first){
+					$scope.pageParam.currPageNo=obj.curr;
+					pageRequest();
+				}
+			}
+		});
+    });
+	
+	function pageRequest(){
+		$http.post("${pageContext.request.contextPath}/m/orderPage",angular.toJson($scope.pageParam)).success(function(response) {
+			$scope.orders = response.data.items;
+			$scope.totalPages = response.data.totalPages;
+	    });
+	}
+	
+
+
+});
+</script>
 </html>
 
-<script>
-</script>
 

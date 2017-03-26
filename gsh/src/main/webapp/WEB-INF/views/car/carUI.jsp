@@ -94,7 +94,7 @@
 		$http.get("${pageContext.request.contextPath}/c/carProduct")
 		  .success(function (response) {
 			  $scope.carProducts = response.data;
-		  });
+		});
 		
 		//全选
 		$scope.checkAll = function(){

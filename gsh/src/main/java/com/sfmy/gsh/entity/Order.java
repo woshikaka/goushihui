@@ -28,7 +28,7 @@ public class Order {
 	private List<OrderItem> items;
 	
 	@Column(name="create_time",nullable=false)
-	private Date createTime=new Date();
+	private Date createTime;
 	
 	@OneToOne
 	@JoinColumn(name="user_id",nullable=false)
@@ -68,7 +68,7 @@ public class Order {
 	private Integer toalQuantity;
 	
 	/**
-	 * 商户订单号
+	 * 商户订单号(购食汇订单号)
 	 */
 	@Column(name="out_trade_no",length=64,nullable=false)
 	private String outTradeNo;

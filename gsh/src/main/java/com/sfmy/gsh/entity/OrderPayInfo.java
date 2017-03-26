@@ -19,7 +19,7 @@ public class OrderPayInfo {
 	private Integer id;
 	
 	@Column(name="create_time",nullable=false)
-	private Date createTime=new Date();
+	private Date createTime;
 	
 	/**
 	 * 支付宝或微信交易号
@@ -28,7 +28,7 @@ public class OrderPayInfo {
 	private String tradeNo;
 	
 	/**
-	 * 商户订单号
+	 * 商户订单号(购食汇订单号)
 	 */
 	@Column(name="out_trade_no",length=64,nullable=false)
 	private String outTradeNo;
