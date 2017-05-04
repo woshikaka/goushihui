@@ -14,11 +14,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sfmy.gsh.constant.AppConstant;
 import com.sfmy.gsh.dao.OrderDao;
 import com.sfmy.gsh.entity.Order;
 import com.sfmy.gsh.entity.OrderItem;
 import com.sfmy.gsh.entity.OrderPayInfo;
+import com.sfmy.gsh.predicate.impl.MermerOrderPredicate;
 import com.sfmy.gsh.web.dto.MemberOrderDTO;
 import com.sfmy.gsh.web.dto.MemberOrderPageDTO;
 import com.sfmy.gsh.web.vo.OrderPageParamVO;
@@ -64,13 +64,15 @@ public class OrderService {
 
 	public MemberOrderPageDTO listPage(Integer currUserId, OrderPageParamVO param) {
 		MemberOrderPageDTO pageDTO = new MemberOrderPageDTO();
-		
 		List<MemberOrderDTO> items = new ArrayList<MemberOrderDTO>();
 		pageDTO.setItems(items);
 		
+		param.setUserId(currUserId);
+		MermerOrderPredicate predicate = new MermerOrderPredicate(param);
+		
 		Sort sort = new Sort(new org.springframework.data.domain.Sort.Order(Sort.Direction.DESC,"createTime"));
 		PageRequest pageRequest = new PageRequest(param.getCurrPageNo()-1,5,sort);
-		Page<Order> page = orderDao.findAll(pageRequest);
+		Page<Order> page = orderDao.findAll(predicate,pageRequest);
 		
 		//bo转dto
 		if (Objects.nonNull(page)) {

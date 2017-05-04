@@ -16,22 +16,22 @@ public class AlipayConfig {
 //↓↓↓↓↓↓↓↓↓↓请在这里配置您的基本信息↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
 
 	// 合作身份者ID，签约账号，以2088开头由16位纯数字组成的字符串，查看地址：https://b.alipay.com/order/pidAndKey.htm
-	public static String partner = "";
+	public static String partner = "2088521656932605";
 	
 	// 收款支付宝账号，以2088开头由16位纯数字组成的字符串，一般情况下收款账号就是签约账号
 	public static String seller_id = partner;
 
 	//商户的私钥,需要PKCS8格式，RSA公私钥生成：https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.nBDxfy&treeId=58&articleId=103242&docType=1
-	public static String private_key = "";
+	public static String private_key = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAMyFTvPMt27Ge8oEwNlCopUzZECWfM9qKK1JdL4f7PPXo7dnlJtANmvPaRskFa9f20O4v/g8v4+OHd6HpeSJnQIOpq6xCXYhVVWtOGdsPrxojD8Q19l4oArv9o65SHm/gpg+ieoxo/EZjnL1Z53IkRS7g/aTwZ9XnbU1AbZT+sKRAgMBAAECgYB6XyU/cPUsfexhkviExn8bQNWyY5ioTj+qd7I3dEjGGfembH6ZahFl7oNYLv4eof9DBQ8wC8Eetw0eMhHLrZ9YIipJEJsnabkhwqpjWNEqgpXlvvIa7Thgcb3pvYc7soL+A5BTHuYFzIge6D/Xh5n/9AOXksv162k1bSfSFm14JQJBAPbTg8K+C5ASeE5qr245aqrGuYAqbGDv9Pde6Emwe8L3zc4pvGAOQgRMn+RJpOojTbfTHrvYnxXStlvm8DuS1JMCQQDUH0Svr3OY2afYTAmduQuZ7X/x9yBp7mVActv0B6w9K1W9RaZBB+hY0g+l//0Joxx3FYVhSpO4GcMknhXdZEbLAkEApitF5GB/dlII7noCewlql2hMUE2/Qw+o8rTRW3LWDy83Pdl5OY2/whc3+b/ep8Z2txAJ+9rdVxrRrFNwXhr+wwJASO9vaJEFSDsekSqj681ihcy5v3LffEzyF5TmuCOjP20VD/1Qyu9zHocrxkIcuSGSege2UtuXqyeAh6irj/IYvQJAWAtEUxN72IE4Mr5RL+Ac8YLWDP7KygbFVd5R5wMohTpZYoNQ42CBqraR3ClF71MX83LUmUamvZJBZj2rKmIkPw==";
 	
 	// 支付宝的公钥,查看地址：https://b.alipay.com/order/pidAndKey.htm
 	public static String alipay_public_key  = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCnxj/9qwVfgoUh/y2W89L6BkRAFljhNhgPdyPuBV64bfQNN1PjbCzkIM6qRdKBoLPXmKKMiFYnkd6rAoprih3/PrQEB/VsW8OoM8fxn67UDYuyBTqA23MML9q1+ilIZwBC2AQ2UBVOrFXfFl75p6/B5KsiNG9zpgmLCUYuLkxpLQIDAQAB";
 
 	// 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "http://商户网址/create_direct_pay_by_user-JAVA-UTF-8/notify_url.jsp";
+	public static String notify_url = "http://localhost:8080/gsh/yb";
 
 	// 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "http://商户网址/create_direct_pay_by_user-JAVA-UTF-8/return_url.jsp";
+	public static String return_url = "http://localhost:8080/gsh/tb";
 
 	// 签名方式
 	public static String sign_type = "RSA";

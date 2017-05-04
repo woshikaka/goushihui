@@ -29,7 +29,7 @@ public class MyStringUtils {
 	public static String generateOutTradeNo() {
 		String random = RandomStringUtils.random(3,"abcdefghijklmnopqrstuvwxyz");
 		Calendar calendar = Calendar.getInstance();
-		String currTimeStr = DateFormatUtils.format(calendar,"MMddHHmmssSSS");
+		String currTimeStr = DateFormatUtils.format(calendar,"yyyyMMddHHmmssSSS");
 		return random+currTimeStr;
 	}
 	

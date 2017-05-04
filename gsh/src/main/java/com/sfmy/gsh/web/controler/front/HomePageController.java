@@ -41,7 +41,7 @@ public class HomePageController {
 	@Resource
 	private CarService carService;
 	
-	@RequestMapping("/homePage")
+	@RequestMapping(value={"/homePage","/"})
 	@SuppressWarnings("unchecked")
 	public String homePage(HttpServletRequest request,Model model) {
 		//轮询广告
