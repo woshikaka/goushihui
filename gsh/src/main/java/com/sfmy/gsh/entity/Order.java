@@ -38,15 +38,24 @@ public class Order {
 	 * 支付信息
 	 */
 	@OneToOne
-	@JoinColumn(name="pay_info_id",nullable=false)
+	@JoinColumn(name="pay_info_id")
 	private OrderPayInfo payInfo;
 	
-	/**
-	 * 收货地址
-	 */
-	@OneToOne
-	@JoinColumn(name="address_id",nullable=false)
-	private Address address;
+//	/**
+//	 * 收货地址
+//	 */
+//	@OneToOne
+//	@JoinColumn(name="address_id",nullable=false)
+//	private Address address;
+	
+	@Column(nullable=false)
+	private String contact;
+	
+	@Column(nullable=false)
+	private String mobile;
+	
+	@Column(name="receive_address",nullable=false)
+	private String receiveAddress;
 	
 	/**
 	 * 订单状态
@@ -105,12 +114,28 @@ public class Order {
 		this.user = user;
 	}
 
-	public Address getAddress() {
-		return address;
+	public String getContact() {
+		return contact;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setContact(String contact) {
+		this.contact = contact;
+	}
+
+	public String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(String mobile) {
+		this.mobile = mobile;
+	}
+
+	public String getReceiveAddress() {
+		return receiveAddress;
+	}
+
+	public void setReceiveAddress(String receiveAddress) {
+		this.receiveAddress = receiveAddress;
 	}
 
 	public OrderStatus getStatus() {

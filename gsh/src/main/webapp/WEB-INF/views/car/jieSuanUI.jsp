@@ -118,7 +118,7 @@
                     <label for="pay-alipay"><input type="radio" id="pay-alipay" checked name="payment"><img src="${pageContext.request.contextPath}/resources/images/cart/alipay.png"></label>
                 </div>
                 
-                <button class="right"> 提交订单</button>
+                <button class="right" ng-click="submitAlipay()">提交订单</button>
                 <span class="right">应付总额：<strong class="red">￥{{sumPayable}}</strong></span>
             </div>
         </div>
@@ -159,7 +159,15 @@
 			})
 		});
 		
-		
+		$scope.submitAlipay = function(){
+			var orderRequestDTO = {};
+			orderRequestDTO.addressId = $scope.selectedAddressId;
+			orderRequestDTO.orderInfos = $scope.carProductList;
+			/* $window.open("${pageContext.request.contextPath}/p/sar", '_blank'); */
+			$http.post("${pageContext.request.contextPath}/p/addOrder",angular.toJson(orderRequestDTO)).success(function (response) {
+				
+			});
+		}
 	});
 </script>
 </html>

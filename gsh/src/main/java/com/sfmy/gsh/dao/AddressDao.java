@@ -16,4 +16,6 @@ public interface AddressDao extends JpaRepository<Address,Integer>{
 	List<Address> findAllByUser(User user);
 
 	void deleteByUserAndId(User user, Integer id);
+
+	Address findByUserAndId(User user,Integer id);
 }

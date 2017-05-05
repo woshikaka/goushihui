@@ -33,6 +33,10 @@ public class OrderService {
 		return orderDao.findByOutTradeNo(outTradeNo);
 	}
 	
+	public Order addOrder(Order order) {
+		return orderDao.save(order);
+	}
+	
 	public boolean callBackWithHandleOrder(Order order,OrderPayInfo payInfo) {
 		boolean isHandled = false;
 		

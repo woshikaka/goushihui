@@ -29,7 +29,7 @@ public class OrderItem {
 	 * 单价
 	 */
 	@Column(name="unit_price",nullable=false)
-	private Integer unitPrice;
+	private Double unitPrice;
 	
 	/**
 	 * 总价
@@ -72,11 +72,11 @@ public class OrderItem {
 		this.quantity = quantity;
 	}
 
-	public Integer getUnitPrice() {
+	public Double getUnitPrice() {
 		return unitPrice;
 	}
 
-	public void setUnitPrice(Integer unitPrice) {
+	public void setUnitPrice(Double unitPrice) {
 		this.unitPrice = unitPrice;
 	}
 

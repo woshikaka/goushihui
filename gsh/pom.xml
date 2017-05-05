@@ -240,17 +240,16 @@
 			<version>3.2.1</version>
 		</dependency>
 
-		<!-- 
-		<dependency> 
-			<groupId>com.alipay</groupId> 
-			<artifactId>sdk-java</artifactId> 
-			<version>20170117151523</version> 
-		</dependency> 
-		-->
 		<dependency>
 			<groupId>commons-httpclient</groupId>
 			<artifactId>commons-httpclient</artifactId>
 			<version>3.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>19.0</version>
 		</dependency>
 	</dependencies>
 	<build>

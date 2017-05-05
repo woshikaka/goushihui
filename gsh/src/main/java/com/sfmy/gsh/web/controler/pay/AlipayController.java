@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +31,7 @@ import com.sfmy.gsh.service.OrderService;
 import com.sfmy.gsh.service.ProductService;
 import com.sfmy.gsh.utils.CacheUtils;
 import com.sfmy.gsh.utils.MyStringUtils;
+import com.sfmy.gsh.web.dto.OrderRequestDTO;
 
 /**
  * 支付宝支付模块
@@ -92,11 +94,6 @@ public class AlipayController {
 		return "error";
 	}
 	
-//	public static void main(String[] args) throws UnsupportedEncodingException {
-//		System.out.println(URLEncoder.encode("æå¥", "utf-8"));
-//		System.out.println(new String("æå¥".getBytes(StandardCharsets.ISO_8859_1),"utf-8"));
-//	}
-	
 	/**
 	 * 支付宝同步通知
 	 * @throws UnsupportedEncodingException 
@@ -109,7 +106,6 @@ public class AlipayController {
 		while (parameterNames.hasMoreElements()) {
 			String name = (String) parameterNames.nextElement();
 			String value = request.getParameter(name);
-			//URLEncoder.encode(value, "UTF-8")
 			params.put(name,new String(value.getBytes(StandardCharsets.ISO_8859_1),"utf-8"));
 		}		
 		
@@ -123,8 +119,10 @@ public class AlipayController {
 		return "error";
 	}
 	
+//	@ResponseBody
 	@RequestMapping(value="/p/sar")
-	public String submitAliRequest(HttpServletRequest request) throws UnsupportedEncodingException {
+	public String submitAliRequest(@RequestBody OrderRequestDTO submitAliRequestDTO,HttpServletRequest request) {
+		
 		Map<String, String> sParaTemp = new HashMap<String, String>();
 		sParaTemp.put("service","create_direct_pay_by_user");
 		sParaTemp.put("partner",AlipayConfig.partner);
@@ -143,6 +141,7 @@ public class AlipayController {
 		
 		request.setAttribute("formHtml", formHtml);
 		return "pay/toAliPay";
+//		return formHtml;
 	}
 	
 	@RequestMapping(value="temp",method=RequestMethod.GET)

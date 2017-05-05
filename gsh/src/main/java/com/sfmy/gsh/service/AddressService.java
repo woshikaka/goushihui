@@ -56,4 +56,8 @@ public class AddressService {
 			}
 		}
 	}
+
+	public Address findAddress(Integer currUserId, Integer addressId) {
+		return addressDao.findByUserAndId(new User(currUserId),addressId);
+	}
 }
