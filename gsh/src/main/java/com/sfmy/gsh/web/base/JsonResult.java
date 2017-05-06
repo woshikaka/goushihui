@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class JsonResult<T> implements Serializable {
 	private static final long serialVersionUID = -1902455525299606460L;
-	private int code = 0;
+	private int code = 1;
 	private String message;
 	private T data;
 

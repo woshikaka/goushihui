@@ -7,17 +7,19 @@ import java.util.Objects;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.sfmy.gsh.constant.OrderStatus;
 import com.sfmy.gsh.dao.OrderDao;
+import com.sfmy.gsh.dao.OrderPayInfoDao;
 import com.sfmy.gsh.entity.Order;
 import com.sfmy.gsh.entity.OrderItem;
 import com.sfmy.gsh.entity.OrderPayInfo;
+import com.sfmy.gsh.entity.User;
 import com.sfmy.gsh.predicate.impl.MermerOrderPredicate;
 import com.sfmy.gsh.web.dto.MemberOrderDTO;
 import com.sfmy.gsh.web.dto.MemberOrderPageDTO;
@@ -29,6 +31,9 @@ public class OrderService {
 	@Resource
 	private OrderDao orderDao;
 	
+	@Resource
+	private OrderPayInfoDao orderPayInfoDao;
+	
 	public Order findByOutTradeNo(String outTradeNo) {
 		return orderDao.findByOutTradeNo(outTradeNo);
 	}
@@ -37,32 +42,18 @@ public class OrderService {
 		return orderDao.save(order);
 	}
 	
-	public boolean callBackWithHandleOrder(Order order,OrderPayInfo payInfo) {
-		boolean isHandled = false;
-		
-		if(order == null){
-			return isHandled;
-		}
-		if(payInfo == null){
-			return isHandled;
-		}
-		if(StringUtils.isBlank(payInfo.getTradeNo())){
-			return isHandled;
-		}
-		if (StringUtils.isBlank(payInfo.getOutTradeNo())) {
-			return isHandled;
-		}
-		if (payInfo.getPayType()==null) {
-			return isHandled;
+	public boolean handlePayInfo(Order order,OrderPayInfo payInfo) {
+		if (order.getPayInfo() == null) {
+			orderPayInfoDao.save(payInfo);
+			
+			order.setPayInfo(payInfo);
+			order.setStatus(OrderStatus.PAY_SUCCESS_WAIT_SEND);
+			orderDao.save(order);
+		}else{
+			order.setStatus(OrderStatus.PAY_SUCCESS_WAIT_SEND);
+			orderDao.save(order);
 		}
 		
-		//过滤重复的通知结果数据
-		if (order.getPayInfo() != null) {
-			return true;
-		}
-		
-		order.setPayInfo(payInfo);
-		orderDao.save(order);
 		return true;
 	}
 
@@ -114,5 +105,10 @@ public class OrderService {
 		
 		dto.setNames(names);
 		dto.setQuantitys(quantitys);
+	}
+
+	public Order findByOutTradeNoAndUserId(Integer userId, String outTradeNo) {
+		Order order = orderDao.findByOutTradeNoAndUser(outTradeNo,new User(userId));
+		return order;
 	}
 }

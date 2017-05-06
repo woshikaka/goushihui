@@ -93,6 +93,7 @@ public class OrderController extends BaseSpringController {
 			item.setTotalPrice(MyArith.mul(orderInfo.getSubCnt().doubleValue(),product.getPrice()));
 			item.setUnitPrice(product.getPrice());
 			item.setOrder(order);
+			items.add(item);
 		}
 
 		Address address = addressService.findAddress(MySecurityUtils.getCurrUserId(), orderRequestDTO.getAddressId());
@@ -113,7 +114,7 @@ public class OrderController extends BaseSpringController {
 		order.setCreateTime(new Date());
 		orderService.addOrder(order);
 
-		return success();
+		return success(order.getOutTradeNo());
 	}
 
 }

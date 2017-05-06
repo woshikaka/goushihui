@@ -41,13 +41,6 @@ public class Order {
 	@JoinColumn(name="pay_info_id")
 	private OrderPayInfo payInfo;
 	
-//	/**
-//	 * 收货地址
-//	 */
-//	@OneToOne
-//	@JoinColumn(name="address_id",nullable=false)
-//	private Address address;
-	
 	@Column(nullable=false)
 	private String contact;
 	

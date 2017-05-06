@@ -163,9 +163,12 @@
 			var orderRequestDTO = {};
 			orderRequestDTO.addressId = $scope.selectedAddressId;
 			orderRequestDTO.orderInfos = $scope.carProductList;
-			/* $window.open("${pageContext.request.contextPath}/p/sar", '_blank'); */
 			$http.post("${pageContext.request.contextPath}/p/addOrder",angular.toJson(orderRequestDTO)).success(function (response) {
-				
+				if(response.code == 1){
+					$window.open("${pageContext.request.contextPath}/p/sar?outTradeNo="+response.data, '_blank');
+				}else{
+					layer.alert(response.message, {icon: 2});
+				}
 			});
 		}
 	});
