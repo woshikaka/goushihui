@@ -41,6 +41,15 @@ public class Order {
 	@JoinColumn(name="pay_info_id")
 	private OrderPayInfo payInfo;
 	
+	/**
+	 * 商品名称
+	 */
+	@Column(nullable=false)
+	private String subject;
+	
+	/**
+	 * 收货人
+	 */
 	@Column(nullable=false)
 	private String contact;
 	
@@ -49,6 +58,8 @@ public class Order {
 	
 	@Column(name="receive_address",nullable=false)
 	private String receiveAddress;
+	
+	private String express;
 	
 	/**
 	 * 订单状态
@@ -169,5 +180,21 @@ public class Order {
 
 	public void setPayInfo(OrderPayInfo payInfo) {
 		this.payInfo = payInfo;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getExpress() {
+		return express;
+	}
+
+	public void setExpress(String express) {
+		this.express = express;
 	}
 }

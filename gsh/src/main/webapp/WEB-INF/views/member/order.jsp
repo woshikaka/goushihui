@@ -124,7 +124,7 @@ app.controller('orderCtrl', function($scope, $http,$location,$window) {
 					pageRequest();
 				}
 			}
-		});
+		}); 
     });
 	
 	function pageRequest(){

@@ -42,7 +42,6 @@ public class AlipayController {
 	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="yb",method=RequestMethod.POST)
-	@ResponseBody
 	public String notifyUrl(HttpServletRequest request) throws UnsupportedEncodingException {
 		Map<String,String> params = new HashMap<String,String>();
 		Enumeration<String> parameterNames = request.getParameterNames();
@@ -84,7 +83,8 @@ public class AlipayController {
 			payInfo.setTradeNo(request.getParameter("trade_no"));
 			
 			if(orderService.handlePayInfo(order, payInfo)){
-				return "success";
+				request.setAttribute("totalAmount",totalAmount);
+				return "pay/paySuccess";
 			}
 		}
 		return "error";
@@ -95,7 +95,6 @@ public class AlipayController {
 	 * @throws UnsupportedEncodingException 
 	 */
 	@RequestMapping(value="tb",method=RequestMethod.GET)
-	@ResponseBody
 	public String returnUrl(HttpServletRequest request) throws UnsupportedEncodingException {
 		Map<String,String> params = new HashMap<String,String>();
 		Enumeration<String> parameterNames = request.getParameterNames();
@@ -138,7 +137,8 @@ public class AlipayController {
 			payInfo.setTradeNo(request.getParameter("trade_no"));
 			
 			if(orderService.handlePayInfo(order, payInfo)){
-				return "success";
+				request.setAttribute("totalAmount",totalAmount);
+				return "pay/paySuccess";
 			}
 		}
 		return "error";

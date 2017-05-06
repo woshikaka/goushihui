@@ -46,6 +46,12 @@
 						<li><a href="${pageContext.request.contextPath}/a/top/topList/3">粮油调料top8</a></li>
 					</ul>
 				</li>
+				<li>
+					<a href="#" name="oneLevel">订单管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
+					<ul class="nav nav-second-level">
+						<li><a href="${pageContext.request.contextPath}/a/order/listUI">订单列表</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>

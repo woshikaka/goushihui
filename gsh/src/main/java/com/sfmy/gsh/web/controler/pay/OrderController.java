@@ -112,6 +112,7 @@ public class OrderController extends BaseSpringController {
 		order.setTotalPrice(totalPrice);
 		order.setItems(items);
 		order.setCreateTime(new Date());
+		order.setSubject(MyStringUtils.buildSubject(order));
 		orderService.addOrder(order);
 
 		return success(order.getOutTradeNo());
