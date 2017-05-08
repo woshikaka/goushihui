@@ -3,6 +3,7 @@ package com.sfmy.gsh.web.controler.admin;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -36,7 +37,13 @@ public class OrderAdminControler extends BaseSpringController{
 	@ResponseBody
 	public JsonResult<AdminOrderPageDTO> page(@RequestBody AdminOrderPageParamVO requestParam) { 
 		AdminOrderPageDTO dto = orderAdminService.pageList(requestParam);
-		
 		return success(dto);
+	}
+	
+	@RequestMapping(value = "/sendGoods/{orderId}")
+	@ResponseBody
+	public JsonResult<Object> sendGoods(@PathVariable Integer orderId) {
+		orderAdminService.sendGoods(orderId);
+		return success();
 	}
 }

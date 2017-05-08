@@ -1,6 +1,7 @@
 package com.sfmy.gsh.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
 import com.sfmy.gsh.constant.AppConstant;
+import com.sfmy.gsh.constant.OrderStatus;
 import com.sfmy.gsh.dao.OrderDao;
 import com.sfmy.gsh.dao.OrderPayInfoDao;
 import com.sfmy.gsh.entity.Order;
@@ -47,6 +49,7 @@ public class OrderAdminService {
 		if (CollectionUtils.isNotEmpty(bos)) {
 			for (Order bo : bos) {
 				AdminOrderDTO orderDTO = new AdminOrderDTO();
+				orderDTO.setId(bo.getId());
 				orderDTO.setContact(bo.getContact());
 				orderDTO.setMobile(bo.getMobile());
 				orderDTO.setOutTradeNo(bo.getOutTradeNo());
@@ -61,5 +64,9 @@ public class OrderAdminService {
 		}
 		dto.setOrders(orders);
 		return dto;
+	}
+
+	public void sendGoods(Integer orderId) {
+		orderDao.updateStatus(OrderStatus.PAY_SUCCESS_ALREADY_SEND,orderId);
 	}
 }

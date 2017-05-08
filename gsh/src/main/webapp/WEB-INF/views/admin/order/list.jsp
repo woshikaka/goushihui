@@ -22,11 +22,11 @@
 			<%-- <%@ include file="/WEB-INF/views/admin/public/alertInfo.jsp"%> --%>
 			<div class="row">
 				<div class="col-md-12">
-					<form id="searchForm" class="form-inline" action="${pageContext.request.contextPath}/a/order/page" method="post" onsubmit="disabledButton()">
+					<form id="searchForm" class="form-inline">
 						<div class="form-group">
-							<input class="form-control" value="${requestParam.outTradeNo}" type="text" name="outTradeNo" placeholder="订单号"/>
+							<input class="form-control" type="text" ng-model="pageParam.outTradeNo" placeholder="订单号"/>
 							<label style="margin-left:20px">订单状态</label>
-							<select class="form-control" name="status" id="isShangJiaSelect">
+							<select class="form-control" ng-model="pageParam.status">
 								<option value="">请选择</option>
 								<option value="WAIT_PAY">待付款</option>
 								<option value="PAY_SUCCESS_WAIT_SEND">付款成功等待发货</option>
@@ -34,7 +34,7 @@
 								<option value="END">交易结束</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-primary glyphicon glyphicon-search" id="search"></button>
+						<button type="submit" class="btn btn-primary glyphicon glyphicon-search" id="search" ng-click="pageRequest()"></button>
 					</form>
 				</div>
 			</div>
@@ -76,7 +76,9 @@
 									<td ng-bind="order.receiveAddress"></td>
 									<td ng-bind="order.status"></td>
 									<td>{{order.express==null?'无':order.express}}</td>
-									<td><a>发货</a></td>
+									<td>
+										<button ng-show="" class="layui-btn layui-btn-primary layui-btn-mini" ng-click="sendGoods(order)">发货</button>
+									</td>
 								</tr> 
 						</tbody>
 					</table>
@@ -99,31 +101,47 @@ app.controller('orderListCtrl', function($scope, $http,$location,$window) {
 	
 	$scope.pageParam={"currPageNo":1};
 	$scope.totalPages=0;
-	$http.post("${pageContext.request.contextPath}/a/order/page",angular.toJson($scope.pageParam)).success(function(response) {
-		$scope.orders = response.data.orders;
-		$scope.totalPages = response.data.totalPages;
-			
-		laypage({
-		    cont: 'paging',
-		    pages: $scope.totalPages,
-		    skin: '#1E9FFF',
-			skip: false,
-			jump: function(obj,first){
-				if(!first){
-					$scope.pageParam.currPageNo=obj.curr;
-					pageRequest();
-				}
-			}
-		});
-    });
 	
-	function pageRequest(){
+	page();
+	
+	$scope.pageRequest = function(){
+		$scope.pageParam.currPageNo=1;
+		page();
+	}
+	
+	function page(){
 		$http.post("${pageContext.request.contextPath}/a/order/page",angular.toJson($scope.pageParam)).success(function(response) {
 			$scope.orders = response.data.orders;
 			$scope.totalPages = response.data.totalPages;
+			
+			laypage({
+			    cont: 'paging',
+			    curr: $scope.pageParam.currPageNo,
+			    pages: $scope.totalPages,
+			    skin: '#1E9FFF',
+				skip: false,
+				jump: function(obj,first){
+					if(!first){
+						$scope.pageParam.currPageNo=obj.curr;
+						page();
+					}
+				}
+			});
 	    });
 	}
 	
+	$scope.sendGoods = function(order){
+		layer.confirm(order.subject+'<br/>确定已经发货？', {
+		  btn: ['是','否']
+		}, function(){
+			$http.get("${pageContext.request.contextPath}/a/order/sendGoods/"+order.id,null).success(function(response) {
+				page();
+			  	layer.msg('操作成功', {icon: 1});
+		    });
+		}, function(){
+			
+		});
+	}
 });
 </script>
 </html>

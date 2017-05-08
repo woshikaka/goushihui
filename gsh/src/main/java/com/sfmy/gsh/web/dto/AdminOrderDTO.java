@@ -2,6 +2,7 @@ package com.sfmy.gsh.web.dto;
 
 
 public class AdminOrderDTO {
+	private Integer id;
 	private String outTradeNo;
 	private String userName;
 	private String subject;
@@ -64,5 +65,11 @@ public class AdminOrderDTO {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Integer getId() {
+		return id;
+	}
+	public void setId(Integer id) {
+		this.id = id;
 	}
 }

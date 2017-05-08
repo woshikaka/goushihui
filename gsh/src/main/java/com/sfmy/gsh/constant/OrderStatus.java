@@ -14,7 +14,7 @@ public enum OrderStatus {
 	/**
 	 * 付款成功已经发货
 	 */
-	PAY_SUCCESS_ALREADY_SEND("付款成功已经发货"),
+	PAY_SUCCESS_ALREADY_SEND("已经发货"),
 	
 	/**
 	 * 交易结束
