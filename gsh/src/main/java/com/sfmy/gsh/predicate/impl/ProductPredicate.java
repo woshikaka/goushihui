@@ -2,7 +2,6 @@ package com.sfmy.gsh.predicate.impl;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -13,23 +12,29 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.sfmy.gsh.entity.Product;
+import com.sfmy.gsh.web.vo.ProductPageParamVO;
 
 public class ProductPredicate implements Specification<Product>{
 
-	private Map<String,Object> requestParam;
+	private ProductPageParamVO pageParamVO;
 	
-	public ProductPredicate(Map<String, Object> requestParam) {
-		this.requestParam = requestParam;
+	public ProductPredicate(ProductPageParamVO pageParamVO) {
+		super();
+		this.pageParamVO = pageParamVO;
 	}
 
 	@Override
 	public Predicate toPredicate(Root<Product> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		List<Predicate> predicates = new ArrayList<Predicate>();
-		if(StringUtils.isNotBlank((String)requestParam.get("name"))){
-			predicates.add(cb.like(root.get("name"),"%"+requestParam.get("name")+"%"));
+		
+		String name = pageParamVO.getName();
+		if(StringUtils.isNotBlank(name)){
+			predicates.add(cb.like(root.get("name"),"%"+name+"%"));
 		}
-		if(StringUtils.isNotBlank((String)requestParam.get("isShangJia"))){
-			predicates.add(cb.equal(root.get("isShangJia"),Boolean.valueOf((String)requestParam.get("isShangJia"))));
+		
+		String isShangJia = pageParamVO.getIsShangJia();
+		if(StringUtils.isNotBlank(isShangJia)){
+			predicates.add(cb.equal(root.get("isShangJia"),Boolean.valueOf(isShangJia)));
 		}
 		return cb.and(predicates.toArray(new Predicate[predicates.size()]));
    	}

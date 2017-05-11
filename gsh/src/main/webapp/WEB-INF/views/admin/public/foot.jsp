@@ -48,6 +48,6 @@
 					</ul>
 				</li>
 			</ul> -->
-			<div class="bottom">© 2016 Taobao.com 版权所有 网络文化经营许可证：文网文[2010]040号|增值电信业务</div>
+			<div class="bottom">福建金兴元进出口贸易有限公司 版权所有 网站备案号：闽ICP备17008793号</div>
 		</div>
 	</section>

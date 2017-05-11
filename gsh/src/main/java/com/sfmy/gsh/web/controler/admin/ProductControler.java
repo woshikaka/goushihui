@@ -1,25 +1,20 @@
 package com.sfmy.gsh.web.controler.admin;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.sfmy.gsh.bean.PageBean;
 import com.sfmy.gsh.entity.Product;
 import com.sfmy.gsh.entity.ProductSecType;
 import com.sfmy.gsh.entity.ProductThirdType;
@@ -30,11 +25,15 @@ import com.sfmy.gsh.utils.MyDateFormatUtils;
 import com.sfmy.gsh.utils.MyOssUtils;
 import com.sfmy.gsh.utils.MyRegexUtils;
 import com.sfmy.gsh.utils.MyStringUtils;
+import com.sfmy.gsh.web.base.JsonResult;
+import com.sfmy.gsh.web.controler.BaseSpringController;
+import com.sfmy.gsh.web.dto.AdminProductPageDTO;
 import com.sfmy.gsh.web.vo.AddProductVO;
+import com.sfmy.gsh.web.vo.ProductPageParamVO;
 
 @Controller
 @RequestMapping(value = "/a/product")
-public class ProductControler {
+public class ProductControler extends BaseSpringController{
 	@Resource
 	private ProductService productService;
 
@@ -42,43 +41,33 @@ public class ProductControler {
 	private CacheUtils cacheUtils;
 	
 	@RequestMapping(value = "/listUI")
-	public String listUI(@RequestParam Map<String,Object> requestParam,HttpServletRequest request,Model model) { 
-		String pageNumber = (String) requestParam.get("pageNumber");
-		if(StringUtils.isBlank(pageNumber)){	
-			requestParam.put("pageNumber",1);
-		}
-		Page<Product> page = productService.pageList(requestParam);
-		
-		PageBean<Product> pageBean = new PageBean<Product>(page.getContent(),page.getSize(),(int) page.getTotalElements());
-		model.addAttribute("pageBean", pageBean);
-		model.addAttribute("requestParam",requestParam);
-		
-		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
-		request.setAttribute("productTypes", productTypes);
-
-		if(CollectionUtils.isNotEmpty(productTypes)){
-			List<ProductSecType> secTypes = new ArrayList<ProductSecType>();
-			for (ProductType productType : productTypes) {
-				secTypes.addAll(productType.getProductSecTypes());
-			}
-			request.setAttribute("secTypes", secTypes);
-			
-			List<ProductThirdType> thirdTypes = new ArrayList<ProductThirdType>();
-			for (ProductSecType productSecType : secTypes) {
-				thirdTypes.addAll(productSecType.getThirdTypes());
-			}
-			request.setAttribute("thirdTypes", thirdTypes);
-		}
-		
+	public String listUI() { 
 		return "admin/product/list";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/page")
+	public JsonResult<AdminProductPageDTO> page(@RequestBody ProductPageParamVO pageParamVO) { 
+		AdminProductPageDTO result = productService.pageList(pageParamVO);
 		
-//		int currentIndex = page.getNumber() + 1;
-//	    int beginIndex = Math.max(1, currentIndex - 5);i
-//	    int endIndex = Math.min(beginIndex + 10, page.getTotalPages());
-//		model.addAttribute("pageBean", page);
-//	    model.addAttribute("beginIndex", beginIndex);
-//	    model.addAttribute("endIndex", endIndex);
-//	    model.addAttribute("currentIndex", currentIndex);
+//		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
+//		request.setAttribute("productTypes", productTypes);
+//		
+//		if(CollectionUtils.isNotEmpty(productTypes)){
+//			List<ProductSecType> secTypes = new ArrayList<ProductSecType>();
+//			for (ProductType productType : productTypes) {
+//				secTypes.addAll(productType.getProductSecTypes());
+//			}
+//			request.setAttribute("secTypes", secTypes);
+//			
+//			List<ProductThirdType> thirdTypes = new ArrayList<ProductThirdType>();
+//			for (ProductSecType productSecType : secTypes) {
+//				thirdTypes.addAll(productSecType.getThirdTypes());
+//			}
+//			request.setAttribute("thirdTypes", thirdTypes);
+//		}
+		
+		return success(result);
 	}
 
 	@RequestMapping(value = "/addUI")
@@ -103,7 +92,6 @@ public class ProductControler {
 				List<ProductSecType> productSecTypes = productType.getProductSecTypes();
 				sb.append("<option value=''>二级分类</option>");
 				for (ProductSecType productSecType : productSecTypes) {
-					// <option value="${bean.id}">${bean.name}</option>
 					sb.append("<option value='" + productSecType.getId() + "'>" + productSecType.getName() + "</option>");
 				}
 			}
@@ -225,6 +213,28 @@ public class ProductControler {
 			return "redirect:/a/product/addUI";
 		}
 		
+		// 库存
+		String stockCountStr = productVO.getStockCount();
+		if (StringUtils.isBlank(stockCountStr)) {
+			ra.addFlashAttribute("isDangerShow", true);
+			ra.addFlashAttribute("dangerMessage", "库存不能为空！");
+			ra.addFlashAttribute("productVO", productVO);
+			return "redirect:/a/product/addUI";
+		}
+		if (!MyRegexUtils.isPositiveInteger(stockCountStr)) {
+			ra.addFlashAttribute("isDangerShow", true);
+			ra.addFlashAttribute("dangerMessage", "你输入的库存不合法！请重新输入价格");
+			ra.addFlashAttribute("productVO", productVO);
+			return "redirect:/a/product/addUI";
+		}
+		Integer stockCount = Integer.valueOf(stockCountStr);
+		if (stockCount == null || stockCount < 0 || stockCount > 10000) {
+			ra.addFlashAttribute("isDangerShow", true);
+			ra.addFlashAttribute("dangerMessage", "你输入的库存不合法！库存只能在0~1万之间");
+			ra.addFlashAttribute("productVO", productVO);
+			return "redirect:/a/product/addUI";
+		}
+		
 
 		// 验证产品图片
 		if (file == null) {
@@ -248,6 +258,7 @@ public class ProductControler {
 		product.setImage(fileKey);
 		product.setMarketPrice(marketPrice);
 		product.setPrice(price);
+		product.setStockCount(stockCount);
 		product.setIsShangJia(productVO.getIsShangJia());
 		product.setFirstType(new ProductType(productVO.getFirstTypeId()));
 		product.setSecType(new ProductSecType(productVO.getSecTypeId()));
@@ -260,20 +271,20 @@ public class ProductControler {
 		return "redirect:/a/product/addUI";
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/batchShangJia")
-	public String batchShangJia(@RequestParam("productIds")List<Integer> productIds,HttpServletRequest request,RedirectAttributes ra) {
+	public JsonResult<Object> batchShangJia(@RequestParam("productIds")List<Integer> productIds) {
 		productService.batchShangJia(productIds);
-		ra.addFlashAttribute("isSuccessShow", true);
-		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品批量上架成功^_^");
-		return "redirect:/a/product/listUI";
+		return success();
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/batchXiaJia")
-	public String batchXiaJia(@RequestParam("productIds")List<Integer> productIds,HttpServletRequest request,RedirectAttributes ra) {
+	public JsonResult<Object> batchXiaJia(@RequestParam("productIds")List<Integer> productIds) {
 		productService.batchXiaJia(productIds);
-		ra.addFlashAttribute("isSuccessShow", true);
-		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品批量下架成功^_^");
-		return "redirect:/a/product/listUI";
+//		ra.addFlashAttribute("isSuccessShow", true);
+//		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品批量下架成功^_^");
+		return success();
 	}
 	
 	@ResponseBody

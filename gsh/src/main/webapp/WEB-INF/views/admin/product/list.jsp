@@ -13,34 +13,33 @@
 	    overflow-y: auto;
 	}
 </style>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
 </head>
-<body>
+<body ng-app="productListApp" ng-controller="productListCtrl">
 	<div id="wrapper">
 	<jsp:include page="/WEB-INF/views/admin/public/nav.jsp"/>
 		<div id="page-wrapper">
 			<%@ include file="/WEB-INF/views/admin/public/alertInfo.jsp"%>
 			<div class="row">
 				<div class="col-md-12">
-					<form id="searchForm" class="form-inline" action="${pageContext.request.contextPath}//a/product/listUI" method="post" onsubmit="disabledButton()">
+					<form id="searchForm" class="form-inline">
 						<div class="form-group">
-							<input class="form-control" value="${requestParam.name}" type="text" name="name" placeholder="产品名称"/>
-							<select class="form-control" name="isShangJia" id="isShangJiaSelect">
-								<option value="">是否上架</option>
+							<input class="form-control" ng-model="pageParam.name" type="text" name="name" placeholder="产品名称"/>
+							<label style="margin-left:20px">是否上架</label>
+							<select class="form-control" ng-model="pageParam.isShangJia">
+								<option value="">请选择</option>
 								<option value="true">上架</option>
 								<option value="false">下架</option>
 							</select>
 						</div>
-						<button type="submit" class="btn btn-primary glyphicon glyphicon-search" id="search"></button>
+						<button class="btn btn-primary glyphicon glyphicon-search" id="search" ng-click="pageRequest()"></button>
 					</form>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12  btn-group btn-group-sm">
-					<button type="button" class="btn btn-default" onclick="batchShangJia()">批量上架</button>
-					<button type="button" class="btn btn-default" onclick="batchXiaJia()">批量下架</button>
-					<%-- <form action="${pageContext.request.contextPath}/a/product/batchShangJia" id="batchShangJiaForm" method="post">
-						<input id="batchShangJiaFormInput" type="hidden" name="productIds" value="">
-					</form> --%>
+					<button type="button" class="btn btn-default" ng-click="shangJiaOrXiajia(1)">批量上架</button>
+					<button type="button" class="btn btn-default" ng-click="shangJiaOrXiajia(0)">批量下架</button>
 				</div>
 				<form action="${pageContext.request.contextPath}/a/product/batchShangJia" id="batchShangJiaForm" method="post">
 					<input id="batchShangJiaFormInput" type="hidden" name="productIds" value="">
@@ -67,32 +66,25 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${pageBean.recordList}" var="bean">
-								<tr>
-									<td><input type="checkbox" name="productCheckbox" value="${bean.id}"></td>
-									<td>${bean.name}</td>
-									<td><img src="/upload${bean.image}" width="50"></td>
-									<td>${bean.firstType.name}<span class="glyphicon glyphicon-chevron-right"></span>${bean.secType.name}<span class="glyphicon glyphicon-chevron-right">${bean.thirdType.name}</td>
-									<td>${bean.price}</td>
-									<td>${bean.marketPrice}</td>
-									<td>${bean.stockCount}</td>
-									<td>${bean.sellCount}</td>
-									<td>
-										<c:choose>
-											<c:when test="${bean.isShangJia}">
-												<span class="label label-success">上架</span>
-											</c:when>
-											<c:otherwise>
-												<span class="label label-default">下架</span>
-											</c:otherwise>
-										</c:choose>
-									</td>
-									<td><a href="javascript:void(0)" onclick="modifyProductInfo(${bean.id})">修改</a></td>
-								</tr> 
-							</c:forEach>
+							<tr ng-repeat="bean in products">
+								<td><input type="checkbox" ng-click="bean.isSelected = !bean.isSelected"></td>
+								<td ng-bind="bean.name"></td>
+								<td><img ng-src="{{bean.image}}" width="50"></td>
+								<td>{{bean.firstTypeName}}<span class="glyphicon glyphicon-chevron-right"></span>{{bean.secTypeName}}<span class="glyphicon glyphicon-chevron-right">{{bean.thirdTypeName}}</td>
+								<td ng-bind="bean.price"></td>
+								<td ng-bind="bean.marketPrice"></td>
+								<td ng-bind="bean.stockCount"></td>
+								<td ng-bind="bean.sellCount"></td>
+								<td>
+									<span ng-show="bean.isShangJia" class="label label-success">上架</span>
+									<span ng-show="!bean.isShangJia" class="label label-default">下架</span>
+								</td>
+								<td><a href="javascript:void(0)" >修改</a></td>
+							</tr> 
 						</tbody>
 					</table>
-					<%@ include file="/WEB-INF/views/admin/public/paging.jsp" %>
+					<div id="paging"></div>
+					<div>共{{totalPages}}页，总记录{{totalElements}}</div>
 				</div>
 			</div>
 		</div>
@@ -122,25 +114,25 @@
 					<div class="col-sm-2">
 						<select class="form-control" name="firstType.id" id="firstTypeChosen">
 								<option value="">一级分类</option>
-								<c:forEach items="${productTypes}" var="bean">
+								<%-- <c:forEach items="${productTypes}" var="bean">
 									<option value="${bean.id}">${bean.name}</option>
-								</c:forEach>
+								</c:forEach> --%>
 						</select>
 					</div>
 					<div class="col-sm-2">
 						<select class="form-control" name="secType.id" id="secTypeChosen">
 								<option value="">二级分类</option>
-								<c:forEach items="${secTypes}" var="bean">
+								<%-- <c:forEach items="${secTypes}" var="bean">
 									<option value="${bean.id}">${bean.name}</option>
-								</c:forEach>
+								</c:forEach> --%>
 						</select>
 					</div>
 					<div class="col-sm-2">
 						<select class="form-control" name="thirdType.id" id="thirdTypeChosen">
 								<option value="">三级分类</option>
-								<c:forEach items="${thirdTypes}" var="bean">
+								<%-- <c:forEach items="${thirdTypes}" var="bean">
 									<option value="${bean.id}">${bean.name}</option>
-								</c:forEach>
+								</c:forEach> --%>
 						</select>
 					</div>
 				</div>
@@ -178,24 +170,88 @@
 				</div>
 			</form>
 	      </div>
-	      <!-- <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-	        <button type="button" class="btn btn-primary">确认修改</button>
-	      </div> -->
 	    </div>
 	  </div>
 	</div>
 </body>
-</html>
+<script src="${pageContext.request.contextPath}/resources/js/angular1.4.6.min.js"></script>
+<script src="${pageContext.request.contextPath}/resources/layui/lay/dest/layui.all.js"></script>
 <script src="${pageContext.request.contextPath}/resources/ckEditor/ckeditor.js"></script>
 <script>
+	var app = angular.module('productListApp', []);
+	app.controller('productListCtrl', function($scope, $http,$location,$window) {
+		var laypage = layui.laypage;
+		var layer = layui.layer;
+		$scope.pageParam={"currPageNo":1};
+		$scope.totalPages=0;
+		$scope.totalElements=0;
+		
+		page();
+		
+		$scope.pageRequest = function(){
+			$scope.pageParam.currPageNo=1;
+			page();
+		}
+		
+		function page(){
+			layer.load(1, {shade: [0.6,'#676767']});
+			$http.post("${pageContext.request.contextPath}/a/product/page",angular.toJson($scope.pageParam)).success(function(response) {
+				$scope.products = response.data.products;
+				$scope.totalPages = response.data.totalPages;
+				$scope.totalElements =  response.data.totalElements;
+				
+				laypage({
+				    cont: 'paging',
+				    curr: $scope.pageParam.currPageNo,
+				    pages: $scope.totalPages,
+				    skin: '#1E9FFF',
+					skip: false,
+					jump: function(obj,first){
+						if(!first){
+							$scope.pageParam.currPageNo=obj.curr;
+							page();
+						}
+					}
+				});
+				layer.closeAll('loading');
+		    });
+		}
+		
+		//批量上架
+		$scope.shangJiaOrXiajia = function(type){
+			var selectedIds = new Array();
+			angular.forEach($scope.products,function(item, index){
+				if(item.isSelected){
+					selectedIds.push(item.id);
+				}
+			})
+			
+			if(selectedIds.length==0){
+				layer.msg('请先选中一个或多个产品！', {offset: 't'});
+				return;
+			}
+			
+			layer.load(1, {shade: [0.6,'#676767']});
+			if(type==0){
+				$http.get("${pageContext.request.contextPath}/a/product/batchXiaJia?productIds="+selectedIds.join(','),null).success(function(response) {
+					page();
+					layer.msg('下架成功！', {icon: 1,offset: 't'});
+			    });
+			}else if(type==1){
+				$http.get("${pageContext.request.contextPath}/a/product/batchShangJia?productIds="+selectedIds.join(','),null).success(function(response) {
+					page();
+					layer.msg('上架成功！', {icon: 1,offset: 't'});
+			    });
+			}
+		}
+	});
+
+	//以下是jQuery代码
 	$(function(){
 		CKEDITOR.replace( 'editor1' );
 		CKEDITOR.editorConfig = function( config ) {
 			config.language = 'zh-cn';
 		};
-		//下拉框初始化		
-		$("#isShangJiaSelect").val('${requestParam.isShangJia}');
 		
 		$("#firstTypeChosen").change(function() {
 			var firTypeId = $(this).val();
@@ -227,37 +283,6 @@
 			});
 		});
 	})
-
-	function batchShangJia(){
-		var ids = new Array();
-		$("input[name='productCheckbox']:checked").each( function () {
-			ids.push($(this).val());
-		});
-		if(ids.length == 0){
-			swal("请先选择产品！", "", "error")
-			return;
-		}
-		$("#batchShangJiaFormInput").val(ids.join(","));
-    	$("#batchShangJiaForm").submit(); 
-    	
-    	waitingDialog.show('处理中...', {dialogSize: 'sm'});
-	}
-	
-	function batchXiaJia(){
-		var ids = new Array();
-		$("input[name='productCheckbox']:checked").each( function () {
-			ids.push($(this).val());
-		});
-		if(ids.length == 0){
-			swal("请先选择产品！", "", "error")
-			return;
-		}
-		$("#batchXiaJiaFormInput").val(ids.join(","));
-    	$("#batchXiaJiaForm").submit(); 
-    	
-    	waitingDialog.show('处理中...', {dialogSize: 'sm'});
-	}
-	
 	function modifyProductInfo(productId){
     	$.ajax({
 			type : "POST",
@@ -356,3 +381,4 @@
 		return true;
 	}
 </script>
+</html>

@@ -3,9 +3,8 @@
 <html lang="zh-CN">
 <head>
 <title>购食汇管理平台</title>
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
 <script src="${pageContext.request.contextPath}/resources/ckEditor/ckeditor.js"></script>
-<%-- <script src="${pageContext.request.contextPath}/resources/ckEditor/sample.js"></script>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ckEditor/samples.css"> --%>
 <%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 </head>
 <body>
@@ -62,6 +61,12 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-2 control-label">库存<i style="color: red">*</i></label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" name="stockCount" value="${productVO.stockCount}"/>
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="col-sm-2 control-label">是否上架<i style="color: red">*</i></label>
 					<div class="col-sm-6">
 						<label class="radio-inline"> <input type="radio" name="isShangJia" value="true"> 上架
@@ -89,79 +94,86 @@
 	</div>
 </body>
 </html>
+<script src="${pageContext.request.contextPath}/resources/layui/lay/dest/layui.all.js"></script>
 <script>
 	function addProductPre(){
 		var name = $("input[name='name']").val();
 		if(!name.trim()){
 			$("input[name='name']").focus();
-			swal("产品名称为空！", "", "error")
+			layer.msg('产品名称不能为空！');
 			return false;
 		}
 		
 		var firstType = $("#firstTypeChosen").val();
 		if(!firstType.trim()){
 			$("#firstTypeChosen").focus();
-			swal("一级分类为空！", "", "error")
+			layer.msg('一级分类不能为空！');
 			return false;
 		}
 		
 		var secType = $("#secTypeChosen").val();
 		if(!secType.trim()){
 			$("#secTypeChosen").focus();
-			swal("二级分类为空！", "", "error")
+			layer.msg('二级分类不能为空！');
 			return false;
 		}
 		
 		var thirdType = $("#thirdTypeChosen").val();
 		if(!thirdType.trim()){
 			$("#thirdTypeChosen").focus();
-			swal("三级分类为空！", "", "error")
+			layer.msg('三级分类不能为空！');
 			return false;
 		}
 		
 		var file = $("input[name='file']").val();
 		if(!file.trim()){
 			$("input[name='file']").focus();
-			swal("产品图片为空！", "", "error")
+			layer.msg('产品图片不能为空！');
 			return false;
 		}
 		var priceStr = $("input[name='priceStr']").val();
 		if(!priceStr.trim()){
 			$("input[name='priceStr']").focus();
-			swal("价格为空！", "", "error");
+			layer.msg('价格不能为空！');
 			return false;
 		}
 		if(priceStr.match(/^\d+$/)){ //integer
-			// do noting
+			// do nothing
 		}else if(priceStr.match(/^\d+\.\d+$/)){//float
-			// do noting
+			// do nothing
 		}else{
-			swal("价格格式不正确！", "", "error");
+			layer.msg('价格格式不正确！');
 			return false;
 		}
 		
 		var marketPriceStr = $("input[name='marketPriceStr']").val();
 		if(!marketPriceStr.trim()){
 			$("input[name='marketPriceStr']").focus();
-			swal("超市价格为空！", "", "error")
+			layer.msg('超市价格不能为空！');
 			return false;
 		}
 		if(marketPriceStr.match(/^\d+$/)){ //integer
-			// do noting
+			// do nothing
 		}else if(marketPriceStr.match(/^\d+\.\d+$/)){//float
-			// do noting
+			// do nothing
 		}else{
-			swal("超市价格格式不正确！", "", "error");
+			layer.msg('超市价格格式不正确！');
 			return false;
 		}
 		
-		//var ue = UE.getEditor('container');
-		//var description = ue.getContent();
-		//var content = CKEDITOR.instances['comment'].getData();
-		//alert(content);
-		//$("input[name='description']").val(content);
-		
-		waitingDialog.show('处理中...', {dialogSize: 'sm'});
+		var stockCount = $("input[name='stockCount']").val();
+		if(!stockCount.trim()){
+			$("input[name='stockCount']").focus();
+			layer.msg('库存不能为空！');
+			return false;
+		}
+		if(stockCount.match(/^\d+$/)){ //integer
+			// do nothing
+		}else{
+			layer.msg('库存格式不正确！');
+			return false;
+		}
+		layer.load(1, {shade: [0.6,'#676767']});
 		return true;
 	}
 	

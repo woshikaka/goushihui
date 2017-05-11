@@ -6,8 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
-import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -15,6 +15,7 @@ import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.google.common.collect.Lists;
 import com.sfmy.gsh.constant.AppConstant;
 import com.sfmy.gsh.dao.ProductDao;
 import com.sfmy.gsh.dao.ProductSecTypeDao;
@@ -26,7 +27,10 @@ import com.sfmy.gsh.entity.ProductType;
 import com.sfmy.gsh.predicate.impl.ProductPredicate;
 import com.sfmy.gsh.predicate.impl.SearchProductPredicate;
 import com.sfmy.gsh.predicate.impl.TopPredicate;
+import com.sfmy.gsh.web.dto.AdminProductDTO;
+import com.sfmy.gsh.web.dto.AdminProductPageDTO;
 import com.sfmy.gsh.web.dto.SearchProductDTO;
+import com.sfmy.gsh.web.vo.ProductPageParamVO;
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -44,10 +48,36 @@ public class ProductService {
 		productDao.save(product);
 	}
 
-	public Page<Product> pageList(Map<String,Object> requestParam) {
-		Integer pageNumber = (Integer) requestParam.get("pageNumber");
-		Page<Product> page = productDao.findAll(new ProductPredicate(requestParam), new PageRequest(pageNumber-1,AppConstant.PAGE_SIZE));
-		return page;
+	public AdminProductPageDTO pageList(ProductPageParamVO pageParamVO) {
+		AdminProductPageDTO dto = new AdminProductPageDTO();
+		List<AdminProductDTO> products = Lists.newArrayList();
+		
+		Page<Product> page = productDao.findAll(new ProductPredicate(pageParamVO), new PageRequest(pageParamVO.getCurrPageNo()-1,AppConstant.PAGE_SIZE));
+		List<Product> bos = page.getContent();
+		if (CollectionUtils.isNotEmpty(bos)) {
+			for (Product bo : bos) {
+				AdminProductDTO itemDTO = new AdminProductDTO();
+				itemDTO.setId(bo.getId());
+				itemDTO.setFirstTypeName(bo.getFirstType().getName());
+				itemDTO.setImage("/upload"+bo.getImage());
+				itemDTO.setMarketPrice(bo.getMarketPrice());
+				itemDTO.setName(bo.getName());
+				itemDTO.setPrice(bo.getPrice());
+				itemDTO.setSecTypeName(bo.getSecType().getName());
+				itemDTO.setSellCount(bo.getSellCount());
+				itemDTO.setStockCount(bo.getStockCount());
+				itemDTO.setThirdTypeName(bo.getThirdType().getName());
+				itemDTO.setIsShangJia(bo.getIsShangJia());
+				products.add(itemDTO);
+			}
+		}
+		
+		dto.setCurrPageNo(pageParamVO.getCurrPageNo());
+		dto.setPageSize(AppConstant.PAGE_SIZE);
+		dto.setTotalPages(page.getTotalPages());
+		dto.setTotalElements(page.getTotalElements());
+		dto.setProducts(products);
+		return dto;
 	}
 
 	public void batchShangJia(List<Integer> productIds) {

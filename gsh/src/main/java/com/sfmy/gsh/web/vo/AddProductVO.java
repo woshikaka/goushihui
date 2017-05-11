@@ -7,8 +7,15 @@ public class AddProductVO {
 	private Integer firstTypeId;
 	private Integer secTypeId;
 	private Integer thirdTypeId;
+	private String stockCount;
 	private Boolean isShangJia;
 	private String description;
+	public String getStockCount() {
+		return stockCount;
+	}
+	public void setStockCount(String stockCount) {
+		this.stockCount = stockCount;
+	}
 	public String getDescription() {
 		return description;
 	}

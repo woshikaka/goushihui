@@ -59,7 +59,6 @@ public class AdControler {
 
 	@RequestMapping(value = "/add")
 	public String add(@RequestParam("file") MultipartFile file, HttpServletRequest request, Ad ad, RedirectAttributes ra, Boolean isForm) throws IOException {
-		// if (isForm!=null && isForm) {
 		AdType adType = ad.getAdType();
 		if(adType==null){
 			ra.addFlashAttribute("isDangerShow", true);
@@ -112,9 +111,10 @@ public class AdControler {
 	@RequestMapping(value = "/delete")
 	public String delete(@RequestParam("adIds") List<Integer> ads, HttpServletRequest request, RedirectAttributes ra) {
 		adService.delete(ads);
-		// if(isDeleteSuccess){
-		// adService.findByIds(adIds);
-		// }
+		
+		List<Ad> showAds = adService.findShowing(AdType.ROLL);
+		cacheUtils.put("showAds", showAds);
+		
 		ra.addFlashAttribute("isSuccessShow", true);
 		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + "广告删除成功^_^");
 		return "redirect:/a/ad/adListUI";
