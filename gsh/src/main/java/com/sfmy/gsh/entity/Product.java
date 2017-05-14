@@ -10,7 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -48,8 +47,9 @@ public class Product implements Serializable{
 	/**
 	 * 商品描述
 	 */
-	@Lob
-	private String description;
+	@OneToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="product_desc_id")
+	private ProductDesc productDesc;
 
 	@Column(name = "create_time")
 	private Date createTime = new Date();
@@ -134,14 +134,6 @@ public class Product implements Serializable{
 		this.basePrice = basePrice;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -219,6 +211,14 @@ public class Product implements Serializable{
 
 	public void setIsTop(Boolean isTop) {
 		this.isTop = isTop;
+	}
+
+	public ProductDesc getProductDesc() {
+		return productDesc;
+	}
+
+	public void setProductDesc(ProductDesc productDesc) {
+		this.productDesc = productDesc;
 	}
 
 	@Override

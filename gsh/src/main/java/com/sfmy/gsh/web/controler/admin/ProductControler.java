@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sfmy.gsh.entity.Product;
+import com.sfmy.gsh.entity.ProductDesc;
 import com.sfmy.gsh.entity.ProductSecType;
 import com.sfmy.gsh.entity.ProductThirdType;
 import com.sfmy.gsh.entity.ProductType;
@@ -27,6 +29,7 @@ import com.sfmy.gsh.utils.MyRegexUtils;
 import com.sfmy.gsh.utils.MyStringUtils;
 import com.sfmy.gsh.web.base.JsonResult;
 import com.sfmy.gsh.web.controler.BaseSpringController;
+import com.sfmy.gsh.web.dto.AdminProductDTO;
 import com.sfmy.gsh.web.dto.AdminProductPageDTO;
 import com.sfmy.gsh.web.vo.AddProductVO;
 import com.sfmy.gsh.web.vo.ProductPageParamVO;
@@ -44,32 +47,11 @@ public class ProductControler extends BaseSpringController{
 	public String listUI() { 
 		return "admin/product/list";
 	}
-	
-	@ResponseBody
-	@RequestMapping(value = "/page")
-	public JsonResult<AdminProductPageDTO> page(@RequestBody ProductPageParamVO pageParamVO) { 
-		AdminProductPageDTO result = productService.pageList(pageParamVO);
-		
-//		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
-//		request.setAttribute("productTypes", productTypes);
-//		
-//		if(CollectionUtils.isNotEmpty(productTypes)){
-//			List<ProductSecType> secTypes = new ArrayList<ProductSecType>();
-//			for (ProductType productType : productTypes) {
-//				secTypes.addAll(productType.getProductSecTypes());
-//			}
-//			request.setAttribute("secTypes", secTypes);
-//			
-//			List<ProductThirdType> thirdTypes = new ArrayList<ProductThirdType>();
-//			for (ProductSecType productSecType : secTypes) {
-//				thirdTypes.addAll(productSecType.getThirdTypes());
-//			}
-//			request.setAttribute("thirdTypes", thirdTypes);
-//		}
-		
-		return success(result);
+	@RequestMapping(value = "/modifyUI")
+	public String modifyUI() { 
+		return "admin/product/modifyModal";
 	}
-
+	
 	@RequestMapping(value = "/addUI")
 	@SuppressWarnings("unchecked")
 	public String addUI(HttpServletRequest request) {
@@ -77,58 +59,14 @@ public class ProductControler extends BaseSpringController{
 		request.setAttribute("productTypes", productTypes);
 		return "admin/product/add";
 	}
-
+	
 	@ResponseBody
-	@RequestMapping(value = "/findSecTypeByFirType",produces="application/json;charset=utf-8")
-	@SuppressWarnings("unchecked")
-	public String findSecTypeByFirType(HttpServletRequest request) {
-		StringBuilder sb = new StringBuilder();
-
-		String firTypeId = request.getParameter("firTypeId");
-
-		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
-		for (ProductType productType : productTypes) {
-			if (StringUtils.equals(productType.getId() + "", firTypeId)) {
-				List<ProductSecType> productSecTypes = productType.getProductSecTypes();
-				sb.append("<option value=''>二级分类</option>");
-				for (ProductSecType productSecType : productSecTypes) {
-					sb.append("<option value='" + productSecType.getId() + "'>" + productSecType.getName() + "</option>");
-				}
-			}
-		}
-
-		return sb.toString();
+	@RequestMapping(value = "/page")
+	public JsonResult<AdminProductPageDTO> page(@RequestBody ProductPageParamVO pageParamVO) { 
+		AdminProductPageDTO result = productService.pageList(pageParamVO);
+		return success(result);
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/findThirdTypeBySecType",produces="application/json;charset=utf-8")
-	@SuppressWarnings("unchecked")
-	public String findThirdTypeBySecType(HttpServletRequest request) {
-		StringBuilder sb = new StringBuilder();
-
-		String secTypeId = request.getParameter("secTypeId");
-		
-		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
-		firFor:for (ProductType productType : productTypes) {
-			if(sb.length()>0){
-				break firFor;
-			}
-			List<ProductSecType> productSecTypes = productType.getProductSecTypes();
-			for (ProductSecType productSecType : productSecTypes) {
-				if(sb.length()>0){
-					break firFor;
-				}
-				if (StringUtils.equals(productSecType.getId() + "", secTypeId)) {
-					List<ProductThirdType> thirdTypes = productSecType.getThirdTypes();
-					sb.append("<option value=''>三级分类</option>");
-					for (ProductThirdType productThirdType : thirdTypes) {
-						sb.append("<option value='" + productThirdType.getId() + "'>" + productThirdType.getName() + "</option>");
-					}
-				}
-			}
-		}
-		return sb.toString();
-	}
 
 	@RequestMapping(value = "/addProduct")
 	public String addProduct(HttpServletRequest request, AddProductVO productVO, @RequestParam("file") MultipartFile file, RedirectAttributes ra) throws IOException {
@@ -234,7 +172,6 @@ public class ProductControler extends BaseSpringController{
 			ra.addFlashAttribute("productVO", productVO);
 			return "redirect:/a/product/addUI";
 		}
-		
 
 		// 验证产品图片
 		if (file == null) {
@@ -263,7 +200,7 @@ public class ProductControler extends BaseSpringController{
 		product.setFirstType(new ProductType(productVO.getFirstTypeId()));
 		product.setSecType(new ProductSecType(productVO.getSecTypeId()));
 		product.setThirdType(new ProductThirdType(productVO.getThirdTypeId()));
-		product.setDescription(productVO.getDescription());
+//		product.setDescription(productVO.getDescription()); TODO
 		
 		productService.addProduct(product);
 		ra.addFlashAttribute("isSuccessShow", true);
@@ -282,26 +219,20 @@ public class ProductControler extends BaseSpringController{
 	@RequestMapping(value = "/batchXiaJia")
 	public JsonResult<Object> batchXiaJia(@RequestParam("productIds")List<Integer> productIds) {
 		productService.batchXiaJia(productIds);
-//		ra.addFlashAttribute("isSuccessShow", true);
-//		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品批量下架成功^_^");
 		return success();
 	}
 	
 	@ResponseBody
-	@RequestMapping(value = "/getProductInfoById")
-	public Product getProductInfoById(Integer id) {
-		Product product = productService.findProductByIdForEager(id);
-		return product;
+	@RequestMapping(value = "/getProductInfoById/{id}")
+	public JsonResult<AdminProductDTO> getProductInfoById(@PathVariable Integer id) {
+		AdminProductDTO result = productService.findProductByIdForEager(id);
+		return success(result);
 	}
 	
+	@ResponseBody
 	@RequestMapping(value = "/updateProduct")
-	public String updateProduct(HttpServletRequest request,Product product, RedirectAttributes ra) throws IOException {
-		productService.updateProduct(product);
-		ra.addFlashAttribute("isSuccessShow", true);
-		ra.addFlashAttribute("successMessage", MyDateFormatUtils.getCurrTime() + " 产品修改成功^_^");
-		return "redirect:/a/product/listUI";
+	public JsonResult<Object> updateProduct(@RequestBody AdminProductDTO dto) throws IOException {
+		productService.updateProduct(dto);
+		return success();
 	}
-
-		
-
 }

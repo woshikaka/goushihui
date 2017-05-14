@@ -49,7 +49,7 @@
 				</div>
 				
 				<div class="form-group">
-					<label class="col-sm-2 control-label">价格<i style="color: red">*</i></label>
+					<label class="col-sm-2 control-label">销售价格<i style="color: red">*</i></label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control" value="${productVO.priceStr}" name="priceStr" />
 					</div>
@@ -75,7 +75,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-sm-2 control-label">产品描述与细节</label>
+					<label class="col-sm-2 control-label">产品描述</label>
 					<div class="col-sm-9">
 						<%-- <%@ include file="/WEB-INF/views/admin/public/ckEditor.jsp"%>
 						<input type="hidden" name="description" value=""> --%>

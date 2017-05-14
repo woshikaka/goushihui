@@ -12,10 +12,13 @@
 	    height: 500px;
 	    overflow-y: auto;
 	}
+	[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  		display: none !important;
+	}
 </style>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
 </head>
-<body ng-app="productListApp" ng-controller="productListCtrl">
+<body ng-app="productListApp" ng-controller="productListCtrl" ng-cloak>
 	<div id="wrapper">
 	<jsp:include page="/WEB-INF/views/admin/public/nav.jsp"/>
 		<div id="page-wrapper">
@@ -41,12 +44,12 @@
 					<button type="button" class="btn btn-default" ng-click="shangJiaOrXiajia(1)">批量上架</button>
 					<button type="button" class="btn btn-default" ng-click="shangJiaOrXiajia(0)">批量下架</button>
 				</div>
-				<form action="${pageContext.request.contextPath}/a/product/batchShangJia" id="batchShangJiaForm" method="post">
+				<%-- <form action="${pageContext.request.contextPath}/a/product/batchShangJia" id="batchShangJiaForm" method="post">
 					<input id="batchShangJiaFormInput" type="hidden" name="productIds" value="">
 				</form>
 				<form action="${pageContext.request.contextPath}/a/product/batchXiaJia" id="batchXiaJiaForm" method="post">
 					<input id="batchXiaJiaFormInput" type="hidden" name="productIds" value="">
-				</form>
+				</form> --%>
 			</div>
 			<div class="row">
 				<div class="col-md-12  ">
@@ -57,7 +60,7 @@
 								<th>名称</th>
 								<th>图片</th>
 								<th>产品类别</th>
-								<th>售卖价格</th>
+								<th>销售价格</th>
 								<th>超市价格</th>
 								<th>库存</th>
 								<th>累计销售量</th>
@@ -66,7 +69,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr ng-repeat="bean in products">
+							<tr ng-repeat="bean in products" ng-cloak>
 								<td><input type="checkbox" ng-click="bean.isSelected = !bean.isSelected"></td>
 								<td ng-bind="bean.name"></td>
 								<td><img ng-src="{{bean.image}}" width="50"></td>
@@ -79,7 +82,7 @@
 									<span ng-show="bean.isShangJia" class="label label-success">上架</span>
 									<span ng-show="!bean.isShangJia" class="label label-default">下架</span>
 								</td>
-								<td><a href="javascript:void(0)" >修改</a></td>
+								<td><button class="layui-btn layui-btn-primary layui-btn-mini" ng-click="openModifyModal(bean)">修改产品</button></td>
 							</tr> 
 						</tbody>
 					</table>
@@ -89,102 +92,115 @@
 			</div>
 		</div>
 	</div>
-	
-	<!--修改 Modal -->
-	<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="modifyModalLabel" aria-hidden="true">
-	  <div class="modal-dialog modal-lg">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-	        <h4 class="modal-title" id="myModalLabel">修改产品信息</h4>
-	      </div>
-	      <div class="modal-body">
-	      	<form class="form-horizontal" action="/gsh/a/product/updateProduct" method="post"  onsubmit="return updateProductPre()">
-				<input id="modifyModalProductId" type="hidden" name="id" value=""/>
-				<input id="modifyModalImage" type="hidden" name="image" value=""/>
-				<input id="modifyModalIsTop" type="hidden" name="isTop" value=""/>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">产品名称<i style="color: red">*</i></label>
-					<div class="col-sm-6">
-						<input id="modifyModalName" type="text" class="form-control" value="" name="name" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">产品类型<i style="color: red">*</i></label>
-					<div class="col-sm-2">
-						<select class="form-control" name="firstType.id" id="firstTypeChosen">
-								<option value="">一级分类</option>
-								<%-- <c:forEach items="${productTypes}" var="bean">
-									<option value="${bean.id}">${bean.name}</option>
-								</c:forEach> --%>
-						</select>
-					</div>
-					<div class="col-sm-2">
-						<select class="form-control" name="secType.id" id="secTypeChosen">
-								<option value="">二级分类</option>
-								<%-- <c:forEach items="${secTypes}" var="bean">
-									<option value="${bean.id}">${bean.name}</option>
-								</c:forEach> --%>
-						</select>
-					</div>
-					<div class="col-sm-2">
-						<select class="form-control" name="thirdType.id" id="thirdTypeChosen">
-								<option value="">三级分类</option>
-								<%-- <c:forEach items="${thirdTypes}" var="bean">
-									<option value="${bean.id}">${bean.name}</option>
-								</c:forEach> --%>
-						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">价格<i style="color: red">*</i></label>
-					<div class="col-sm-6">
-						<input id="modifyModalPrice" type="text" class="form-control" value="" name="price" />
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">超市价格<i style="color: red">*</i></label>
-					<div class="col-sm-6">
-						<input id="modifyModalMarketPrice" type="text" class="form-control" name="marketPrice" value=""/>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">是否上架<i style="color: red">*</i></label>
-					<div class="col-sm-6">
-						<label class="radio-inline"> <input id="shangjia" type="radio" name="isShangJia" value="true"> 上架
-						</label> <label class="radio-inline"> <input id="xiajia" type="radio" name="isShangJia" value="false"> 下架
-						</label>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">产品描述与细节</label>
-					<div class="col-sm-9">
-						<textarea name="description" id="editor1" rows="10" cols="80">
-			            </textarea>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary">确认修改</button>
-					</div>
-				</div>
-			</form>
-	      </div>
-	    </div>
-	  </div>
-	</div>
 </body>
+
+<div class="modal fade" id="modifyProductModel" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+				</button>
+				<h4 class="modal-title" id="myModalLabel">
+					修改产品
+				</h4>
+			</div>
+			<div class="modal-body">
+				<form class="form-horizontal">
+					<input type="hidden" name="isForm" value="true"/>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">产品名称<i style="color: red">*</i></label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" ng-model="productInfo.name" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">产品类型<i style="color: red">*</i></label>
+						<div class="col-sm-2">
+							<select class="form-control" name="firstTypeId" id="firstTypeChosen">
+									<option value="">一级分类</option>
+							</select>
+						</div>
+						<div class="col-sm-2">
+							<select class="form-control" name="secTypeId" id="secTypeChosen">
+									<option value="">二级分类</option>
+							</select>
+						</div>
+						<div class="col-sm-2">
+							<select class="form-control" name="thirdTypeId" id="thirdTypeChosen">
+									<option value="">三级分类</option>
+							</select>
+						</div>
+					</div>
+					<!-- <div class="form-group">
+						<label class="col-sm-2 control-label">产品图片<i style="color: red">*</i></label>
+						<div class="col-sm-6">
+							<input type="file" class="form-control" name="file"><i style="color:red">产品图片建议上传400*400的图片</i>
+						</div>
+					</div> -->
+					
+					<div class="form-group">
+						<label class="col-sm-2 control-label">销售价格<i style="color: red">*</i></label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" ng-model="productInfo.price" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">超市价格<i style="color: red">*</i></label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" ng-model="productInfo.marketPrice"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">库存<i style="color: red">*</i></label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" ng-model="productInfo.stockCount"/>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">是否上架<i style="color: red">*</i></label>
+						<div class="col-sm-6">
+							<label class="radio-inline"> 
+								<input type="radio" ng-model="productInfo.isShangJia" ng-value="true"> 上架
+							</label> 
+							<label class="radio-inline"> 
+								<input type="radio" ng-model="productInfo.isShangJia" ng-value="false"> 下架
+							</label>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label">产品描述</label>
+						<div class="col-sm-9">
+							<textarea class="layui-textarea layui-hide" name="content" id="productDescEditor">{{productInfo.description}}</textarea>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				<button type="button" class="btn btn-primary" ng-click="commitModify()">提交更改</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal -->
+</div>
+
 <script src="${pageContext.request.contextPath}/resources/js/angular1.4.6.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/layui/lay/dest/layui.all.js"></script>
 <script src="${pageContext.request.contextPath}/resources/ckEditor/ckeditor.js"></script>
 <script>
+	var modifyTimeTest = 0;
 	var app = angular.module('productListApp', []);
 	app.controller('productListCtrl', function($scope, $http,$location,$window) {
+		var form = layui.form;
 		var laypage = layui.laypage;
 		var layer = layui.layer;
+		var layedit = layui.layedit;
+		
 		$scope.pageParam={"currPageNo":1};
 		$scope.totalPages=0;
 		$scope.totalElements=0;
+		
+		$scope.productInfo = {};
 		
 		page();
 		
@@ -217,7 +233,7 @@
 		    });
 		}
 		
-		//批量上架
+		//批量上架或下架
 		$scope.shangJiaOrXiajia = function(type){
 			var selectedIds = new Array();
 			angular.forEach($scope.products,function(item, index){
@@ -244,14 +260,33 @@
 			    });
 			}
 		}
+		
+		//打开修改模态框
+		$scope.openModifyModal = function(bean){
+			$('#modifyProductModel').modal(); 
+			$http.get("${pageContext.request.contextPath}/a/product/getProductInfoById/"+bean.id,null).success(function(response) {
+				$scope.productInfo = response.data;
+				//创建一个编辑器
+				var productDescEditor = layedit.build('productDescEditor');
+		    });
+		}
+		
+		$scope.commitModify = function(){
+			layer.load(1, {shade: [0.6,'#676767']});
+			$http.post("${pageContext.request.contextPath}/a/product/updateProduct",angular.toJson($scope.productInfo)).success(function(response) {
+				$('#modifyProductModel').modal('hide')
+				page();
+				layer.msg('修改成功！', {icon: 1,offset: 't'});
+		    });	
+		}
 	});
 
 	//以下是jQuery代码
 	$(function(){
-		CKEDITOR.replace( 'editor1' );
+		/* CKEDITOR.replace('editor1');
 		CKEDITOR.editorConfig = function( config ) {
 			config.language = 'zh-cn';
-		};
+		}; */
 		
 		$("#firstTypeChosen").change(function() {
 			var firTypeId = $(this).val();

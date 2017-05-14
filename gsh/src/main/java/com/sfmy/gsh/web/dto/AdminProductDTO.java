@@ -4,14 +4,49 @@ public class AdminProductDTO {
 	private Integer id;
 	private String name;
 	private String image;
+	private Integer firstTypeId;
 	private String firstTypeName;
+	private Integer secTypeId;
 	private String secTypeName;
+	private Integer thirdTypeId;
 	private String thirdTypeName;
 	private Double price;
 	private Double marketPrice;
 	private Integer stockCount;
 	private Integer sellCount;
 	private Boolean isShangJia;
+	private Integer descId;
+	private String description;
+	public Integer getDescId() {
+		return descId;
+	}
+	public void setDescId(Integer descId) {
+		this.descId = descId;
+	}
+	public Integer getFirstTypeId() {
+		return firstTypeId;
+	}
+	public void setFirstTypeId(Integer firstTypeId) {
+		this.firstTypeId = firstTypeId;
+	}
+	public Integer getSecTypeId() {
+		return secTypeId;
+	}
+	public void setSecTypeId(Integer secTypeId) {
+		this.secTypeId = secTypeId;
+	}
+	public Integer getThirdTypeId() {
+		return thirdTypeId;
+	}
+	public void setThirdTypeId(Integer thirdTypeId) {
+		this.thirdTypeId = thirdTypeId;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
 	public Integer getId() {
 		return id;
 	}

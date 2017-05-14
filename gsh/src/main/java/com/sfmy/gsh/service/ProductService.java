@@ -3,11 +3,13 @@ package com.sfmy.gsh.service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,6 +23,7 @@ import com.sfmy.gsh.dao.ProductDao;
 import com.sfmy.gsh.dao.ProductSecTypeDao;
 import com.sfmy.gsh.dao.ProductTypeDao;
 import com.sfmy.gsh.entity.Product;
+import com.sfmy.gsh.entity.ProductDesc;
 import com.sfmy.gsh.entity.ProductSecType;
 import com.sfmy.gsh.entity.ProductThirdType;
 import com.sfmy.gsh.entity.ProductType;
@@ -126,6 +129,36 @@ public class ProductService {
 		productDao.save(product);
 	}
 	
+	public void updateProduct(AdminProductDTO dto) {
+		Product product = productDao.findOne(dto.getId());
+
+		//商品描述
+		String htmlDesc = dto.getDescription();
+		if (StringUtils.isNotBlank(dto.getDescription())) {
+			if(product.getProductDesc() == null){
+				ProductDesc productDesc = new ProductDesc();
+				productDesc.setHtmlDesc(htmlDesc);
+				product.setProductDesc(productDesc);
+			}else{
+				ProductDesc productDesc = product.getProductDesc();
+				productDesc.setHtmlDesc(htmlDesc);
+				product.setProductDesc(productDesc);
+			}
+		}
+		
+		product.setFirstType(new ProductType(dto.getFirstTypeId()));
+		product.setIsShangJia(dto.getIsShangJia());
+		product.setMarketPrice(dto.getMarketPrice());
+		product.setName(dto.getName());
+		product.setPrice(dto.getPrice());
+		product.setSecType(new ProductSecType(dto.getSecTypeId()));
+		product.setSellCount(dto.getSellCount());
+		product.setStockCount(dto.getStockCount());
+		product.setThirdType(new ProductThirdType(dto.getThirdTypeId()));
+		
+		productDao.save(product);
+	}
+	
 	public List<Product> hot5() {
 		List<Product> result = new ArrayList<Product>();
 		result = productDao.findTop5ByIsTopOrderByUpdateTimeDescSellCountDesc(true);
@@ -160,16 +193,41 @@ public class ProductService {
 		return page;
 	}
 
-	public Product findProductByIdForEager(Integer id) {
-		Product product = productDao.findById(id);
-//		Hibernate.initialize(product.getFirstType());
-//		Hibernate.initialize(product.getSecType());
-//		Hibernate.initialize(product.getThirdType());
+	public AdminProductDTO findProductByIdForEager(Integer id) {
+		Product bo = productDao.findById(id);
 		
-		product.setFirstType(new ProductType(product.getFirstType().getId()));
-		product.setSecType(new ProductSecType(product.getSecType().getId()));
-		product.setThirdType(new ProductThirdType(product.getThirdType().getId()));
-		return product;
+		AdminProductDTO dto = new AdminProductDTO();
+		if (Objects.nonNull(bo)) {
+			dto.setId(bo.getId());
+			
+			ProductDesc productDesc = bo.getProductDesc();
+			if (Objects.nonNull(productDesc)) {
+				dto.setDescription(productDesc.getHtmlDesc());
+				dto.setDescId(productDesc.getId());
+			}
+			
+			ProductType firstType = bo.getFirstType();
+			dto.setFirstTypeId(firstType.getId());
+			dto.setFirstTypeName(firstType.getName());
+			
+			ProductSecType secType = bo.getSecType();
+			dto.setSecTypeId(secType.getId());
+			dto.setSecTypeName(secType.getName());
+			
+			ProductThirdType thirdType = bo.getThirdType();
+			dto.setThirdTypeId(thirdType.getId());
+			dto.setThirdTypeName(thirdType.getName());
+			
+			dto.setIsShangJia(bo.getIsShangJia());
+			dto.setMarketPrice(bo.getMarketPrice());
+			dto.setName(bo.getName());
+			dto.setPrice(bo.getPrice());
+			
+			dto.setSellCount(bo.getSellCount());
+			dto.setStockCount(bo.getStockCount());
+			
+		}
+		return dto;
 	}
 
 }
