@@ -39,17 +39,11 @@
 					</form>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row" style="margin-top: 20px">
 				<div class="col-md-12  btn-group btn-group-sm">
 					<button type="button" class="btn btn-default" ng-click="shangJiaOrXiajia(1)">批量上架</button>
 					<button type="button" class="btn btn-default" ng-click="shangJiaOrXiajia(0)">批量下架</button>
 				</div>
-				<%-- <form action="${pageContext.request.contextPath}/a/product/batchShangJia" id="batchShangJiaForm" method="post">
-					<input id="batchShangJiaFormInput" type="hidden" name="productIds" value="">
-				</form>
-				<form action="${pageContext.request.contextPath}/a/product/batchXiaJia" id="batchXiaJiaForm" method="post">
-					<input id="batchXiaJiaFormInput" type="hidden" name="productIds" value="">
-				</form> --%>
 			</div>
 			<div class="row">
 				<div class="col-md-12  ">
@@ -93,8 +87,8 @@
 		</div>
 	</div>
 </body>
-
-<div class="modal fade" id="modifyProductModel" tabindex="-1" role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
+<!-- tabindex="-1" -->
+<div class="modal fade" id="modifyProductModel"  role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
@@ -171,8 +165,11 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label">产品描述</label>
 						<div class="col-sm-9">
-							<textarea class="layui-textarea layui-hide" name="content" id="productDescEditor">{{productInfo.description}}</textarea>
+						<textarea name="description" id="productDescEditor" rows="10" cols="80">{{productInfo.description}}</textarea>
 						</div>
+						<!-- <div class="col-sm-9">
+							<textarea class="layui-textarea layui-hide" name="content" id="productDescEditor">{{productInfo.description}}</textarea>
+						</div> -->
 					</div>
 				</form>
 			</div>
@@ -260,21 +257,32 @@
 			    });
 			}
 		}
+
 		
 		//打开修改模态框
 		$scope.openModifyModal = function(bean){
 			$('#modifyProductModel').modal(); 
 			$http.get("${pageContext.request.contextPath}/a/product/getProductInfoById/"+bean.id,null).success(function(response) {
 				$scope.productInfo = response.data;
+				
 				//创建一个编辑器
-				var productDescEditor = layedit.build('productDescEditor');
+				var editor = CKEDITOR.instances['productDescEditor'];
+			    if (editor) { editor.destroy(true); }
+				CKEDITOR.replace('productDescEditor');
+				CKEDITOR.editorConfig = function( config ) {
+					config.language = 'zh-cn';
+				};
 		    });
 		}
 		
 		$scope.commitModify = function(){
+			var productDesc = CKEDITOR.instances['productDescEditor'].getData();
+			$scope.productInfo.description=productDesc;
+			
 			layer.load(1, {shade: [0.6,'#676767']});
 			$http.post("${pageContext.request.contextPath}/a/product/updateProduct",angular.toJson($scope.productInfo)).success(function(response) {
 				$('#modifyProductModel').modal('hide')
+				$scope.productInfo = {};
 				page();
 				layer.msg('修改成功！', {icon: 1,offset: 't'});
 		    });	

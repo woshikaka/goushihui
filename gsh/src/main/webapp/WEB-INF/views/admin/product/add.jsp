@@ -182,7 +182,7 @@
 			var firTypeId = $(this).val();
 			$.ajax({
 				type : "get",
-				url : "${pageContext.request.contextPath}/a/product/findSecTypeByFirType",
+				url : "${pageContext.request.contextPath}/a/productType/findSecTypeByFirType",
 				data : {
 					"firTypeId" : firTypeId
 				},
@@ -197,7 +197,7 @@
 			var secTypeId = $(this).val();
 			$.ajax({
 				type : "get",
-				url : "${pageContext.request.contextPath}/a/product/findThirdTypeBySecType",
+				url : "${pageContext.request.contextPath}/a/productType/findThirdTypeBySecType",
 				data : {
 					"secTypeId" : secTypeId
 				},

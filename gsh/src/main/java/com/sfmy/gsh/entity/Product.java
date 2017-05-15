@@ -3,6 +3,7 @@ package com.sfmy.gsh.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -47,7 +48,7 @@ public class Product implements Serializable{
 	/**
 	 * 商品描述
 	 */
-	@OneToOne(fetch=FetchType.LAZY)
+	@OneToOne(fetch=FetchType.LAZY,cascade=CascadeType.ALL)
 	@JoinColumn(name="product_desc_id")
 	private ProductDesc productDesc;
 

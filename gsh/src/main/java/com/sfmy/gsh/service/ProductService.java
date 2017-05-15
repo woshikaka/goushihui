@@ -138,6 +138,9 @@ public class ProductService {
 			if(product.getProductDesc() == null){
 				ProductDesc productDesc = new ProductDesc();
 				productDesc.setHtmlDesc(htmlDesc);
+				
+				
+				
 				product.setProductDesc(productDesc);
 			}else{
 				ProductDesc productDesc = product.getProductDesc();

@@ -17,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sfmy.gsh.entity.Product;
-import com.sfmy.gsh.entity.ProductDesc;
 import com.sfmy.gsh.entity.ProductSecType;
 import com.sfmy.gsh.entity.ProductThirdType;
 import com.sfmy.gsh.entity.ProductType;
