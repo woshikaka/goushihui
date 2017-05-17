@@ -2,6 +2,7 @@ package com.sfmy.gsh.predicate.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -12,6 +13,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import com.sfmy.gsh.entity.Product;
+import com.sfmy.gsh.entity.ProductSecType;
+import com.sfmy.gsh.entity.ProductThirdType;
+import com.sfmy.gsh.entity.ProductType;
 import com.sfmy.gsh.web.vo.ProductPageParamVO;
 
 public class ProductPredicate implements Specification<Product>{
@@ -30,6 +34,21 @@ public class ProductPredicate implements Specification<Product>{
 		String name = pageParamVO.getName();
 		if(StringUtils.isNotBlank(name)){
 			predicates.add(cb.like(root.get("name"),"%"+name+"%"));
+		}
+
+		Integer thirdTypeId = pageParamVO.getThirdTypeId();
+		if (Objects.nonNull(thirdTypeId)) {
+			predicates.add(cb.equal(root.get("thirdType"),new ProductThirdType(thirdTypeId)));
+		}
+		
+		Integer secTypeId = pageParamVO.getSecTypeId();
+		if (Objects.nonNull(secTypeId)) {
+			predicates.add(cb.equal(root.get("secType"),new ProductSecType(secTypeId)));
+		}
+		
+		Integer firstTypeId = pageParamVO.getFirstTypeId();
+		if (Objects.nonNull(firstTypeId)) {
+			predicates.add(cb.equal(root.get("firstType"),new ProductType(firstTypeId)));
 		}
 		
 		String isShangJia = pageParamVO.getIsShangJia();

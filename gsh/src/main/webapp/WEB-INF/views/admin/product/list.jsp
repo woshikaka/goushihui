@@ -35,6 +35,18 @@
 								<option value="false">下架</option>
 							</select>
 						</div>
+						<div class="form-group">
+							<label style="margin-left:20px">产品类型</label>
+							<select class="form-control" ng-model="queryFirstType" ng-options="firstType.name for firstType in allProductTypes">
+								<option value="">一级分类</option>
+							</select>
+							<select class="form-control" ng-model="querySecType" ng-options="secType.name for secType in queryFirstType.productSecTypes">
+								<option value="">二级分类</option>
+							</select>
+							<select class="form-control" ng-model="queryThirdType" ng-options="thirdType.name for thirdType in querySecType.thirdTypes">
+								<option value="">三级分类</option>
+							</select>							
+						</div>
 						<button class="btn btn-primary glyphicon glyphicon-search" id="search" ng-click="pageRequest()"></button>
 					</form>
 				</div>
@@ -86,7 +98,6 @@
 			</div>
 		</div>
 	</div>
-</body>
 <!-- tabindex="-1" -->
 <div class="modal fade" id="modifyProductModel"  role="dialog" data-backdrop="static" aria-labelledby="myModalLabel" aria-hidden="true">
 	<div class="modal-dialog modal-lg">
@@ -110,19 +121,19 @@
 					</div>
 					<div class="form-group">
 						<label class="col-sm-2 control-label">产品类型<i style="color: red">*</i></label>
-						<div class="col-sm-2">
-							<select class="form-control" name="firstTypeId" id="firstTypeChosen">
-									<option value="">一级分类</option>
+						<div class="col-sm-2">         
+							<select class="form-control" ng-model="selectedFirstType" ng-options="firstType.name for firstType in allProductTypes">
+								<option value="">一级分类</option>
 							</select>
 						</div>
 						<div class="col-sm-2">
-							<select class="form-control" name="secTypeId" id="secTypeChosen">
-									<option value="">二级分类</option>
+							<select class="form-control" ng-model="selectedSecType" ng-options="secType.name for secType in selectedFirstType.productSecTypes">
+								<option value="">二级分类</option>
 							</select>
 						</div>
 						<div class="col-sm-2">
-							<select class="form-control" name="thirdTypeId" id="thirdTypeChosen">
-									<option value="">三级分类</option>
+							<select class="form-control" ng-model="selectedThirdType" ng-options="thirdType.name for thirdType in selectedSecType.thirdTypes">
+								<option value="">三级分类</option>
 							</select>
 						</div>
 					</div>
@@ -180,6 +191,7 @@
 		</div><!-- /.modal-content -->
 	</div><!-- /.modal -->
 </div>
+</body>
 
 <script src="${pageContext.request.contextPath}/resources/js/angular1.4.6.min.js"></script>
 <script src="${pageContext.request.contextPath}/resources/layui/lay/dest/layui.all.js"></script>
@@ -198,11 +210,20 @@
 		$scope.totalElements=0;
 		
 		$scope.productInfo = {};
+		$scope.allProductTypes = [];
+		$scope.selectedFirstType={id:0,name:""};
+		$scope.queryFirstType={id:""};
+		$scope.querySecType={id:""};
+		$scope.queryThirdType={id:""};
 		
 		page();
 		
 		$scope.pageRequest = function(){
 			$scope.pageParam.currPageNo=1;
+			$scope.pageParam.firstTypeId = $scope.queryFirstType.id;
+			$scope.pageParam.secTypeId = $scope.querySecType.id;
+			$scope.pageParam.thirdTypeId = $scope.queryThirdType.id;
+			
 			page();
 		}
 		
@@ -257,13 +278,15 @@
 			    });
 			}
 		}
-
 		
 		//打开修改模态框
 		$scope.openModifyModal = function(bean){
 			$('#modifyProductModel').modal(); 
 			$http.get("${pageContext.request.contextPath}/a/product/getProductInfoById/"+bean.id,null).success(function(response) {
 				$scope.productInfo = response.data;
+				initProducTypeSelected();
+				
+				
 				
 				//创建一个编辑器
 				var editor = CKEDITOR.instances['productDescEditor'];
@@ -275,9 +298,14 @@
 		    });
 		}
 		
+		//提交修改
 		$scope.commitModify = function(){
 			var productDesc = CKEDITOR.instances['productDescEditor'].getData();
 			$scope.productInfo.description=productDesc;
+			
+			$scope.productInfo.firstTypeId = $scope.selectedFirstType.id;
+			$scope.productInfo.secTypeId = $scope.selectedSecType.id;
+			$scope.productInfo.thirdTypeId = $scope.selectedThirdType.id;
 			
 			layer.load(1, {shade: [0.6,'#676767']});
 			$http.post("${pageContext.request.contextPath}/a/product/updateProduct",angular.toJson($scope.productInfo)).success(function(response) {
@@ -287,6 +315,43 @@
 				layer.msg('修改成功！', {icon: 1,offset: 't'});
 		    });	
 		}
+		
+		//获取全部产品类别
+		$http.get("${pageContext.request.contextPath}/a/productType/getAllType",null).success(function(response) {
+			$scope.allProductTypes = response.data;
+	    });
+		
+		function initProducTypeSelected(){
+			angular.forEach($scope.allProductTypes,function(item, index){
+				if(item.id == $scope.productInfo.firstTypeId){
+					$scope.selectedFirstType = item;
+					
+					angular.forEach(item.productSecTypes,function(item2, index){
+						if(item2.id == $scope.productInfo.secTypeId){
+							$scope.selectedSecType = item2;
+							
+							angular.forEach(item2.thirdTypes,function(item3, index){
+								if(item3.id == $scope.productInfo.thirdTypeId){
+									$scope.selectedThirdType = item3;
+								}
+							})	
+						}
+					})
+				}
+			})
+		}
+		
+		/* $scope.$watch('firstType', function(newVal) {
+	        if (newVal){
+	        	console.log($scope.firstType);
+	        	
+	        	angular.forEach($scope.allProductTypes,function(item, index){
+					if(item.id == newVal){
+						$scope.firstType = item;
+					}
+				})
+	        }
+	    }); */
 	});
 
 	//以下是jQuery代码

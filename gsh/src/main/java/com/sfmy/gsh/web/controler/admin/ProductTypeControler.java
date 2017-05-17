@@ -5,13 +5,11 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.google.common.collect.Lists;
 import com.sfmy.gsh.entity.ProductSecType;
 import com.sfmy.gsh.entity.ProductThirdType;
 import com.sfmy.gsh.entity.ProductType;
@@ -29,22 +27,29 @@ public class ProductTypeControler extends BaseSpringController{
 	@Resource
 	private CacheUtils cacheUtils;
 	
-	public JsonResult<Object> name() {
+	@ResponseBody
+	@RequestMapping("/getAllType")
+	public JsonResult<List<ProductType>> getAllType() {
 		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
-		
-		if(CollectionUtils.isNotEmpty(productTypes)){
-			List<ProductSecType> secTypes = Lists.newArrayList();
-			for (ProductType productType : productTypes) {
-				secTypes.addAll(productType.getProductSecTypes());
-			}
-			
-			List<ProductThirdType> thirdTypes = Lists.newArrayList();
-			for (ProductSecType productSecType : secTypes) {
-				thirdTypes.addAll(productSecType.getThirdTypes());
-			}
-		}
-		return success();
+		return success(productTypes);
 	}
+	
+//	public JsonResult<Object> name() {
+//		List<ProductType> productTypes = cacheUtils.get("productTypes", List.class);
+//		
+//		if(CollectionUtils.isNotEmpty(productTypes)){
+//			List<ProductSecType> secTypes = Lists.newArrayList();
+//			for (ProductType productType : productTypes) {
+//				secTypes.addAll(productType.getProductSecTypes());
+//			}
+//			
+//			List<ProductThirdType> thirdTypes = Lists.newArrayList();
+//			for (ProductSecType productSecType : secTypes) {
+//				thirdTypes.addAll(productSecType.getThirdTypes());
+//			}
+//		}
+//		return success();
+//	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/findSecTypeByFirType",produces="application/json;charset=utf-8")
