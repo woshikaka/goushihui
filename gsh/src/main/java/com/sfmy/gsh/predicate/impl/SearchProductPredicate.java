@@ -31,7 +31,8 @@ public class SearchProductPredicate implements Specification<Product>{
 		if(StringUtils.isNotBlank(dto.getKeyword())){
 //			predicates.add(cb.like(root.get("name"),"%"+dto.getKeyword()+"%"));
 //			predicates.add(cb.like(root.get("description"),"%"+dto.getKeyword()+"%"));
-			predicates.add(cb.or(cb.like(root.get("name"),"%"+dto.getKeyword()+"%"),cb.like(root.get("description"),"%"+dto.getKeyword()+"%")));
+//			predicates.add(cb.or(cb.like(root.get("name"),"%"+dto.getKeyword()+"%"),cb.like(root.get("productDesc"),"%"+dto.getKeyword()+"%")));
+			predicates.add(cb.or(cb.like(root.get("name"),"%"+dto.getKeyword()+"%")));
 		}
 		if(dto.getThirdTypeId()!=null){
 			predicates.add(cb.equal(root.get("thirdType"),new ProductThirdType(dto.getThirdTypeId())));

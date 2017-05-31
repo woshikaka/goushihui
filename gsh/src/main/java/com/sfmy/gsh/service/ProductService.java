@@ -30,9 +30,11 @@ import com.sfmy.gsh.entity.ProductType;
 import com.sfmy.gsh.predicate.impl.ProductPredicate;
 import com.sfmy.gsh.predicate.impl.SearchProductPredicate;
 import com.sfmy.gsh.predicate.impl.TopPredicate;
+import com.sfmy.gsh.utils.MyArith;
 import com.sfmy.gsh.web.dto.AdminProductDTO;
 import com.sfmy.gsh.web.dto.AdminProductPageDTO;
 import com.sfmy.gsh.web.dto.SearchProductDTO;
+import com.sfmy.gsh.web.dto.front.ProductDetailDTO;
 import com.sfmy.gsh.web.vo.ProductPageParamVO;
 
 @Service
@@ -230,6 +232,29 @@ public class ProductService {
 			dto.setStockCount(bo.getStockCount());
 			
 		}
+		return dto;
+	}
+
+	public ProductDetailDTO findProductDetailDtoById(Integer id) {
+		ProductDetailDTO dto = new ProductDetailDTO();
+		
+		Product bo = productDao.findOne(id);
+		if (Objects.nonNull(bo)) {
+			dto.setId(bo.getId());
+			dto.setMarketPrice(bo.getMarketPrice());
+			dto.setName(bo.getName());
+			dto.setPrice(bo.getPrice());
+			dto.setSellCount(bo.getSellCount());
+			dto.setStockCount(bo.getStockCount());
+			dto.setEconomy(MyArith.sub(bo.getMarketPrice(),bo.getPrice()));
+			dto.setImage("/upload"+bo.getImage());
+			dto.setIsShangJia(bo.getIsShangJia());
+			ProductDesc productDesc = bo.getProductDesc();
+			if (Objects.nonNull(productDesc)) {
+				dto.setHtmlDesc(productDesc.getHtmlDesc());
+			}
+		}
+		
 		return dto;
 	}
 
