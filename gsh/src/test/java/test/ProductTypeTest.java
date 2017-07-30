@@ -22,9 +22,50 @@ public class ProductTypeTest {
 	private ProductTypeDao productTypeDao;
 	
 	@Test
+	public void testSaveJINKOU() {
+		ProductType productType = new ProductType();
+		productType.setName("进口商品");
+		productType.setIndex(1);
+		
+		List<ProductSecType> productSecTypes = new ArrayList<ProductSecType>();
+		
+		ProductSecType secType = new ProductSecType();
+		secType.setName("进口零食");
+		List<ProductThirdType> thirdTypes = new ArrayList<ProductThirdType>();
+		thirdTypes.add(new ProductThirdType("进口饼干糕点"));
+		thirdTypes.add(new ProductThirdType("进口糖果"));
+		thirdTypes.add(new ProductThirdType("进口冲调"));
+		secType.setThirdTypes(thirdTypes);
+		productSecTypes.add(secType);
+		
+		ProductSecType secType1 = new ProductSecType();
+		secType1.setName("进口酒水饮料");
+		List<ProductThirdType> thirdTypes1 = new ArrayList<ProductThirdType>();
+		thirdTypes1.add(new ProductThirdType("进口酒水"));
+		thirdTypes1.add(new ProductThirdType("进口饮料"));
+		thirdTypes1.add(new ProductThirdType("进口奶制品"));
+		secType1.setThirdTypes(thirdTypes1);
+		productSecTypes.add(secType1);
+		
+		ProductSecType secType2 = new ProductSecType();
+		secType2.setName("进口粮油调料");
+		List<ProductThirdType> thirdTypes2 = new ArrayList<ProductThirdType>();
+		thirdTypes2.add(new ProductThirdType("进口粮油"));
+		thirdTypes2.add(new ProductThirdType("进口干货"));
+		thirdTypes2.add(new ProductThirdType("进口方便食品"));
+		secType2.setThirdTypes(thirdTypes2);
+		productSecTypes.add(secType2);
+		
+		
+		productType.setProductSecTypes(productSecTypes);
+		
+		productTypeDao.save(productType);
+	}
+	@Test
 	public void testSaveFUSHILINGSHI() {
 		ProductType productType = new ProductType();
 		productType.setName("副食零食");
+		productType.setIndex(2);
 		
 		List<ProductSecType> productSecTypes = new ArrayList<ProductSecType>();
 		
@@ -106,6 +147,7 @@ public class ProductTypeTest {
 	public void testSaveJIUSHUIYINLIAO() {
 		ProductType productType = new ProductType();
 		productType.setName("酒水饮料");
+		productType.setIndex(3);
 		
 		List<ProductSecType> productSecTypes = new ArrayList<ProductSecType>();
 		
@@ -159,6 +201,7 @@ public class ProductTypeTest {
 	public void testSaveLIANGYOUTIAOLIAO() {
 		ProductType productType = new ProductType();
 		productType.setName("粮油调料");
+		productType.setIndex(4);
 		
 		List<ProductSecType> productSecTypes = new ArrayList<ProductSecType>();
 		

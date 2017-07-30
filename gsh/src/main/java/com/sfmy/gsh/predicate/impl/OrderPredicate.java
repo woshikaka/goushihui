@@ -28,6 +28,7 @@ public class OrderPredicate implements Specification<Order>{
 	@Override
 	public Predicate toPredicate(Root<Order> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 		List<Predicate> predicates = new ArrayList<Predicate>();
+		predicates.add(cb.notEqual(root.get("status"),OrderStatus.WAIT_PAY));
 		if(StringUtils.isNotBlank(requestParam.getOutTradeNo())){
 			predicates.add(cb.like(root.get("outTradeNo"),"%"+requestParam.getOutTradeNo()+"%"));
 		}

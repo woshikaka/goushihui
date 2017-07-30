@@ -89,9 +89,9 @@ public class CarController {
 	 * 把商品放入购物车
 	 */
 	@RequestMapping("/putCat")
-	public String putCat(Integer productCnt, Integer productId, HttpServletRequest request, RedirectAttributes ra) {
-		carService.putCat(MySecurityUtils.getCurrUserId(), productId, productCnt);
-		ra.addAttribute("productCnt", productCnt);
+	public String putCat(Integer productId, HttpServletRequest request, RedirectAttributes ra) {
+		carService.putCat(MySecurityUtils.getCurrUserId(), productId, 1);
+		ra.addAttribute("productCnt", 1);
 		ra.addAttribute("productId", productId);
 		return "redirect:putCatResult";
 	}

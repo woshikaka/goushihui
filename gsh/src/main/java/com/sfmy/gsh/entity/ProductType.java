@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,12 @@ public class ProductType implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
+	
+	@Column(name = "name",nullable=false)
 	private String name;
+	
+	@Column(name = "`index`",nullable=false)
+	private Integer index;
 	@OneToMany(cascade={CascadeType.ALL},fetch=FetchType.LAZY)
 //	@LazyCollection(LazyCollectionOption.FALSE)
 	@JoinTable(
@@ -32,6 +38,14 @@ public class ProductType implements Serializable{
 			inverseJoinColumns={@JoinColumn(name = "product_sec_id", referencedColumnName = "id")}
 			)
 	private List<ProductSecType> productSecTypes = new ArrayList<ProductSecType>();
+
+	public Integer getIndex() {
+		return index;
+	}
+
+	public void setIndex(Integer index) {
+		this.index = index;
+	}
 
 	public ProductType() {
 		super();

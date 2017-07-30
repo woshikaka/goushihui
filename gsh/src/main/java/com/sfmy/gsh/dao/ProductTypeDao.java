@@ -8,6 +8,6 @@ import com.sfmy.gsh.entity.ProductType;
 
 public interface ProductTypeDao extends JpaRepository<ProductType,Integer>{
 
-	List<ProductType> findAll();
+	List<ProductType> findAllByOrderByIndexAsc();
 
 }

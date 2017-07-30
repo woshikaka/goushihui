@@ -25,7 +25,7 @@ public class ProductTypeService {
 	private CacheUtils cacheUtils;
 	
 	public void initProductType() {
-		List<ProductType> productTypes = productTypeDao.findAll();
+		List<ProductType> productTypes = productTypeDao.findAllByOrderByIndexAsc();
 		if(CollectionUtils.isNotEmpty(productTypes)){
 			List<ProductSecType> secTypes = new ArrayList<ProductSecType>();
 			for (ProductType productType : productTypes) {

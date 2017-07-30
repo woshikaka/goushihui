@@ -59,7 +59,7 @@
                         <thead>
                             <tr>
                                 <th width="16%">订单编号</th>
-                                <th width="37%">商品名称</th>
+                                <th width="37%" style="text-align:center;">商品名称</th>
                                 <th width="5%">个数</th>
                                 <th width="8%">总数</th>
                                 <!-- <th width="13%">市场价格</th> -->
@@ -71,11 +71,11 @@
                         <tbody>
                             <tr ng-repeat="order in orders">
                                 <td ng-bind="order.outTradeNo"></td>
-                                <td>
+                                <td style="text-align:center;">
                                     <p class="goods_name elip" ng-repeat="name in order.names">{{name}}</p>
                                 </td>
                                 <td>
-                                    <p class="goods_name elip" style="width:100px" ng-repeat="quantity in order.quantitys track by $index">{{quantity}}</p>
+                                    <p class="goods_name elip" style="width:100px;" ng-repeat="quantity in order.quantitys track by $index">{{quantity}}</p>
                                 </td>
                                 <td ng-bind="order.toalQuantity"></td>
                                 <td>

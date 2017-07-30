@@ -28,7 +28,7 @@
 							<label style="margin-left:20px">订单状态</label>
 							<select class="form-control" ng-model="pageParam.status">
 								<option value="">请选择</option>
-								<option value="WAIT_PAY">待付款</option>
+								<!-- <option value="WAIT_PAY">待付款</option> -->
 								<option value="PAY_SUCCESS_WAIT_SEND">付款成功等待发货</option>
 								<option value="PAY_SUCCESS_ALREADY_SEND">付款成功已经发货</option>
 								<option value="END">交易结束</option>

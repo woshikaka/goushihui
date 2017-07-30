@@ -22,24 +22,6 @@ public class StartupListener implements ApplicationListener<ContextRefreshedEven
 	
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-//		if (event.getApplicationContext().getParent() == null) {
-//			List<ProductType> productTypes = productTypeService.findAll();
-//			if(CollectionUtils.isNotEmpty(productTypes)){
-//				List<ProductSecType> secTypes = new ArrayList<ProductSecType>();
-//				for (ProductType productType : productTypes) {
-//					secTypes.addAll(productType.getProductSecTypes());
-//				}
-//				cacheUtils.put("secTypes",secTypes);
-//				
-//				List<ProductThirdType> thirdTypes = new ArrayList<ProductThirdType>();
-//				for (ProductSecType productSecType : secTypes) {
-//					thirdTypes.addAll(productSecType.getThirdTypes());
-//				}
-//				cacheUtils.put("thirdTypes",thirdTypes);
-//			}
-//			
-//			cacheUtils.put("productTypes", productTypes);
-//		}
 		if (event.getApplicationContext().getParent() == null) {
 			productTypeService.initProductType();
 		}

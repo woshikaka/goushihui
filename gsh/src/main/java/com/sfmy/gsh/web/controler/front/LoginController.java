@@ -28,7 +28,14 @@ public class LoginController {
 	 * 跳转到登录UI
 	 */
 	@RequestMapping("/loginUI")
-	public String loginUI(HttpServletRequest request) {
+	public String loginUI(HttpServletRequest request,RedirectAttributes ra) {
+		String registerSuccess = request.getParameter("registerSuccess");
+		if (StringUtils.equals("1", registerSuccess)) {
+			request.setAttribute("isSuccessShow",true);
+			request.setAttribute("successMessage","注册成功！请进行登录");
+//			ra.addFlashAttribute("isSuccessShow",true);
+//			ra.addFlashAttribute("dangerMessage","注册成功！请进行登录");
+		}
 		return "front/loginUI";
 	}
 	
@@ -93,7 +100,7 @@ public class LoginController {
 			return "redirect:registerUI";
 		}
 		userService.saveUser(user);
-		return "/front/gshIndex";
+		return "redirect:/loginUI?registerSuccess=1";
 	}
 
 	
