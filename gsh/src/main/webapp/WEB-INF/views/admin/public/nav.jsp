@@ -52,6 +52,13 @@
 						<li><a href="${pageContext.request.contextPath}/a/order/listUI">订单列表</a></li>
 					</ul>
 				</li>
+				<li>
+					<a href="#" name="oneLevel">文案管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
+					<ul class="nav nav-second-level">
+						<li><a href="${pageContext.request.contextPath}/a/order/listUI">批发规则</a></li>
+						<li><a href="${pageContext.request.contextPath}/a/order/listUI">关于我们</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 	</div>
