@@ -16,4 +16,10 @@ public class TextPlanService {
 	public TextPlan findByType(Integer typeId) {
 		return textPlanDao.findByType(typeId);
 	}
+
+	public void save(Integer type, String ruleContent) {
+		TextPlan textPlan = textPlanDao.findByType(type);
+		textPlan.setContent(ruleContent);
+		textPlanDao.save(textPlan);
+	}
 }

@@ -6,5 +6,6 @@ import com.sfmy.gsh.entity.TextPlan;
 
 public interface TextPlanDao extends JpaRepository<TextPlan,Integer>{
 
-	TextPlan findByType(Integer typeId);
+	TextPlan findByType(Integer type);
+
 }
