@@ -1,5 +1,7 @@
 package com.sfmy.gsh.service;
 
+import java.util.Objects;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +21,13 @@ public class TextPlanService {
 
 	public void save(Integer type, String ruleContent) {
 		TextPlan textPlan = textPlanDao.findByType(type);
-		textPlan.setContent(ruleContent);
+		if (Objects.nonNull(textPlan)) {
+			textPlan.setContent(ruleContent);
+		}else{
+			textPlan = new TextPlan();
+			textPlan.setType(type);
+			textPlan.setContent(ruleContent);
+		}
 		textPlanDao.save(textPlan);
 	}
 }

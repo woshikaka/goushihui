@@ -22,10 +22,10 @@ public class TextPlan {
 	@Column(columnDefinition = "TEXT")
 	private String content;
 	
-	@Column(name="gmt_create",nullable=false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+	@Column(name="gmt_create",columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
 	private Date gmtCreate;
 	
-	@Column(name="gmt_modified",nullable=false,columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+	@Column(name="gmt_modified",columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
 	private Date gmtModified;
 
 	public Integer getId() {
