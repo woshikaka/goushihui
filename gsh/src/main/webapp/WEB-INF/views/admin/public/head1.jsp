@@ -11,7 +11,7 @@
 <section class="rect_wrap">
 		<div class="container">
 			<!-- <div class="logo_box"></div> -->
-			<a href="${pageContext.request.contextPath}/homePage"><img src="${pageContext.request.contextPath}/resources/images/logo.png" style="margin-top:-35px;"/></a>
+			<a href="${pageContext.request.contextPath}/homePage"><img id="logoImg" src="" style="margin-top:-35px;width: 160px;height: 100px"/></a>
 			<div class="search_wrap">
 				<div class="search_bd">
 					<div class="search_box">
@@ -73,4 +73,6 @@
 			}
 			return true;
 		}
+		
+		$("#logoImg").attr("src","${pageContext.request.contextPath}/resources/images/logo.png?temp="+Date.now());
 </script>

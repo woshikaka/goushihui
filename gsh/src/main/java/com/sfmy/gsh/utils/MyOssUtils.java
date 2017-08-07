@@ -41,9 +41,6 @@ public class MyOssUtils /*implements ApplicationContextAware*/ /*ServletContextA
 	}
 	
 	private static String getUploadPath() {
-//		String tomcatHome = System.getProperty("catalina.base")+"\\webapps";
-//		String appName = applicationContext.getApplicationName().substring(0);
-//		String dir = tomcatHome+"\\"+appName+"\\resources\\upload";
 		String tomcatHome = System.getProperty("catalina.base")+"\\webapps";
 		String dir = tomcatHome+"\\"+"upload";
 		
@@ -53,14 +50,4 @@ public class MyOssUtils /*implements ApplicationContextAware*/ /*ServletContextA
 		}
 		return dir;
 	}
-
-//	@Override
-//	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-//		this.applicationContext = applicationContext;
-//	}
-
-	/*@Override
-	public void setServletContext(ServletContext servletContext) {
-		this.servletContext = servletContext;
-	}*/
 }

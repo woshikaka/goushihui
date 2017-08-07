@@ -53,8 +53,9 @@
 					</ul>
 				</li>
 				<li>
-					<a href="#" name="oneLevel">文案管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
+					<a href="#" name="oneLevel">文案与logo管理<i class="glyphicon glyphicon-chevron-left" style="float: right;"></i></a>
 					<ul class="nav nav-second-level">
+						<li><a href="${pageContext.request.contextPath}/a/document/modifyLogoUI">logo修改</a></li>
 						<li><a href="${pageContext.request.contextPath}/a/document/wholesaleRuleUI">批发规则</a></li>
 						<li><a href="${pageContext.request.contextPath}/a/document/aboutMeUI">关于我们</a></li>
 					</ul>
