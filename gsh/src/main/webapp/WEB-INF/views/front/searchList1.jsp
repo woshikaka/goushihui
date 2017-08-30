@@ -26,7 +26,26 @@
 </head>
 <body ng-app="searchApp" ng-controller="searchCtrl">
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
-	<%@ include file="/WEB-INF/views/admin/public/head1.jsp"%>
+	<section class="rect_wrap">
+		<div class="container">
+			<!-- <div class="logo_box"></div> -->
+			<a href="${pageContext.request.contextPath}/homePage"><img id="logoImg" src="${pageContext.request.contextPath}/resources/images/logo.png" style="margin-top:-35px;width: 160px;height: 100px"/></a>
+			<div class="search_wrap">
+				<div class="search_bd">
+					<div class="search_box">
+						<div class="search_icon">
+							<i class="icon-search"></i>
+						</div>
+							<input type="text" ng-model="keyword" class="search_input">
+							<button type="button" ng-click="search()" class="search_btn right" >搜索</button>
+					</div>
+				</div>
+			</div>
+			<div class="shopping_cart right">
+				<a href="${pageContext.request.contextPath}/c/carUI" style="color: #fff"><img src="${pageContext.request.contextPath}/resources/images/index/cart.png" class="cart_icon"> 我的购物车 <i class="shop_num">${carCnt}</i></a>
+			</div>
+		</div>
+	</section>
         <section class="menu_wrap">
         <div class="top_nav">
             <div class="container">
@@ -69,7 +88,7 @@
     </section>
     <div class="container search_list">
         <div class="search_location">
-        	您搜索的<span class="red">{{checkedType.productTypeName}} {{checkedType.secTypeName?'&gt; '+checkedType.secTypeName:''}} {{checkedType.thirdTypeName?'&gt; '+checkedType.thirdTypeName:''}}</span>
+        	您搜索的<span class="red">{{checkedType.productTypeName}} {{checkedType.secTypeName?'&gt; '+checkedType.secTypeName:''}} {{checkedType.thirdTypeName?'&gt; '+checkedType.thirdTypeName:''}} {{showKeyword}}</span>
            	 共有 <span class="red" ng-bind="pageBean.totalElements"></span> 件商品：
         </div>
         <div class="sort_warp">
@@ -96,7 +115,7 @@
             </div>
 			<span ng-show={{$scope.totalPages==0}}>没有符合的商品！</span>
 			<div class="paging_warp clear">
-                <div class="paging_info left"> 每页 <i class="red">20</i>条</div>
+                <!-- <div class="paging_info left"> 每页 <i class="red">20</i>条</div> -->
 				<div id="paging" style="float: right;"></div>
             </div>
         </section>
@@ -130,24 +149,32 @@
         });
 		
 		$scope.checkedTypeMethod = function(firstType,secType,thirdType){
-			$scope.pageParam={"currPageNo":1};
 			$scope.checkedType = {};
+			$scope.keyword = null;
+			$scope.pageParam.keyword = null;
+			$scope.showKeyword = "";
 			
 			if(firstType){
 				$scope.checkedType.productTypeId = firstType.id;
 				$scope.checkedType.productTypeName = firstType.name;
+			}else{
+				$scope.checkedType.productTypeId = null;
 			}
 			
 			if(secType){
 				$scope.checkedType.secTypeId = secType.id;
 				$scope.checkedType.secTypeName = secType.name;
 				$scope.pageParam.secTypeId = secType.id;
+			}else{
+				$scope.pageParam.secTypeId = null;
 			}
 			
 			if(thirdType){
 				$scope.checkedType.thirdTypeId = thirdType.id;
 				$scope.checkedType.thirdTypeName = thirdType.name;
 				$scope.pageParam.thirdTypeId = thirdType.id;
+			}else{
+				$scope.pageParam.thirdTypeId = null;
 			}
 			
 			$scope.checkedType.productTypeId = $scope.tempCheckedFirType.productTypeId;
@@ -155,10 +182,15 @@
 			
 			$scope.navHide();
 			
-			$scope.initLaypage();
 			$scope.pageParam.currPageNo=1;
 			$scope.pageParam.productTypeId = $scope.checkedType.productTypeId;
-			pageRequest();
+			//pageRequest();
+			//$scope.initLaypage();
+			$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
+				$scope.pageBean = response.data;
+				$scope.totalPages = response.data.totalPages;
+				$scope.initLaypage();
+		    });
 		}
 		
 		$scope.navHide = function(){
@@ -222,11 +254,24 @@
 			});			
 		}
 	
-		
 		function pageRequest(){
 			$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
 				$scope.pageBean = response.data;
 				$scope.totalPages = response.data.totalPages;
+		    });
+		}
+		
+		$scope.keyword = "";
+		$scope.search = function(){
+			$scope.pageParam={"currPageNo":1};
+			$scope.checkedType=null;
+			$scope.pageParam.keyword = $scope.keyword;
+			$scope.showKeyword = angular.copy($scope.keyword);
+			
+			$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
+				$scope.pageBean = response.data;
+				$scope.totalPages = response.data.totalPages;
+				$scope.initLaypage();
 		    });
 		}
 		

@@ -85,7 +85,11 @@ public class Product implements Serializable{
 	@OneToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name = "third_type_id",nullable=false)
 	private ProductThirdType thirdType;
-
+	/**
+	 * 活动类型 1:团购商品		2:特价促销	3:新品上架
+	 */
+	@Column(name = "activity_type")
+	private Integer activityType;
 	public Product() {
 		super();
 	}
@@ -220,6 +224,14 @@ public class Product implements Serializable{
 
 	public void setProductDesc(ProductDesc productDesc) {
 		this.productDesc = productDesc;
+	}
+
+	public Integer getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(Integer activityType) {
+		this.activityType = activityType;
 	}
 
 	@Override
