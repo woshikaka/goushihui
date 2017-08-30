@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.google.common.collect.Lists;
+import com.sfmy.gsh.bean.PageBean1;
 import com.sfmy.gsh.constant.AppConstant;
 import com.sfmy.gsh.dao.ProductDao;
 import com.sfmy.gsh.dao.ProductSecTypeDao;
@@ -35,6 +37,7 @@ import com.sfmy.gsh.web.dto.AdminProductDTO;
 import com.sfmy.gsh.web.dto.AdminProductPageDTO;
 import com.sfmy.gsh.web.dto.SearchProductDTO;
 import com.sfmy.gsh.web.dto.front.ProductDetailDTO;
+import com.sfmy.gsh.web.dto.front.SearchProductResultDTO;
 import com.sfmy.gsh.web.vo.ProductPageParamVO;
 
 @Service
@@ -182,20 +185,46 @@ public class ProductService {
 		return viewLog;
 	}
 
-	public Page<Product> search(SearchProductDTO dto) {
+	public PageBean1<SearchProductResultDTO> search(SearchProductDTO dto) {
 		Sort sort = null;
-		if(BooleanUtils.isTrue(dto.getSalesHigh2Low())){
+		if(Objects.equals(1,dto.getSelectedTab())){
+			//do nothing
+		}else if(Objects.equals(2,dto.getSelectedTab())){
 			sort = new Sort(new Order(Sort.Direction.DESC,"sellCount"));
-		}
-		if(BooleanUtils.isTrue(dto.getPriceLow2High())){
+		}else if(Objects.equals(3,dto.getSelectedTab())){
 			sort = new Sort(new Order(Sort.Direction.ASC,"price"));
 		}
 		
 		
 		SearchProductPredicate predicate = new SearchProductPredicate(dto);
 		PageRequest pageRequest = new PageRequest(dto.getCurrPageNo()-1,AppConstant.PAGE_SIZE,sort);
-		Page<Product> page = productDao.findAll(predicate,pageRequest);
-		return page;
+		Page<Product> doPage = productDao.findAll(predicate,pageRequest);
+		
+		PageBean1<SearchProductResultDTO> resultPage = new PageBean1<>();
+		List<SearchProductResultDTO> content = Lists.newArrayList();
+		
+		if (Objects.nonNull(doPage) && CollectionUtils.isNotEmpty(doPage.getContent())) {
+			BeanUtils.copyProperties(doPage, resultPage);
+			for (Product product : doPage.getContent()) {
+				SearchProductResultDTO searchProductResultDTO = do2Dto(product);
+				content.add(searchProductResultDTO);
+			}
+		}
+		resultPage.setContent(content);
+		return resultPage;
+	}
+
+	private SearchProductResultDTO do2Dto(Product product) {
+		SearchProductResultDTO dto = new SearchProductResultDTO();
+		
+		dto.setId(product.getId());
+		dto.setName(product.getName());
+		dto.setImage(product.getImage());
+		dto.setSellCount(product.getSellCount());
+		dto.setPrice(product.getPrice());
+		dto.setMarketPrice(product.getMarketPrice());
+		
+		return dto;
 	}
 
 	public AdminProductDTO findProductByIdForEager(Integer id) {

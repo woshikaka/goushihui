@@ -196,8 +196,6 @@
                     $(".nav_menu_box .nav_item").removeClass('select')
                 })
             })
-
-
         })
         
         

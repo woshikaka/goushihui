@@ -220,9 +220,15 @@
 		
 		$scope.pageRequest = function(){
 			$scope.pageParam.currPageNo=1;
-			$scope.pageParam.firstTypeId = $scope.queryFirstType.id;
-			$scope.pageParam.secTypeId = $scope.querySecType.id;
-			$scope.pageParam.thirdTypeId = $scope.queryThirdType.id;
+			if($scope.queryFirstType){
+				$scope.pageParam.firstTypeId = $scope.queryFirstType.id;
+			}
+			if($scope.querySecType){
+				$scope.pageParam.secTypeId = $scope.querySecType.id;
+			}
+			if($scope.queryThirdType){
+				$scope.pageParam.thirdTypeId = $scope.queryThirdType.id;
+			}
 			
 			page();
 		}
