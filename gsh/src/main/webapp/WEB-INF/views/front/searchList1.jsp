@@ -52,9 +52,9 @@
                 <div class="classify_title"><strong>商品分类</strong><img src="${pageContext.request.contextPath}/resources/images/index/menu_list.png"></div>
                 <ul class="top_nav_menu clear">
 					<li><a href="${pageContext.request.contextPath}/homePage">首页</a></li>
-					<li><a href="javascript:;">团购商品</a></li>
-					<li><a href="javascript:;">特价促销</a></li>
-					<li><a href="javascript:;">新品上架</a></li>
+					<li><a href="javascript:;" ng-click="activitySearch(1)">团购商品</a></li>
+					<li><a href="javascript:;" ng-click="activitySearch(2)">特价促销</a></li>
+					<li><a href="javascript:;" ng-click="activitySearch(3)">新品上架</a></li>
 					<li><a href="javascript:;">批发规则</a></li>
 					<li><a href="javascript:;">关于我们</a></li>
                 </ul>
@@ -113,7 +113,7 @@
                     </li>
                 </ul>
             </div>
-			<span ng-show={{$scope.totalPages==0}}>没有符合的商品！</span>
+			<span ng-show={{!$scope.totalPages || $scope.totalPages==0}}>没有符合的商品！</span>
 			<div class="paging_warp clear">
                 <!-- <div class="paging_info left"> 每页 <i class="red">20</i>条</div> -->
 				<div id="paging" style="float: right;"></div>
@@ -152,6 +152,7 @@
 			$scope.checkedType = {};
 			$scope.keyword = null;
 			$scope.pageParam.keyword = null;
+			$scope.pageParam.activityType = null;
 			$scope.showKeyword = "";
 			
 			if(firstType){
@@ -267,6 +268,29 @@
 			$scope.checkedType=null;
 			$scope.pageParam.keyword = $scope.keyword;
 			$scope.showKeyword = angular.copy($scope.keyword);
+			
+			$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
+				$scope.pageBean = response.data;
+				$scope.totalPages = response.data.totalPages;
+				$scope.initLaypage();
+		    });
+		}
+		
+		$scope.activitySearch = function(activityType){
+			$scope.pageParam={"currPageNo":1};
+			$scope.checkedType=null;
+			$scope.keyword = "";
+			
+			if(activityType==1){
+			$scope.pageParam.activityType = 1;
+				$scope.showKeyword = "团购商品";
+			}else if(activityType==2){
+				$scope.pageParam.activityType = activityType;
+				$scope.showKeyword = "特价促销";
+			}else if(activityType==3){
+				$scope.pageParam.activityType = activityType;
+				$scope.showKeyword = "新品上架";
+			}
 			
 			$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
 				$scope.pageBean = response.data;

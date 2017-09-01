@@ -11,6 +11,15 @@ public class SearchProductDTO {
 	private String thirdTypeName;
 	private Boolean defaultSort;
 	private int selectedTab;
+	private int activityType;
+	public int getActivityType() {
+		return activityType;
+	}
+
+	public void setActivityType(int activityType) {
+		this.activityType = activityType;
+	}
+
 	public int getSelectedTab() {
 		return selectedTab;
 	}

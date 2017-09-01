@@ -2,6 +2,7 @@ package com.sfmy.gsh.predicate.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -33,6 +34,15 @@ public class SearchProductPredicate implements Specification<Product>{
 //			predicates.add(cb.like(root.get("description"),"%"+dto.getKeyword()+"%"));
 //			predicates.add(cb.or(cb.like(root.get("name"),"%"+dto.getKeyword()+"%"),cb.like(root.get("productDesc"),"%"+dto.getKeyword()+"%")));
 			predicates.add(cb.or(cb.like(root.get("name"),"%"+dto.getKeyword()+"%")));
+		}
+		if(Objects.nonNull(dto.getActivityType())){
+			if(Objects.equals(dto.getActivityType(), 1)){
+				predicates.add(cb.equal(root.get("activityType"),1));
+			}else if(Objects.equals(dto.getActivityType(), 2)){
+				predicates.add(cb.equal(root.get("activityType"),2));
+			}else if(Objects.equals(dto.getActivityType(), 3)){
+				predicates.add(cb.equal(root.get("activityType"),3));
+			}
 		}
 		if(dto.getThirdTypeId()!=null){
 			predicates.add(cb.equal(root.get("thirdType"),new ProductThirdType(dto.getThirdTypeId())));
