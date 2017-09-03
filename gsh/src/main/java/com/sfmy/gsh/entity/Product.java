@@ -89,7 +89,7 @@ public class Product implements Serializable{
 	 * 活动类型 1:团购商品		2:特价促销	3:新品上架
 	 */
 	@Column(name = "activity_type")
-	private Integer activityType;
+	private String activityType;
 	public Product() {
 		super();
 	}
@@ -226,11 +226,11 @@ public class Product implements Serializable{
 		this.productDesc = productDesc;
 	}
 
-	public Integer getActivityType() {
+	public String getActivityType() {
 		return activityType;
 	}
 
-	public void setActivityType(Integer activityType) {
+	public void setActivityType(String activityType) {
 		this.activityType = activityType;
 	}
 

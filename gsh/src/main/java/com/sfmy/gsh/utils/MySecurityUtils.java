@@ -6,7 +6,7 @@ import com.sfmy.gsh.bean.ShiroUser;
 
 public class MySecurityUtils {
 	public static Integer getCurrUserId() {
-		Integer userId = -1;
+		Integer userId = null;
 		ShiroUser shiroUser = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
 		if(shiroUser!=null){
 			userId = shiroUser.getId();

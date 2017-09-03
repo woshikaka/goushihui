@@ -222,12 +222,20 @@
 			$scope.pageParam.currPageNo=1;
 			if($scope.queryFirstType){
 				$scope.pageParam.firstTypeId = $scope.queryFirstType.id;
+			}else{
+				$scope.pageParam.firstTypeId = null;
 			}
+			
 			if($scope.querySecType){
 				$scope.pageParam.secTypeId = $scope.querySecType.id;
+			}else{
+				$scope.pageParam.secTypeId = null;
 			}
+			
 			if($scope.queryThirdType){
 				$scope.pageParam.thirdTypeId = $scope.queryThirdType.id;
+			}else{
+				$scope.pageParam.thirdTypeId = null;
 			}
 			
 			page();

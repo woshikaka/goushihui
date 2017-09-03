@@ -19,7 +19,7 @@
 							<i class="icon-search"></i>
 						</div>
 						<form id="searchForm" action="${pageContext.request.contextPath}/searchUI" method="post" onsubmit="return searchCheck()">
-							<input id="keywordInput" type="text" name="keyword" value="${dto.keyword}" class="search_input">
+							<input id="keywordInput" type="text" name="keyword" class="search_input">
 							<button type="submit" class="search_btn right">搜索</button>
 							<%-- <c:if test="${dto.productTypeId != null}">
 								<input type="hidden" name="productTypeId" value="${dto.productTypeId}">

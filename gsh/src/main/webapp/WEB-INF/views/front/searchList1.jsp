@@ -24,7 +24,7 @@
 }
 </style>
 </head>
-<body ng-app="searchApp" ng-controller="searchCtrl">
+<body ng-app="searchApp" ng-controller="searchCtrl" ng-init="init()">
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
 	<section class="rect_wrap">
 		<div class="container">
@@ -42,7 +42,7 @@
 				</div>
 			</div>
 			<div class="shopping_cart right">
-				<a href="${pageContext.request.contextPath}/c/carUI" style="color: #fff"><img src="${pageContext.request.contextPath}/resources/images/index/cart.png" class="cart_icon"> 我的购物车 <i class="shop_num">${carCnt}</i></a>
+				<a href="${pageContext.request.contextPath}/c/carUI" style="color: #fff"><img src="${pageContext.request.contextPath}/resources/images/index/cart.png" class="cart_icon"> 我的购物车 <i class="shop_num" ng-bind="carCnt"></i></a>
 			</div>
 		</div>
 	</section>
@@ -113,7 +113,7 @@
                     </li>
                 </ul>
             </div>
-			<span ng-show={{!$scope.totalPages || $scope.totalPages==0}}>没有符合的商品！</span>
+			<span ng-show="totalPages==0">没有符合的商品！</span>
 			<div class="paging_warp clear">
                 <!-- <div class="paging_info left"> 每页 <i class="red">20</i>条</div> -->
 				<div id="paging" style="float: right;"></div>
@@ -178,8 +178,10 @@
 				$scope.pageParam.thirdTypeId = null;
 			}
 			
-			$scope.checkedType.productTypeId = $scope.tempCheckedFirType.productTypeId;
-			$scope.checkedType.productTypeName = $scope.tempCheckedFirType.productTypeName;
+			if(!$scope.checkedType.productTypeId){
+				$scope.checkedType.productTypeId = $scope.tempCheckedFirType.productTypeId;
+				$scope.checkedType.productTypeName = $scope.tempCheckedFirType.productTypeName;
+			}
 			
 			$scope.navHide();
 			
@@ -231,15 +233,6 @@
 			pageRequest();
 		}
 		
-		$scope.pageParam={"currPageNo":1};
-		$scope.totalPages=0;
-		$scope.pageBean={};
-		$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
-			$scope.pageBean = response.data;
-			$scope.totalPages = response.data.totalPages;
-			$scope.initLaypage();		
-	    });
-		
 		$scope.initLaypage = function(){
 			laypage({
 			    cont: 'paging',
@@ -282,7 +275,7 @@
 			$scope.keyword = "";
 			
 			if(activityType==1){
-			$scope.pageParam.activityType = 1;
+				$scope.pageParam.activityType = 1;
 				$scope.showKeyword = "团购商品";
 			}else if(activityType==2){
 				$scope.pageParam.activityType = activityType;
@@ -297,6 +290,91 @@
 				$scope.totalPages = response.data.totalPages;
 				$scope.initLaypage();
 		    });
+		}
+		
+		$http.post("${pageContext.request.contextPath}/common/getCarCnt",angular.toJson($scope.pageParam)).success(function(response) {
+			$scope.carCnt = response.data;
+	    });
+		
+		
+		$scope.init = function(){
+			$scope.pageParam = {currPageNo:1};
+			$scope.totalPages=0;
+			$scope.pageBean={};
+			
+			var selectedTab = getParameterByName("selectedTab",null);
+			if(selectedTab){
+				$scope.selected1 = false;
+				$scope.selected2 = true;
+				$scope.selected3 = false;	
+				$scope.pageParam.selectedTab = 2;
+			}
+			
+			var firstTypeId = getParameterByName("ti",null);
+			if(firstTypeId){
+				var firstType = {};
+				firstType.id = firstTypeId;
+				$scope.pageParam.productTypeId = firstTypeId;
+				if(firstTypeId==1){
+					$scope.checkedType.productTypeName = "进口商品";
+				}else if(firstTypeId==2){
+					$scope.checkedType.productTypeName = "副食零食";
+				}else if(firstTypeId==3){
+					$scope.checkedType.productTypeName = "酒水饮料";
+				}else if(firstTypeId==4){
+					$scope.checkedType.productTypeName = "粮油调料";
+				}
+			}
+			
+			var secTypeId = getParameterByName("sti",null);
+			var secTypeName = getParameterByName("stn",null);
+			if(secTypeId){
+				$scope.checkedType.secTypeId = secTypeId;
+				$scope.checkedType.secTypeName = secTypeName;
+				$scope.pageParam.secTypeId = secTypeId;
+			}
+			
+			var thirdTypeId = getParameterByName("tti",null);
+			var thirdTypeName = getParameterByName("ttn",null);
+			if(thirdTypeId){
+				$scope.checkedType.thirdTypeId = thirdTypeId;
+				$scope.checkedType.thirdTypeName = thirdTypeName;
+				$scope.pageParam.thirdTypeId = thirdTypeId;
+			}
+			
+			var activityType = getParameterByName("a",null);
+			if(activityType==1){
+				$scope.pageParam.activityType = 1;
+				$scope.showKeyword = "团购商品";
+			}else if(activityType==2){
+				$scope.pageParam.activityType = activityType;
+				$scope.showKeyword = "特价促销";
+			}else if(activityType==3){
+				$scope.pageParam.activityType = activityType;
+				$scope.showKeyword = "新品上架";
+			}
+			
+			var keyword = '${keyword}';
+			if(keyword){
+				$scope.showKeyword = keyword;
+				$scope.pageParam.keyword = keyword;
+			}	
+			
+			$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
+				$scope.pageBean = response.data;
+				$scope.totalPages = response.data.totalPages;
+				$scope.initLaypage();		
+		    });
+		}
+		
+		function getParameterByName(name, url) {
+		    if (!url) url = window.location.href;
+		    name = name.replace(/[\[\]]/g, "\\$&");
+		    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		        results = regex.exec(url);
+		    if (!results) return null;
+		    if (!results[2]) return '';
+		    return decodeURIComponent(results[2].replace(/\+/g, " "));
 		}
 		
 	});

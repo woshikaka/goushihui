@@ -35,6 +35,8 @@ import com.sfmy.gsh.service.ProductService;
 import com.sfmy.gsh.utils.CacheUtils;
 import com.sfmy.gsh.utils.MyArith;
 import com.sfmy.gsh.utils.MySecurityUtils;
+import com.sfmy.gsh.web.base.JsonResult;
+import com.sfmy.gsh.web.controler.BaseSpringController;
 import com.sfmy.gsh.web.vo.CarProductVO;
 
 /**
@@ -42,7 +44,7 @@ import com.sfmy.gsh.web.vo.CarProductVO;
  */
 @Controller
 @RequestMapping(value = "/c")
-public class CarController {
+public class CarController extends BaseSpringController{
 
 	@Resource
 	private CarService carService;
@@ -136,15 +138,7 @@ public class CarController {
 	@RequestMapping("/carUI")
 	public String catUI(HttpServletRequest request,Model model) {
 		Integer carCnt = carService.countProductCnt(MySecurityUtils.getCurrUserId());
-		
-//		List<CarProduct> catProducts = carService.findCatProduct(MySecurityUtils.getCurrUserId());
-//		List<Address> address = addressService.findAllAddress(MySecurityUtils.getCurrUserId());
-//		request.setAttribute("catProducts", catProducts);
-//		request.setAttribute("address", address);
 		model.addAttribute("carCnt", carCnt);
-//		model.addAttribute("productTypes", productTypes);
-//		model.addAttribute("secTypes", secTypes);
-//		model.addAttribute("thirdTypes", thirdTypes);
 		return "car/carUI";
 	}
 	

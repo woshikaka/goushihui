@@ -37,11 +37,11 @@ public class SearchProductPredicate implements Specification<Product>{
 		}
 		if(Objects.nonNull(dto.getActivityType())){
 			if(Objects.equals(dto.getActivityType(), 1)){
-				predicates.add(cb.equal(root.get("activityType"),1));
+				predicates.add(cb.equal(root.get("activityType"),"%"+1+"%"));
 			}else if(Objects.equals(dto.getActivityType(), 2)){
-				predicates.add(cb.equal(root.get("activityType"),2));
+				predicates.add(cb.equal(root.get("activityType"),"%"+2+"%"));
 			}else if(Objects.equals(dto.getActivityType(), 3)){
-				predicates.add(cb.equal(root.get("activityType"),3));
+				predicates.add(cb.equal(root.get("activityType"),"%"+3+"%"));
 			}
 		}
 		if(dto.getThirdTypeId()!=null){

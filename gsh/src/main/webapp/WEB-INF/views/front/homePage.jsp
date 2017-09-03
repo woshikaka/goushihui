@@ -37,9 +37,9 @@
 				<ul class="top_nav_menu clear">
 					<!-- <li class="select"><a href="javascript:;">首页</a></li> -->
 					<li><a href="${pageContext.request.contextPath}/homePage">首页</a></li>
-					<li><a href="javascript:;">团购商品</a></li>
-					<li><a href="javascript:;">特价促销</a></li>
-					<li><a href="javascript:;">新品上架</a></li>
+					<li><a href="${pageContext.request.contextPath}/searchUI?a=1">团购商品</a></li>
+					<li><a href="${pageContext.request.contextPath}/searchUI?a=2">特价促销</a></li>
+					<li><a href="${pageContext.request.contextPath}/searchUI?a=3">新品上架</a></li>
 					<li><a href="javascript:;">批发规则</a></li>
 					<li><a href="javascript:;">关于我们</a></li>
 				</ul>
@@ -105,7 +105,7 @@
 					<div class="nav_menu_box">
 						<ul>
 							<c:forEach items="${productTypes}" var="bean">
-								<li class="nav_item"><a href="${pageContext.request.contextPath}/navShop?navTypeId=${bean.id}">${bean.name}</a><i class="icon-angle-right"></i></li>
+								<li class="nav_item"><a href="${pageContext.request.contextPath}/searchUI?ti=${bean.id}">${bean.name}</a><i class="icon-angle-right"></i></li>
 							</c:forEach>
 						</ul>
 					</div>
@@ -117,10 +117,10 @@
 									<ul>
 										<c:forEach items="${productType.productSecTypes}" var="secType">
 											<li class="sort_li">
-												<a href="${pageContext.request.contextPath}/navShop?navTypeId=${productType.id}&navSecTypeId=${secType.id}&navSecTypeName=${secType.name}"><h4>${secType.name}</h4></a>
+												<a href="${pageContext.request.contextPath}/searchUI?ti=${productType.id}&sti=${secType.id}&stn=${secType.name}"><h4>${secType.name}</h4></a>
 												<div>
 													<c:forEach items="${secType.thirdTypes}" var="thirdType">
-														<a href="${pageContext.request.contextPath}/navShop?navTypeId=${productType.id}&navSecTypeId=${secType.id}&navSecTypeName=${secType.name}&navThirdTypeId=${thirdType.id}&navThirdTypeName=${thirdType.name}">${thirdType.name}</a>
+														<a href="${pageContext.request.contextPath}/searchUI?ti=${productType.id}&stn=${productType.name}&sti=${secType.id}&stn=${secType.name}&tti=${thirdType.id}&ttn=${thirdType.name}">${thirdType.name}</a>
 													</c:forEach>
 												</div>
 											</li>
@@ -141,7 +141,7 @@
 		<section class="best_sellers_warp page_box">
 			<div class="page_title">
 				<h3 class="title left">推荐热销专卖商品</h3>
-				<a href="${pageContext.request.contextPath}/more?salesHigh2Low=true" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/searchUI?selectedTab=2" class="more right">查看更多>></a>
 			</div>
 			<div class="page_list">
 				<ul class="clear">
@@ -173,11 +173,11 @@
 		<section class="item_wrap page_box floor_2">
 			<div class="page_title">
 				<h3 class="title left">副食零食</h3>
-				<a href="${pageContext.request.contextPath}/more?productTypeId=1" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/searchUI?ti=1" class="more right">查看更多>></a>
 			</div>
 			<div class="page_content clear">
 				<div class="left_ad left">
-					<a href="${pageContext.request.contextPath}/more?productTypeId=1">
+					<a href="${pageContext.request.contextPath}/searchUI?ti=1">
 						<h3>副食零食</h3>
 						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_2.png">
 					</a>
@@ -232,11 +232,11 @@
 		<section class="item_wrap page_box floor_1">
 			<div class="page_title">
 				<h3 class="title left">酒水饮料</h3>
-				<a href="${pageContext.request.contextPath}/more?productTypeId=2" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/searchUI?ti=2" class="more right">查看更多>></a>
 			</div>
 			<div class="page_content clear">
 				<div class="left_ad left">
-					<a href="${pageContext.request.contextPath}/more?productTypeId=2">
+					<a href="${pageContext.request.contextPath}/searchUI?ti=2">
 						<h3>酒水饮料</h3>
 						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_1.png">
 					</a>
@@ -291,11 +291,11 @@
 		<section class="item_wrap page_box floor_3">
 			<div class="page_title">
 				<h3 class="title left">粮油调味</h3>
-				<a href="${pageContext.request.contextPath}/more?productTypeId=3" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/searchUI?ti=3" class="more right">查看更多>></a>
 			</div>
 			<div class="page_content clear">
 				<div class="left_ad left">
-					<a href="${pageContext.request.contextPath}/more?productTypeId=3">
+					<a href="${pageContext.request.contextPath}/searchUI?ti=3">
 						<h3>粮油调味</h3>
 						<h4>GO></h4> <img
 						src="${pageContext.request.contextPath}/resources/images/index/item_img_3.png">

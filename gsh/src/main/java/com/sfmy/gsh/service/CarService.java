@@ -1,6 +1,7 @@
 package com.sfmy.gsh.service;
 
 import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.Resource;
 
@@ -41,10 +42,12 @@ public class CarService {
 
 	public Integer countProductCnt(Integer userId) {
 		Integer cnt = 0;
-		List<Integer> productCnts = carProductDao.findProductCntByUser(new User(userId));
-		if(CollectionUtils.isNotEmpty(productCnts)){
-			for (Integer i : productCnts) {
-				cnt+=i;
+		if(Objects.nonNull(userId)){
+			List<Integer> productCnts = carProductDao.findProductCntByUser(new User(userId));
+			if(CollectionUtils.isNotEmpty(productCnts)){
+				for (Integer i : productCnts) {
+					cnt+=i;
+				}
 			}
 		}
 		return cnt;
