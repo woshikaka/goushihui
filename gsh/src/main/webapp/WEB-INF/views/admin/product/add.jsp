@@ -75,6 +75,14 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-sm-2 control-label">活动类型<i style="color: red">*</i></label>
+					<div class="col-sm-6 checkbox">
+						<label><input type="checkbox" name="activityType" value="1">团购商品&nbsp;&nbsp;&nbsp;</label>
+						<label><input type="checkbox" name="activityType" value="2">特价促销&nbsp;&nbsp;&nbsp;</label>
+						<label><input type="checkbox" name="activityType" value="3">新品上架&nbsp;&nbsp;&nbsp;</label>
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="col-sm-2 control-label">产品描述</label>
 					<div class="col-sm-9">
 						<%-- <%@ include file="/WEB-INF/views/admin/public/ckEditor.jsp"%>

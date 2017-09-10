@@ -16,7 +16,7 @@
 .jiesuan_btn{
 	height: 74px;
     background-color: #f04848;
-    padding: 0 5%;
+    /* padding: 0 5%; */
     font-size: 22px;
     color: #fff;
     margin-left: 4%;

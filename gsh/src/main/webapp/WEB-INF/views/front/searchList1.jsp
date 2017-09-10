@@ -98,7 +98,7 @@
             <div class="page_list">
                 <ul class="clear">
                 	<li ng-repeat="bean in pageBean.content" title="{{bean.name}}">
-                        <div class="goods_img"><a href="${pageContext.request.contextPath}/product/detail/1"><img src="/upload{{bean.image}}"></a></div>
+                        <div class="goods_img"><a href="${pageContext.request.contextPath}/product/detail/{{bean.id}}"><img src="/upload{{bean.image}}"></a></div>
                         <p class="goods_name title" ng-bind="bean.name"></p>
                         <p class="goods_volume">成交{{bean.sellCount}}单</p>
                         <div class="goods_price">

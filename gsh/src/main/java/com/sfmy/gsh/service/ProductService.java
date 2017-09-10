@@ -8,7 +8,6 @@ import java.util.Objects;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -76,6 +75,7 @@ public class ProductService {
 				itemDTO.setStockCount(bo.getStockCount());
 				itemDTO.setThirdTypeName(bo.getThirdType().getName());
 				itemDTO.setIsShangJia(bo.getIsShangJia());
+				itemDTO.setActivityType(buildActivityType(bo.getActivityType()));
 				products.add(itemDTO);
 			}
 		}
@@ -86,6 +86,20 @@ public class ProductService {
 		dto.setTotalElements(page.getTotalElements());
 		dto.setProducts(products);
 		return dto;
+	}
+
+	private String buildActivityType(String activityType) {
+		List<String> result = Lists.newArrayList();
+		if (StringUtils.contains(activityType, "1")) {
+			result.add("团购商品");
+		}
+		if (StringUtils.contains(activityType, "2")) {
+			result.add("特价促销");
+		}
+		if (StringUtils.contains(activityType, "3")) {
+			result.add("新品上架");
+		}
+		return StringUtils.join(result,"，");
 	}
 
 	public void batchShangJia(List<Integer> productIds) {
@@ -163,6 +177,7 @@ public class ProductService {
 		product.setSellCount(dto.getSellCount());
 		product.setStockCount(dto.getStockCount());
 		product.setThirdType(new ProductThirdType(dto.getThirdTypeId()));
+		product.setActivityType(dto.getActivityType());
 		
 		productDao.save(product);
 	}
@@ -259,6 +274,7 @@ public class ProductService {
 			
 			dto.setSellCount(bo.getSellCount());
 			dto.setStockCount(bo.getStockCount());
+			dto.setActivityType(bo.getActivityType());
 			
 		}
 		return dto;

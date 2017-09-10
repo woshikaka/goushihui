@@ -173,11 +173,11 @@
 		<section class="item_wrap page_box floor_2">
 			<div class="page_title">
 				<h3 class="title left">副食零食</h3>
-				<a href="${pageContext.request.contextPath}/searchUI?ti=1" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/searchUI?ti=2" class="more right">查看更多>></a>
 			</div>
 			<div class="page_content clear">
 				<div class="left_ad left">
-					<a href="${pageContext.request.contextPath}/searchUI?ti=1">
+					<a href="${pageContext.request.contextPath}/searchUI?ti=2">
 						<h3>副食零食</h3>
 						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_2.png">
 					</a>
@@ -232,11 +232,11 @@
 		<section class="item_wrap page_box floor_1">
 			<div class="page_title">
 				<h3 class="title left">酒水饮料</h3>
-				<a href="${pageContext.request.contextPath}/searchUI?ti=2" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/searchUI?ti=3" class="more right">查看更多>></a>
 			</div>
 			<div class="page_content clear">
 				<div class="left_ad left">
-					<a href="${pageContext.request.contextPath}/searchUI?ti=2">
+					<a href="${pageContext.request.contextPath}/searchUI?ti=3">
 						<h3>酒水饮料</h3>
 						<h4>GO></h4> <img src="${pageContext.request.contextPath}/resources/images/index/item_img_1.png">
 					</a>
@@ -291,11 +291,11 @@
 		<section class="item_wrap page_box floor_3">
 			<div class="page_title">
 				<h3 class="title left">粮油调味</h3>
-				<a href="${pageContext.request.contextPath}/searchUI?ti=3" class="more right">查看更多>></a>
+				<a href="${pageContext.request.contextPath}/searchUI?ti=4" class="more right">查看更多>></a>
 			</div>
 			<div class="page_content clear">
 				<div class="left_ad left">
-					<a href="${pageContext.request.contextPath}/searchUI?ti=3">
+					<a href="${pageContext.request.contextPath}/searchUI?ti=4">
 						<h3>粮油调味</h3>
 						<h4>GO></h4> <img
 						src="${pageContext.request.contextPath}/resources/images/index/item_img_3.png">

@@ -17,6 +17,13 @@ public class AdminProductDTO {
 	private Boolean isShangJia;
 	private Integer descId;
 	private String description;
+	private String activityType;
+	public String getActivityType() {
+		return activityType;
+	}
+	public void setActivityType(String activityType) {
+		this.activityType = activityType;
+	}
 	public Integer getDescId() {
 		return descId;
 	}

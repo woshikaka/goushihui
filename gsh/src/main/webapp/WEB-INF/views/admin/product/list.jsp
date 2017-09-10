@@ -47,6 +47,15 @@
 								<option value="">三级分类</option>
 							</select>							
 						</div>
+						<div class="form-group">
+							<label style="margin-left:20px">活动类型</label>
+							<select class="form-control" ng-model="pageParam.activityType">
+								<option value="">请选择</option>
+								<option value="1">团购商品</option>
+								<option value="2">特价促销</option>
+								<option value="3">新品上架</option>
+							</select>
+						</div>
 						<button class="btn btn-primary glyphicon glyphicon-search" id="search" ng-click="pageRequest()"></button>
 					</form>
 				</div>
@@ -71,6 +80,7 @@
 								<th>库存</th>
 								<th>累计销售量</th>
 								<th>是否上架</th>
+								<th width="250px">活动类型</th>
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -88,6 +98,7 @@
 									<span ng-show="bean.isShangJia" class="label label-success">上架</span>
 									<span ng-show="!bean.isShangJia" class="label label-default">下架</span>
 								</td>
+								<td ng-bind="bean.activityType"></td>
 								<td><button class="layui-btn layui-btn-primary layui-btn-mini" ng-click="openModifyModal(bean)">修改产品</button></td>
 							</tr> 
 						</tbody>
@@ -174,13 +185,18 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="col-sm-2 control-label">活动类型<i style="color: red">*</i></label>
+						<div class="col-sm-6 checkbox">
+							<label><input type="checkbox" ng-click="clickActivityType(1,$event)" ng-checked="selectedActivityType1">团购商品&nbsp;&nbsp;&nbsp;</label>
+							<label><input type="checkbox" ng-click="clickActivityType(2,$event)" ng-checked="selectedActivityType2">特价促销&nbsp;&nbsp;&nbsp;</label>
+							<label><input type="checkbox" ng-click="clickActivityType(3,$event)" ng-checked="selectedActivityType3">新品上架&nbsp;&nbsp;&nbsp;</label>
+						</div>
+					</div>
+					<div class="form-group">
 						<label class="col-sm-2 control-label">产品描述</label>
 						<div class="col-sm-9">
 						<textarea name="description" id="productDescEditor" rows="10" cols="80">{{productInfo.description}}</textarea>
 						</div>
-						<!-- <div class="col-sm-9">
-							<textarea class="layui-textarea layui-hide" name="content" id="productDescEditor">{{productInfo.description}}</textarea>
-						</div> -->
 					</div>
 				</form>
 			</div>
@@ -300,7 +316,18 @@
 				$scope.productInfo = response.data;
 				initProducTypeSelected();
 				
-				
+				$scope.selectedActivityType1 = false;
+				$scope.selectedActivityType2 = false;
+				$scope.selectedActivityType3 = false;
+				if($scope.productInfo.activityType && $scope.productInfo.activityType.indexOf('1') > -1){
+					$scope.selectedActivityType1 = true;
+				}
+				if($scope.productInfo.activityType && $scope.productInfo.activityType.indexOf('2') > -1){
+					$scope.selectedActivityType2 = true;
+				}
+				if($scope.productInfo.activityType && $scope.productInfo.activityType.indexOf('3') > -1){
+					$scope.selectedActivityType3 = true;
+				}
 				
 				//创建一个编辑器
 				var editor = CKEDITOR.instances['productDescEditor'];
@@ -353,6 +380,32 @@
 					})
 				}
 			})
+		}
+		
+		$scope.clickActivityType = function(activityType,event){
+			var checked = event.target.checked;
+			
+			var selectedArr = [];
+			if(activityType == 1){
+				$scope.selectedActivityType1 = checked;
+			}
+			if(activityType == 2){
+				$scope.selectedActivityType2 = checked;
+			}
+			if(activityType == 3){
+				$scope.selectedActivityType3 = checked;
+			}
+			
+			if($scope.selectedActivityType1){
+				selectedArr.push(1);
+			}
+			if($scope.selectedActivityType2){
+				selectedArr.push(2);
+			}
+			if($scope.selectedActivityType3){
+				selectedArr.push(3);
+			}
+			$scope.productInfo.activityType = selectedArr.join(',');
 		}
 		
 		/* $scope.$watch('firstType', function(newVal) {

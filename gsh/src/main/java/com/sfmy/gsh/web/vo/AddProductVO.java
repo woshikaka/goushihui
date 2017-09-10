@@ -1,5 +1,7 @@
 package com.sfmy.gsh.web.vo;
 
+import java.util.List;
+
 public class AddProductVO {
 	private String priceStr;
 	private String marketPriceStr;
@@ -10,6 +12,13 @@ public class AddProductVO {
 	private String stockCount;
 	private Boolean isShangJia;
 	private String description;
+	private List<String> activityType;
+	public List<String> getActivityType() {
+		return activityType;
+	}
+	public void setActivityType(List<String> activityType) {
+		this.activityType = activityType;
+	}
 	public String getStockCount() {
 		return stockCount;
 	}

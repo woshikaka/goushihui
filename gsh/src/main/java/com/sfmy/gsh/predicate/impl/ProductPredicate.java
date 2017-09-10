@@ -55,6 +55,11 @@ public class ProductPredicate implements Specification<Product>{
 		if(StringUtils.isNotBlank(isShangJia)){
 			predicates.add(cb.equal(root.get("isShangJia"),Boolean.valueOf(isShangJia)));
 		}
+		
+		String activityType = pageParamVO.getActivityType();
+		if(StringUtils.isNotBlank(activityType)){
+			predicates.add(cb.like(root.get("activityType"),"%"+activityType+"%"));
+		}
 		return cb.and(predicates.toArray(new Predicate[predicates.size()]));
    	}
 

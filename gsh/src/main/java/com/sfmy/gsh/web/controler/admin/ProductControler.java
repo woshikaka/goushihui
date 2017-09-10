@@ -199,6 +199,7 @@ public class ProductControler extends BaseSpringController{
 		product.setFirstType(new ProductType(productVO.getFirstTypeId()));
 		product.setSecType(new ProductSecType(productVO.getSecTypeId()));
 		product.setThirdType(new ProductThirdType(productVO.getThirdTypeId()));
+		product.setActivityType(StringUtils.join(productVO.getActivityType(),","));
 //		product.setDescription(productVO.getDescription()); TODO
 		
 		productService.addProduct(product);
