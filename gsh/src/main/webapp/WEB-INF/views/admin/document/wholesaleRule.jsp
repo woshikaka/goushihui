@@ -25,6 +25,13 @@
 		
 		layer.load(1, {shade: [0.6,'#676767']});
 		$http.post("${pageContext.request.contextPath}/a/document/getTextPlan/1",null).success(function(response) {
+			CKEDITOR.replace( 'editor1', {
+			    height: '400px'
+			});
+			/* CKEDITOR.editorConfig = function( config ) {
+				config.language = 'zh-cn';
+			}; */
+			
 			$scope.ruleContent = response.data;
 			layer.closeAll('loading');
 	    });
@@ -41,10 +48,4 @@
 		    });
 		}
 	});
-	
-	
-	CKEDITOR.replace( 'editor1' );
-	CKEDITOR.editorConfig = function( config ) {
-		config.language = 'zh-cn';
-	};
 </script>
