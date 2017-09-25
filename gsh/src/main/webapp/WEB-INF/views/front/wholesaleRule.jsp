@@ -103,7 +103,7 @@
     
     <div class="container search_list">
     	<div class="content_title">
-    		<span>关于我们</span>
+    		<span>批发规则</span>
     	</div>
     	${text}
     </div>

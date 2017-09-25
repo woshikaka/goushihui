@@ -18,7 +18,7 @@ public class AboutMeControler {
 	private TextPlanService textPlanService;
 	
 	@RequestMapping(value = "/aboutMe")
-	public String test(HttpServletRequest request) {
+	public String aboutMe(HttpServletRequest request) {
 		String text = "暂无说明！";
 		TextPlan textPlan = textPlanService.findByType(2);
 		if (Objects.nonNull(textPlan)) {
@@ -26,5 +26,16 @@ public class AboutMeControler {
 		}
 		request.setAttribute("text",text);
 		return "front/aboutMe";
+	}
+	
+	@RequestMapping(value = "/wholesaleRule")
+	public String wholesaleRule(HttpServletRequest request) {
+		String text = "暂无说明！";
+		TextPlan textPlan = textPlanService.findByType(1);
+		if (Objects.nonNull(textPlan)) {
+			text = textPlan.getContent();
+		}
+		request.setAttribute("text",text);
+		return "front/wholesaleRule";
 	}
 }

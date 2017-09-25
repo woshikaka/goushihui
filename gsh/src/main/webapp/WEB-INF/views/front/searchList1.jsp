@@ -55,7 +55,7 @@
 					<li><a href="javascript:;" ng-click="activitySearch(1)">团购商品</a></li>
 					<li><a href="javascript:;" ng-click="activitySearch(2)">特价促销</a></li>
 					<li><a href="javascript:;" ng-click="activitySearch(3)">新品上架</a></li>
-					<li><a href="javascript:;">批发规则</a></li>
+					<li><a href="${pageContext.request.contextPath}/wholesaleRule">批发规则</a></li>
 					<li><a href="${pageContext.request.contextPath}/aboutMe">关于我们</a></li>
                 </ul>
             </div>
