@@ -35,13 +35,12 @@
 						src="${pageContext.request.contextPath}/resources/images/index/menu_list.png">
 				</div>
 				<ul class="top_nav_menu clear">
-					<!-- <li class="select"><a href="javascript:;">首页</a></li> -->
 					<li><a href="${pageContext.request.contextPath}/homePage">首页</a></li>
 					<li><a href="${pageContext.request.contextPath}/searchUI?a=1">团购商品</a></li>
 					<li><a href="${pageContext.request.contextPath}/searchUI?a=2">特价促销</a></li>
 					<li><a href="${pageContext.request.contextPath}/searchUI?a=3">新品上架</a></li>
 					<li><a href="javascript:;">批发规则</a></li>
-					<li><a href="javascript:;">关于我们</a></li>
+					<li><a href="${pageContext.request.contextPath}/aboutMe">关于我们</a></li>
 				</ul>
 			</div>
 		</div>

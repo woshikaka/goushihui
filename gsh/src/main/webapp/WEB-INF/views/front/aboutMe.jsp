@@ -22,6 +22,20 @@
 	overflow:hidden; 
 	text-overflow:ellipsis;
 }
+
+.content_title{
+	border-bottom: 1px solid #CCC;
+	font: bold 18px/50px microsoft yahei,Helvetica,Tahoma,Arial,sans-serif;
+    margin: 10px 0;
+}
+
+.content_title span{
+	border-bottom: 3px solid #F30;
+	display: inline-block
+}
+.search_list p{
+	line-height: 30px;
+}
 </style>
 </head>
 <body ng-app="searchApp" ng-controller="searchCtrl" ng-init="init()">
@@ -52,9 +66,9 @@
                 <div class="classify_title"><strong>商品分类</strong><img src="${pageContext.request.contextPath}/resources/images/index/menu_list.png"></div>
                 <ul class="top_nav_menu clear">
 					<li><a href="${pageContext.request.contextPath}/homePage">首页</a></li>
-					<li><a href="javascript:;" ng-click="activitySearch(1)">团购商品</a></li>
-					<li><a href="javascript:;" ng-click="activitySearch(2)">特价促销</a></li>
-					<li><a href="javascript:;" ng-click="activitySearch(3)">新品上架</a></li>
+					<li><a href="${pageContext.request.contextPath}/searchUI?a=1">团购商品</a></li>
+					<li><a href="${pageContext.request.contextPath}/searchUI?a=2">特价促销</a></li>
+					<li><a href="${pageContext.request.contextPath}/searchUI?a=3">新品上架</a></li>
 					<li><a href="javascript:;">批发规则</a></li>
 					<li><a href="${pageContext.request.contextPath}/aboutMe">关于我们</a></li>
                 </ul>
@@ -86,40 +100,14 @@
             </div>
         </div>
     </section>
+    
     <div class="container search_list">
-        <div class="search_location">
-        	您搜索的<span class="red">{{checkedType.productTypeName}} {{checkedType.secTypeName?'&gt; '+checkedType.secTypeName:''}} {{checkedType.thirdTypeName?'&gt; '+checkedType.thirdTypeName:''}} {{showKeyword}}</span>
-           	 共有 <span class="red" ng-bind="pageBean.totalElements"></span> 件商品：
-        </div>
-        <div class="sort_warp">
-            <ul><li ng-class="selected1?'select':''" ng-click="checkedTab(1)">综合排序</li><li ng-class="selected2?'select':''" ng-click="checkedTab(2)">销量从高到低</li><li ng-class="selected3?'select':''" ng-click="checkedTab(3)">价格从低到高</li></ul>
-        </div>
-        <section class="best_sellers_warp page_box">
-            <div class="page_list">
-                <ul class="clear">
-                	<li ng-repeat="bean in pageBean.content" title="{{bean.name}}">
-                        <div class="goods_img"><a href="${pageContext.request.contextPath}/product/detail/{{bean.id}}"><img src="/upload{{bean.image}}"></a></div>
-                        <p class="goods_name title" ng-bind="bean.name"></p>
-                        <p class="goods_volume">成交{{bean.sellCount}}单</p>
-                        <div class="goods_price">
-                        	<shiro:notAuthenticated>
-								<a class="red" href="${pageContext.request.contextPath}/loginUI">登录</a>查看专属价格
-							</shiro:notAuthenticated>
-							<shiro:authenticated>
-								<span class="new_price">{{bean.price}}元</span>
-								<span class="old_price">{{bean.marketPrice}}元</span>
-							</shiro:authenticated>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-			<span ng-show="totalPages==0">没有符合的商品！</span>
-			<div class="paging_warp clear">
-                <!-- <div class="paging_info left"> 每页 <i class="red">20</i>条</div> -->
-				<div id="paging" style="float: right;"></div>
-            </div>
-        </section>
+    	<div class="content_title">
+    		<span>关于我们</span>
+    	</div>
+    	${text}
     </div>
+    
 	<section class="shop_advantage">
 		<ul class="clear">
 			<li><img src="${pageContext.request.contextPath}/resources/images/index/quality_goods.png">优质商品</li>
@@ -411,4 +399,3 @@
     
 </script>
 </html>
-    
