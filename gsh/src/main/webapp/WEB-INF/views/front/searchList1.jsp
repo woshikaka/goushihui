@@ -187,8 +187,7 @@
 			
 			$scope.pageParam.currPageNo=1;
 			$scope.pageParam.productTypeId = $scope.checkedType.productTypeId;
-			//pageRequest();
-			//$scope.initLaypage();
+			
 			$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
 				$scope.pageBean = response.data;
 				$scope.totalPages = response.data.totalPages;
@@ -249,9 +248,12 @@
 		}
 	
 		function pageRequest(){
+			layer.load(1, {shade: [0.6,'#676767']});
 			$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
 				$scope.pageBean = response.data;
 				$scope.totalPages = response.data.totalPages;
+				$window.scrollTo(0, 100);
+				layer.closeAll('loading');
 		    });
 		}
 		
@@ -262,10 +264,12 @@
 			$scope.pageParam.keyword = $scope.keyword;
 			$scope.showKeyword = angular.copy($scope.keyword);
 			
+			layer.load(1, {shade: [0.6,'#676767']});
 			$http.post("${pageContext.request.contextPath}/search",angular.toJson($scope.pageParam)).success(function(response) {
 				$scope.pageBean = response.data;
 				$scope.totalPages = response.data.totalPages;
 				$scope.initLaypage();
+				layer.closeAll('loading');
 		    });
 		}
 		

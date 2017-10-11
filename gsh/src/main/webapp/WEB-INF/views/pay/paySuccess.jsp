@@ -11,7 +11,24 @@
 </head>
 <body>
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
-	<%@ include file="/WEB-INF/views/admin/public/head1.jsp"%>
+	<section class="rect_wrap">
+		<div class="container">
+			<a href="${pageContext.request.contextPath}/homePage"><img id="logoImg" src="" style="margin-top:-35px;width: 160px;height: 100px"/></a>
+			<div class="search_wrap">
+				<div class="search_bd">
+					<div class="search_box">
+						<div class="search_icon">
+							<i class="icon-search"></i>
+						</div>
+						<form id="searchForm" action="${pageContext.request.contextPath}/searchUI" method="post" onsubmit="return searchCheck()">
+							<input id="keywordInput" type="text" name="keyword" class="search_input">
+							<button type="submit" class="search_btn right">搜索</button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 	<section class="success_cart">
 		<div class="container ">
 			<div class="success_txt">
