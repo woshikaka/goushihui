@@ -283,18 +283,24 @@ public class ProductService {
 	public ProductDetailDTO findProductDetailDtoById(Integer id) {
 		ProductDetailDTO dto = new ProductDetailDTO();
 		
-		Product bo = productDao.findOne(id);
-		if (Objects.nonNull(bo)) {
-			dto.setId(bo.getId());
-			dto.setMarketPrice(bo.getMarketPrice());
-			dto.setName(bo.getName());
-			dto.setPrice(bo.getPrice());
-			dto.setSellCount(bo.getSellCount());
-			dto.setStockCount(bo.getStockCount());
-			dto.setEconomy(MyArith.sub(bo.getMarketPrice(),bo.getPrice()));
-			dto.setImage("/upload"+bo.getImage());
-			dto.setIsShangJia(bo.getIsShangJia());
-			ProductDesc productDesc = bo.getProductDesc();
+		Product doItem = productDao.findOne(id);
+		if (Objects.nonNull(doItem)) {
+			dto.setId(doItem.getId());
+			dto.setMarketPrice(doItem.getMarketPrice());
+			dto.setName(doItem.getName());
+			dto.setPrice(doItem.getPrice());
+			dto.setSellCount(doItem.getSellCount());
+			dto.setStockCount(doItem.getStockCount());
+			dto.setEconomy(MyArith.sub(doItem.getMarketPrice(),doItem.getPrice()));
+			dto.setImage("/upload"+doItem.getImage());
+			dto.setIsShangJia(doItem.getIsShangJia());
+			dto.setFirstTypeId(doItem.getFirstType().getId());
+			dto.setFirstTypeName(doItem.getFirstType().getName());
+			dto.setSecTypeId(doItem.getId());
+			dto.setSecTypeName(doItem.getSecType().getName());
+			dto.setThirdTypeId(doItem.getThirdType().getId());
+			dto.setThirdTypeName(doItem.getThirdType().getName());
+			ProductDesc productDesc = doItem.getProductDesc();
 			if (Objects.nonNull(productDesc)) {
 				dto.setHtmlDesc(productDesc.getHtmlDesc());
 			}

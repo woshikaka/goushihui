@@ -10,6 +10,48 @@ public class ProductDetailDTO {
 	private String htmlDesc;
 	private String image;
 	private Boolean isShangJia;
+	private Integer firstTypeId;
+	private String firstTypeName;
+	private Integer secTypeId;
+	private String secTypeName;
+	private Integer thirdTypeId;
+	private String thirdTypeName;
+	public Integer getFirstTypeId() {
+		return firstTypeId;
+	}
+	public void setFirstTypeId(Integer firstTypeId) {
+		this.firstTypeId = firstTypeId;
+	}
+	public String getFirstTypeName() {
+		return firstTypeName;
+	}
+	public void setFirstTypeName(String firstTypeName) {
+		this.firstTypeName = firstTypeName;
+	}
+	public Integer getSecTypeId() {
+		return secTypeId;
+	}
+	public void setSecTypeId(Integer secTypeId) {
+		this.secTypeId = secTypeId;
+	}
+	public String getSecTypeName() {
+		return secTypeName;
+	}
+	public void setSecTypeName(String secTypeName) {
+		this.secTypeName = secTypeName;
+	}
+	public Integer getThirdTypeId() {
+		return thirdTypeId;
+	}
+	public void setThirdTypeId(Integer thirdTypeId) {
+		this.thirdTypeId = thirdTypeId;
+	}
+	public String getThirdTypeName() {
+		return thirdTypeName;
+	}
+	public void setThirdTypeName(String thirdTypeName) {
+		this.thirdTypeName = thirdTypeName;
+	}
 	public Boolean getIsShangJia() {
 		return isShangJia;
 	}

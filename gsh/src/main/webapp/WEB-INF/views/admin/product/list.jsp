@@ -344,9 +344,26 @@
 			var productDesc = CKEDITOR.instances['productDescEditor'].getData();
 			$scope.productInfo.description=productDesc;
 			
-			$scope.productInfo.firstTypeId = $scope.selectedFirstType.id;
-			$scope.productInfo.secTypeId = $scope.selectedSecType.id;
-			$scope.productInfo.thirdTypeId = $scope.selectedThirdType.id;
+			if($scope.selectedFirstType && $scope.selectedFirstType.id){
+				$scope.productInfo.firstTypeId = $scope.selectedFirstType.id;
+			}else{
+				layer.msg('一级分类不能为空！',{icon: 5,offset: 't'});
+				return;			
+			}
+			
+			if($scope.selectedSecType && $scope.selectedSecType.id){
+				$scope.productInfo.secTypeId = $scope.selectedSecType.id;
+			}else{
+				layer.msg('二级分类不能为空！',{icon: 5,offset: 't'});
+				return;
+			}
+			
+			if($scope.selectedThirdType && $scope.selectedThirdType.id){
+				$scope.productInfo.thirdTypeId = $scope.selectedThirdType.id;	
+			}else{
+				layer.msg('三级分类不能为空！',{icon: 5,offset: 't'});
+				return;
+			}
 			
 			layer.load(1, {shade: [0.6,'#676767']});
 			$http.post("${pageContext.request.contextPath}/a/product/updateProduct",angular.toJson($scope.productInfo)).success(function(response) {

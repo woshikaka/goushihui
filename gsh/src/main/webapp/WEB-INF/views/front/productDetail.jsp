@@ -10,12 +10,19 @@
 <%@ include file="/WEB-INF/views/admin/public/reflib.jsp"%>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layui/css/layui.css">
 </head>
+<style>
+/* .crumb_warp .container a {
+    margin: 0 0px;
+} */
+</style>
 <body ng-app="productDetailApp" ng-controller="productDetailCtrl">
 	<%@ include file="/WEB-INF/views/admin/public/head.jsp"%>
 	<%@ include file="/WEB-INF/views/admin/public/head1.jsp"%>
     <section class="crumb_warp">
         <div class="container">
-            <%-- <a href="${pageContext.request.contextPath}/navShop?navTypeId=${product.firstType.id}">${product.firstType.name}</a>><a href="${pageContext.request.contextPath}/navShop?navTypeId=${product.firstType.id}&navSecTypeId=${product.secType.id}&navSecTypeName=${product.secType.name}">${product.secType.name}</a>><a href="${pageContext.request.contextPath}/navShop?navTypeId=${product.firstType.id}&navSecTypeId=${product.secType.id}&navSecTypeName=${product.secType.name}&navThirdTypeId=${product.thirdType.id}&navThirdTypeName=${product.thirdType.name}">${product.thirdType.name}</a> --%>
+            <a href="">{{productDetail.firstTypeName}}</a>
+            ><a href="">{{productDetail.secTypeName}}</a>
+            ><a href="">{{productDetail.thirdTypeName}}</a>
         </div>
     </section>
     <section class="shop_detail_warp">
