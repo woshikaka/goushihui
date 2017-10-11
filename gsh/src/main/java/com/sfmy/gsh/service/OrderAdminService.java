@@ -46,18 +46,19 @@ public class OrderAdminService {
 		List<AdminOrderDTO> orders = Lists.newArrayList();
 		List<Order> bos = page.getContent();
 		if (CollectionUtils.isNotEmpty(bos)) {
-			for (Order bo : bos) {
+			for (Order order : bos) {
 				AdminOrderDTO orderDTO = new AdminOrderDTO();
-				orderDTO.setId(bo.getId());
-				orderDTO.setContact(bo.getContact());
-				orderDTO.setMobile(bo.getMobile());
-				orderDTO.setOutTradeNo(bo.getOutTradeNo());
-				orderDTO.setReceiveAddress(bo.getReceiveAddress());
-				orderDTO.setStatus(bo.getStatus().getChinese());
-				orderDTO.setSubject(bo.getSubject());
-				orderDTO.setToalQuantity(bo.getToalQuantity());
-				orderDTO.setTotalPrice(bo.getTotalPrice());
-				orderDTO.setUserName(bo.getUser().getName());
+				orderDTO.setId(order.getId());
+				orderDTO.setContact(order.getContact());
+				orderDTO.setMobile(order.getMobile());
+				orderDTO.setOutTradeNo(order.getOutTradeNo());
+				orderDTO.setReceiveAddress(order.getReceiveAddress());
+				orderDTO.setStatus(order.getStatus().getChinese());
+				orderDTO.setStatusFlag(order.getStatus().name());
+				orderDTO.setSubject(order.getSubject());
+				orderDTO.setToalQuantity(order.getToalQuantity());
+				orderDTO.setTotalPrice(order.getTotalPrice());
+				orderDTO.setUserName(order.getUser().getName());
 				orders.add(orderDTO);
 			}
 		}

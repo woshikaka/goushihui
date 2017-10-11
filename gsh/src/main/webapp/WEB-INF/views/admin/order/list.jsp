@@ -30,7 +30,7 @@
 								<option value="">请选择</option>
 								<!-- <option value="WAIT_PAY">待付款</option> -->
 								<option value="PAY_SUCCESS_WAIT_SEND">付款成功等待发货</option>
-								<option value="PAY_SUCCESS_ALREADY_SEND">付款成功已经发货</option>
+								<option value="PAY_SUCCESS_ALREADY_SEND">已经发货</option>
 								<option value="END">交易结束</option>
 							</select>
 						</div>
@@ -59,7 +59,7 @@
 								<th>收货人电话</th>
 								<th>收货人地址</th>
 								<th>订单状态</th>
-								<th>物流信息</th>
+								<!-- <th>物流信息</th> -->
 								<th>操作</th>
 							</tr>
 						</thead>
@@ -75,9 +75,9 @@
 									<td ng-bind="order.mobile"></td>
 									<td ng-bind="order.receiveAddress"></td>
 									<td ng-bind="order.status"></td>
-									<td>{{order.express==null?'无':order.express}}</td>
+									<!-- <td>{{order.express==null?'无':order.express}}</td> -->
 									<td>
-										<button ng-show="" class="layui-btn layui-btn-primary layui-btn-mini" ng-click="sendGoods(order)">发货</button>
+										<button class="layui-btn layui-btn-primary layui-btn-mini" ng-click="sendGoods(order)">发货</button>
 									</td>
 								</tr> 
 						</tbody>
@@ -110,6 +110,7 @@ app.controller('orderListCtrl', function($scope, $http,$location,$window) {
 	}
 	
 	function page(){
+		layer.load(1, {shade: [0.6,'#676767']});
 		$http.post("${pageContext.request.contextPath}/a/order/page",angular.toJson($scope.pageParam)).success(function(response) {
 			$scope.orders = response.data.orders;
 			$scope.totalPages = response.data.totalPages;
@@ -127,11 +128,12 @@ app.controller('orderListCtrl', function($scope, $http,$location,$window) {
 					}
 				}
 			});
+			layer.closeAll('loading');
 	    });
 	}
 	
 	$scope.sendGoods = function(order){
-		layer.confirm(order.subject+'<br/>确定已经发货？', {
+		layer.confirm(order.subject+'<br/>确定发货？', {
 		  btn: ['是','否']
 		}, function(){
 			$http.get("${pageContext.request.contextPath}/a/order/sendGoods/"+order.id,null).success(function(response) {

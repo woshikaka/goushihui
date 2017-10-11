@@ -12,6 +12,13 @@ public class AdminOrderDTO {
 	private String mobile;
 	private String receiveAddress;
 	private String status;
+	private String statusFlag;
+	public String getStatusFlag() {
+		return statusFlag;
+	}
+	public void setStatusFlag(String statusFlag) {
+		this.statusFlag = statusFlag;
+	}
 	public String getOutTradeNo() {
 		return outTradeNo;
 	}
